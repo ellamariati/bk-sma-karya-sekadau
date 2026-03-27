@@ -6,65 +6,71 @@ use CodeIgniter\Model;
 
 class SiswaModel extends Model
 {
-    protected $table      = 'siswa';
-    protected $primaryKey = 'id';
+    protected $table         = 'siswa';
+    protected $primaryKey    = 'id';
+    protected $useAutoIncrement = true;
+    protected $returnType    = 'array';
+    protected $useSoftDeletes = false;
 
     protected $allowedFields = [
-        'nisn', 'nis', 'nama', 'jk',
-        'tempat_lahir', 'tanggal_lahir',
-        'agama', 'kelas', 'jurusan',
-        'no_hp_ortu', 'alamat', 'foto',
-        'status', // aktif | alumni | keluar
+        'nisn', 'nama', 'kelas', 'jurusan',
+        'jk', 'foto', 'no_hp_ortu', 'status',
     ];
 
     protected $useTimestamps = true;
+    protected $createdField  = 'created_at';
+    protected $updatedField  = 'updated_at';
 
-    protected $validationRules = [
-        'nisn'    => 'required|min_length[8]',
-        'nama'    => 'required|min_length[3]',
-        'kelas'   => 'required',
-        'jurusan' => 'required',
-        'jk'      => 'required|in_list[L,P]',
-    ];
+    protected $validationRules    = [];
+    protected $validationMessages = [];
+    protected $skipValidation     = false;
 
-    /**
-     * Jumlah siswa yang memiliki pelanggaran
-     */
+    // ──────────────────────────────────────────
+    // Helper: jumlah siswa yang punya pelanggaran
+    // ──────────────────────────────────────────
     public function getSiswaBermasalah(): int
     {
-        $result = $this->db->table('siswa s')
-            ->select('COUNT(DISTINCT p.siswa_id) as total')
+        return (int) $this->db->table('siswa s')
+            ->select('COUNT(DISTINCT s.id) as total')
             ->join('pelanggaran p', 'p.siswa_id = s.id', 'inner')
-            ->get()->getRow();
-
-        return (int) ($result->total ?? 0);
+            ->get()
+            ->getRow()
+            ->total;
     }
 
-    /**
-     * Data siswa lengkap dengan total poin pelanggaran
-     */
-    public function getWithPoin(array $filter = []): array
+    // ──────────────────────────────────────────
+    // Ambil semua siswa + total poin pelanggaran
+    // Untuk keperluan view (tanpa paginate)
+    // ──────────────────────────────────────────
+    public function getAllWithPoin(): array
     {
-        $builder = $this->db->table('siswa s')
-            ->select('s.*, COALESCE(SUM(p.poin), 0) as total_poin, COUNT(p.id) as jml_pelanggaran')
+        return $this->db->table('siswa s')
+            ->select('s.*, COALESCE(SUM(p.poin), 0) as total_poin')
             ->join('pelanggaran p', 'p.siswa_id = s.id', 'left')
             ->groupBy('s.id')
-            ->orderBy('s.nama', 'ASC');
+            ->orderBy('s.nama', 'ASC')
+            ->get()
+            ->getResultArray();
+    }
 
-        if (!empty($filter['kelas'])) {
-            $builder->like('s.kelas', $filter['kelas'], 'after');
-        }
-        if (!empty($filter['jurusan'])) {
-            $builder->where('s.jurusan', $filter['jurusan']);
-        }
-        if (!empty($filter['q'])) {
-            $builder->groupStart()
-                ->like('s.nama', $filter['q'])
-                ->orLike('s.nisn', $filter['q'])
-                ->orLike('s.kelas', $filter['q'])
-                ->groupEnd();
-        }
+    // ──────────────────────────────────────────
+    // Cek NISN unik saat update (exclude id sendiri)
+    // ──────────────────────────────────────────
+    public function isNisnUnique(string $nisn, int $excludeId = 0): bool
+    {
+        return $this->where('nisn', $nisn)
+            ->where('id !=', $excludeId)
+            ->countAllResults() === 0;
+    }
 
-        return $builder->get()->getResultArray();
+    // ──────────────────────────────────────────
+    // Helper: derive jurusan dari kelas (A/B=MIPA, lainnya=IPS)
+    // ──────────────────────────────────────────
+    public static function jurusanFromKelas(string $kelas): string
+    {
+        preg_match('/([A-Fa-f])\s*$/', $kelas, $m);
+        if (!$m) return 'IPS';
+        $h = strtoupper($m[1]);
+        return ($h === 'A' || $h === 'B') ? 'MIPA' : 'IPS';
     }
 }

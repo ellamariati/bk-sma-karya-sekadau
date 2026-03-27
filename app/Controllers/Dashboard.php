@@ -18,12 +18,18 @@ class Dashboard extends BaseController
 
     public function index()
     {
+        $db = \Config\Database::connect();
+
         // ── Stat Cards ──
         $data['stats'] = [
             'total'    => $this->pelanggaranModel->countAll(),
-            'baru'     => $this->pelanggaranModel->where('status','baru')->countAllResults(),
-            'proses'   => $this->pelanggaranModel->where('status','proses')->countAllResults(),
-            'diproses' => $this->pelanggaranModel->where('status','diproses')->countAllResults(),
+            'baru'     => $this->pelanggaranModel->where('status', 'baru')->countAllResults(),
+            'proses'   => $this->pelanggaranModel->where('status', 'proses')->countAllResults(),
+            'diproses' => $this->pelanggaranModel->where('status', 'diproses')->countAllResults(),
+            // Ringkasan per kategori (untuk card berat/sedang/ringan)
+            'berat'    => $this->pelanggaranModel->where('kategori', 'berat')->countAllResults(),
+            'sedang'   => $this->pelanggaranModel->where('kategori', 'sedang')->countAllResults(),
+            'ringan'   => $this->pelanggaranModel->where('kategori', 'ringan')->countAllResults(),
         ];
 
         // ── Notifikasi ──
@@ -41,39 +47,45 @@ class Dashboard extends BaseController
                 ->countAllResults(),
         ];
 
-        // ── Tabel Pelanggaran Terbaru (dari database) ──
-        $data['tabel_baru'] = $this->pelanggaranModel
-            ->select('pelanggaran.*, siswa.nama as nama_siswa, siswa.kelas, u.nama as nama_konselor')
-            ->join('siswa', 'siswa.id = pelanggaran.siswa_id', 'left')
-            ->join('users u', 'u.id = pelanggaran.konselor_id', 'left')
-            ->where('pelanggaran.status', 'baru')
-            ->orderBy('pelanggaran.created_at', 'DESC')
-            ->limit(8)
-            ->findAll();
+        // ── Jenis Pelanggaran Terbanyak (untuk progress bar) ──
+        $data['jenis_terbanyak'] = $db->query("
+            SELECT
+                jenis_pelanggaran AS jenis,
+                kategori          AS kat,
+                COUNT(*)          AS jumlah
+            FROM pelanggaran
+            GROUP BY jenis_pelanggaran, kategori
+            ORDER BY jumlah DESC
+            LIMIT 5
+        ")->getResultArray();
 
-        $data['tabel_proses'] = $this->pelanggaranModel
-            ->select('pelanggaran.*, siswa.nama as nama_siswa, siswa.kelas, u.nama as nama_konselor')
-            ->join('siswa', 'siswa.id = pelanggaran.siswa_id', 'left')
-            ->join('users u', 'u.id = pelanggaran.konselor_id', 'left')
-            ->where('pelanggaran.status', 'proses')
-            ->orderBy('pelanggaran.created_at', 'DESC')
-            ->limit(8)
-            ->findAll();
+        // Hitung persentase relatif terhadap jumlah terbanyak
+        if (!empty($data['jenis_terbanyak'])) {
+            $max = (int) $data['jenis_terbanyak'][0]['jumlah'];
+            foreach ($data['jenis_terbanyak'] as &$j) {
+                $j['persen'] = $max > 0 ? round(($j['jumlah'] / $max) * 100) : 0;
+            }
+            unset($j);
+        }
 
-        $data['tabel_selesai'] = $this->pelanggaranModel
-            ->select('pelanggaran.*, siswa.nama as nama_siswa, siswa.kelas, u.nama as nama_konselor')
-            ->join('siswa', 'siswa.id = pelanggaran.siswa_id', 'left')
-            ->join('users u', 'u.id = pelanggaran.konselor_id', 'left')
-            ->where('pelanggaran.status', 'diproses')
-            ->orderBy('pelanggaran.created_at', 'DESC')
-            ->limit(8)
-            ->findAll();
-
-        // ── List Siswa untuk form tambah ──
-        $data['listSiswa'] = $this->siswaModel
-            ->select('id, nisn, nama, kelas')
-            ->orderBy('nama', 'ASC')
-            ->findAll();
+        // ── Siswa dengan Akumulasi Poin Terbanyak ──
+        $data['siswa_poin'] = $db->query("
+            SELECT
+                s.nama,
+                s.kelas,
+                COALESCE(SUM(p.poin), 0) AS poin,
+                CASE
+                    WHEN COALESCE(SUM(p.poin), 0) >= 100 THEN '#ef4444'
+                    WHEN COALESCE(SUM(p.poin), 0) >= 50  THEN '#f59e0b'
+                    ELSE '#1a56db'
+                END AS warna
+            FROM siswa s
+            LEFT JOIN pelanggaran p ON p.siswa_id = s.id
+            GROUP BY s.id, s.nama, s.kelas
+            HAVING poin > 0
+            ORDER BY poin DESC
+            LIMIT 5
+        ")->getResultArray();
 
         return view('dashboard/index', $data);
     }

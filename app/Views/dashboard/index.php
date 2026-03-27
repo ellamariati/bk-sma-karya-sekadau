@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BK SMA Karya Sekadau— Dashboard Bimbingan Konseling</title>
+    <title>BK SMA Karya Sekadau — Dashboard Bimbingan Konseling</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -25,7 +25,6 @@
         *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
         body{font-family:'DM Sans',sans-serif;background:var(--gray-50);color:var(--gray-800);min-height:100vh;display:flex;overflow-x:hidden}
 
-        
         /* ══ SIDEBAR ══ */
         .sidebar{width:var(--sidebar-w);min-height:100vh;background:linear-gradient(175deg,var(--blue-900) 0%,var(--blue-800) 50%,var(--blue-700) 100%);position:fixed;left:0;top:0;bottom:0;z-index:100;display:flex;flex-direction:column;box-shadow:4px 0 32px rgba(10,22,40,.25);transition:var(--transition);overflow-y:auto}
         .sidebar::before{content:'';position:absolute;top:0;right:0;width:1px;height:100%;background:linear-gradient(to bottom,transparent,rgba(59,130,246,.4),transparent)}
@@ -79,7 +78,7 @@
 
         /* ══ STAT CARDS ══ */
         .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-bottom:28px}
-        .stat-card{background:white;border-radius:var(--radius);padding:22px 24px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:16px;position:relative;overflow:hidden;transition:var(--transition);cursor:pointer}
+        .stat-card{background:white;border-radius:var(--radius);padding:22px 24px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:16px;position:relative;overflow:hidden;transition:var(--transition);cursor:pointer;text-decoration:none}
         .stat-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;border-radius:0 0 var(--radius) var(--radius)}
         .stat-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
         .stat-card.total::after{background:linear-gradient(90deg,var(--blue-500),var(--blue-300))}
@@ -108,7 +107,7 @@
         .notif-content{flex:1}
         .notif-content .notif-title{font-family:'Outfit',sans-serif;font-weight:600;font-size:15px;color:white}
         .notif-content .notif-items{display:flex;gap:20px;margin-top:6px;flex-wrap:wrap}
-        .notif-item{display:flex;align-items:center;gap:6px;font-size:12.5px;color:rgba(255,255,255,.8);padding:4px 10px;background:rgba(255,255,255,.12);border-radius:20px}
+        .notif-item{display:flex;align-items:center;gap:6px;font-size:12.5px;color:rgba(255,255,255,.8);padding:4px 10px;background:rgba(255,255,255,.12);border-radius:20px;cursor:pointer}
         .notif-item .dot{width:6px;height:6px;border-radius:50%}
         .notif-actions{display:flex;gap:8px;flex-shrink:0}
         .btn-notif{padding:9px 18px;border-radius:8px;border:none;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer;transition:var(--transition);display:inline-flex;align-items:center;gap:6px}
@@ -135,7 +134,7 @@
 
         /* ══ NEWS ══ */
         .news-list{display:flex;flex-direction:column}
-        .news-item{display:flex;gap:14px;padding:16px 24px;border-bottom:1px solid var(--gray-100);transition:var(--transition);cursor:pointer}
+        .news-item{display:flex;gap:14px;padding:16px 24px;border-bottom:1px solid var(--gray-100);transition:var(--transition);cursor:pointer;text-decoration:none}
         .news-item:last-child{border-bottom:none}
         .news-item:hover{background:var(--blue-50)}
         .news-badge{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:5px}
@@ -144,43 +143,39 @@
         .news-meta span{font-size:11.5px;color:var(--gray-400);display:flex;align-items:center;gap:4px}
         .news-tag{font-size:10.5px;font-weight:600;padding:2px 8px;border-radius:20px;white-space:nowrap}
 
-        /* ══ TABS ══ */
-        .tab-nav{display:flex;gap:0;padding:0 24px;border-bottom:1px solid var(--gray-100);background:var(--gray-50)}
-        .tab-btn{padding:13px 18px;border:none;background:none;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:400;color:var(--gray-400);cursor:pointer;position:relative;transition:var(--transition);white-space:nowrap;display:flex;align-items:center;gap:7px}
-        .tab-btn::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--blue-500);border-radius:2px 2px 0 0;transform:scaleX(0);transition:var(--transition)}
-        .tab-btn.active{color:var(--blue-600);font-weight:500}
-        .tab-btn.active::after{transform:scaleX(1)}
-        .tab-btn:hover{color:var(--blue-500)}
-        .tab-count{font-size:10px;font-weight:700;padding:2px 6px;border-radius:20px;background:var(--blue-100);color:var(--blue-600)}
-        .tab-count.warn{background:#fef3c7;color:#d97706}
-        .tab-count.new{background:#fee2e2;color:#dc2626}
+        /* ══ RINGKASAN PELANGGARAN ══ */
+        .ringkasan-section{margin-bottom:28px}
+        .ringkasan-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+        .ringkasan-card{background:white;border-radius:var(--radius);padding:20px 22px;box-shadow:var(--shadow);display:flex;align-items:center;gap:16px;text-decoration:none;transition:var(--transition);border:2px solid transparent;position:relative;overflow:hidden}
+        .ringkasan-card::before{content:'';position:absolute;inset:0;opacity:0;transition:var(--transition)}
+        .ringkasan-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg);border-color:var(--blue-200)}
+        .ringkasan-card:hover::before{opacity:1}
+        .ringkasan-icon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+        .ringkasan-icon.berat{background:#fee2e2;color:#dc2626}
+        .ringkasan-icon.sedang{background:#fef3c7;color:#b45309}
+        .ringkasan-icon.ringan{background:var(--blue-100);color:var(--blue-600)}
+        .ringkasan-body{flex:1}
+        .ringkasan-label{font-size:12px;font-weight:500;color:var(--gray-400);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+        .ringkasan-val{font-family:'Outfit',sans-serif;font-size:28px;font-weight:800;color:var(--blue-900);letter-spacing:-1px;line-height:1}
+        .ringkasan-sub{font-size:11.5px;color:var(--gray-400);margin-top:4px;display:flex;align-items:center;gap:4px}
+        .ringkasan-arrow{color:var(--blue-400);font-size:13px;transition:var(--transition)}
+        .ringkasan-card:hover .ringkasan-arrow{transform:translateX(4px)}
 
-        /* ══ TABLE ══ */
-        .table-wrap{overflow-x:auto}
-        table{width:100%;border-collapse:collapse;font-size:13px}
-        thead th{padding:12px 16px;text-align:left;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.6px;color:var(--gray-400);background:var(--gray-50);border-bottom:1px solid var(--gray-200);white-space:nowrap}
-        tbody td{padding:13px 16px;border-bottom:1px solid var(--gray-100);color:var(--gray-800);vertical-align:middle}
-        tbody tr:last-child td{border-bottom:none}
-        tbody tr{transition:var(--transition);cursor:pointer}
-        tbody tr:hover{background:var(--blue-50)}
-        .td-student{display:flex;align-items:center;gap:10px}
-        .td-avatar{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:white;flex-shrink:0}
-        .td-name{font-weight:500;color:var(--blue-900)}
-        .td-class{font-size:11.5px;color:var(--gray-400);margin-top:1px}
-        .badge{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:600;white-space:nowrap}
-        .badge::before{content:'';width:5px;height:5px;border-radius:50%;background:currentColor}
-        .badge.baru{background:#fee2e2;color:#dc2626}
-        .badge.proses{background:#fef3c7;color:#b45309}
-        .badge.selesai,.badge.diproses{background:#dcfce7;color:#16a34a}
-        .badge.ringan{background:var(--blue-100);color:var(--blue-600)}
-        .badge.sedang{background:#fef3c7;color:#b45309}
-        .badge.berat{background:#fee2e2;color:#dc2626}
-        .action-btns{display:flex;gap:6px}
-        .btn-icon{width:30px;height:30px;border-radius:7px;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:13px;transition:var(--transition)}
-        .btn-icon.view{background:var(--blue-100);color:var(--blue-600)}
-        .btn-icon.edit{background:#fef3c7;color:#b45309}
-        .btn-icon.del{background:#fee2e2;color:#dc2626}
-        .btn-icon:hover{opacity:.8;transform:scale(1.05)}
+        /* ══ SISWA BERMASALAH ══ */
+        .siswa-list{display:flex;flex-direction:column}
+        .siswa-item{display:flex;align-items:center;gap:14px;padding:14px 24px;border-bottom:1px solid var(--gray-100);transition:var(--transition);cursor:pointer;text-decoration:none}
+        .siswa-item:last-child{border-bottom:none}
+        .siswa-item:hover{background:var(--blue-50)}
+        .siswa-avatar{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;color:white;flex-shrink:0}
+        .siswa-info{flex:1}
+        .siswa-name{font-size:13.5px;font-weight:500;color:var(--blue-900)}
+        .siswa-meta{font-size:11.5px;color:var(--gray-400);margin-top:2px}
+        .siswa-poin{text-align:right}
+        .poin-badge{font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;padding:4px 10px;border-radius:8px}
+        .poin-badge.high{background:#fee2e2;color:#dc2626}
+        .poin-badge.mid{background:#fef3c7;color:#b45309}
+        .poin-badge.low{background:var(--blue-100);color:var(--blue-600)}
+        .siswa-poin-label{font-size:10px;color:var(--gray-400);margin-top:2px}
 
         /* ══ NOTIF POPUP ══ */
         .notif-popup{position:fixed;top:80px;right:20px;width:320px;background:white;border-radius:var(--radius);box-shadow:0 20px 60px rgba(10,22,40,.2);z-index:200;display:none;overflow:hidden;animation:slideDown .25s ease}
@@ -198,31 +193,7 @@
         .notif-popup-footer{padding:12px 18px;text-align:center;font-size:12.5px;color:var(--blue-500);border-top:1px solid var(--gray-100);cursor:pointer;font-weight:500}
         .notif-popup-footer:hover{background:var(--blue-50)}
 
-        /* ══ MODAL ══ */
-        .modal-overlay{display:none;position:fixed;inset:0;background:rgba(10,22,40,.55);z-index:300;align-items:center;justify-content:center;padding:20px}
-        .modal-overlay.show{display:flex}
-        .modal{background:white;border-radius:var(--radius);width:100%;max-width:580px;max-height:90vh;overflow-y:auto;box-shadow:0 24px 80px rgba(10,22,40,.3);animation:modalIn .25s ease}
-        @keyframes modalIn{from{opacity:0;transform:scale(.95) translateY(10px)}to{opacity:1;transform:scale(1) translateY(0)}}
-        .modal-header{padding:22px 26px 18px;background:linear-gradient(135deg,var(--blue-800),var(--blue-500));display:flex;align-items:center;justify-content:space-between;position:sticky;top:0}
-        .modal-header h2{font-family:'Outfit',sans-serif;font-size:17px;font-weight:700;color:white;display:flex;align-items:center;gap:10px}
-        .modal-close{width:32px;height:32px;border-radius:8px;border:none;background:rgba(255,255,255,.15);color:white;cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;transition:var(--transition)}
-        .modal-close:hover{background:rgba(255,255,255,.25)}
-        .modal-body{padding:24px 26px}
-        .modal-footer{padding:16px 26px;border-top:1px solid var(--gray-100);display:flex;justify-content:flex-end;gap:10px;position:sticky;bottom:0;background:white}
-        .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
-        .form-row.full{grid-template-columns:1fr}
-        .form-group{display:flex;flex-direction:column;gap:6px}
-        .form-label{font-size:12.5px;font-weight:600;color:var(--gray-700)}
-        .form-label span{color:var(--danger)}
-        .form-input,.form-select,.form-textarea{padding:10px 14px;border-radius:var(--radius-sm);border:1.5px solid var(--gray-200);background:var(--gray-50);font-family:'DM Sans',sans-serif;font-size:13.5px;color:var(--gray-800);outline:none;transition:var(--transition);width:100%}
-        .form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--blue-400);background:white;box-shadow:0 0 0 3px rgba(59,130,246,.1)}
-        .form-textarea{resize:vertical;min-height:90px}
-        .btn-cancel{padding:10px 20px;border-radius:var(--radius-sm);border:1.5px solid var(--gray-200);background:white;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--gray-600);cursor:pointer;transition:var(--transition)}
-        .btn-cancel:hover{background:var(--gray-50)}
-        .poin-preview{margin-top:6px;padding:10px 14px;border-radius:var(--radius-sm);background:var(--blue-50);border:1px solid var(--blue-200);font-size:13px;color:var(--blue-700);display:none;align-items:center;gap:8px}
-        .poin-preview.show{display:flex}
-
-        /* ══ TOAST NOTIF ══ */
+        /* ══ TOAST ══ */
         .toast{position:fixed;bottom:28px;right:28px;background:var(--blue-900);color:white;padding:14px 20px;border-radius:var(--radius-sm);font-size:13.5px;font-weight:500;box-shadow:var(--shadow-lg);z-index:999;display:flex;align-items:center;gap:10px;transform:translateY(80px);opacity:0;transition:all .35s cubic-bezier(.4,0,.2,1)}
         .toast.show{transform:translateY(0);opacity:1}
         .toast.success{border-left:4px solid var(--success)}
@@ -235,8 +206,8 @@
         ::-webkit-scrollbar-thumb:hover{background:var(--blue-300)}
 
         /* ══ RESPONSIVE ══ */
-        @media(max-width:1200px){.stats-grid{grid-template-columns:repeat(2,1fr)}.dashboard-grid{grid-template-columns:1fr}}
-        @media(max-width:768px){:root{--sidebar-w:0px}.sidebar{transform:translateX(-270px);width:270px}.sidebar.open{transform:translateX(0)}.main-wrapper{margin-left:0}.navbar-hamburger{display:flex}.navbar{padding:0 18px}.page-content{padding:20px 18px}.stats-grid{grid-template-columns:1fr 1fr}}
+        @media(max-width:1200px){.stats-grid{grid-template-columns:repeat(2,1fr)}.dashboard-grid{grid-template-columns:1fr}.ringkasan-grid{grid-template-columns:1fr 1fr}}
+        @media(max-width:768px){:root{--sidebar-w:0px}.sidebar{transform:translateX(-270px);width:270px}.sidebar.open{transform:translateX(0)}.main-wrapper{margin-left:0}.navbar-hamburger{display:flex}.navbar{padding:0 18px}.page-content{padding:20px 18px}.stats-grid{grid-template-columns:1fr 1fr}.ringkasan-grid{grid-template-columns:1fr}}
         @media(max-width:480px){.stats-grid{grid-template-columns:1fr}}
         .overlay{display:none;position:fixed;inset:0;background:rgba(10,22,40,.4);z-index:90}
         .overlay.show{display:block}
@@ -246,124 +217,10 @@
 
 <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
 
-<!-- ══ TOAST NOTIFICATION ══ -->
+<!-- ══ TOAST ══ -->
 <div class="toast success" id="toast">
     <i class="fa fa-circle-check"></i>
     <span id="toastMsg">—</span>
-</div>
-
-<!-- ══ MODAL TAMBAH PELANGGARAN ══ -->
-<div class="modal-overlay" id="modalTambah">
-    <div class="modal">
-        <div class="modal-header">
-            <h2><i class="fa fa-plus-circle"></i> Tambah Data Pelanggaran</h2>
-            <button class="modal-close" onclick="closeModal('modalTambah')"><i class="fa fa-times"></i></button>
-        </div>
-        <form action="<?= base_url('pelanggaran/simpan') ?>" method="POST">
-            <?= csrf_field() ?>
-            <div class="modal-body">
-                <div class="form-row full">
-                    <div class="form-group">
-                        <label class="form-label">Siswa <span>*</span></label>
-                        <select class="form-select" name="siswa_id" required onchange="fillSiswaInfo(this)">
-                            <option value="">— Pilih Siswa —</option>
-                            <?php if (!empty($listSiswa)): ?>
-                                <?php foreach ($listSiswa as $s): ?>
-                                <option value="<?= $s['id'] ?>" data-kelas="<?= esc($s['kelas']) ?>" data-nisn="<?= esc($s['nisn']) ?>">
-                                    <?= esc($s['nama']) ?> — <?= esc($s['kelas']) ?>
-                                </option>
-                                <?php endforeach; ?>
-                            <?php else: ?>
-                                <option disabled>— Belum ada data siswa —</option>
-                            <?php endif; ?>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-row" id="siswaInfoRow" style="display:none">
-                    <div class="form-group">
-                        <label class="form-label">Kelas</label>
-                        <input type="text" class="form-input" id="kelasInfo" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">NISN</label>
-                        <input type="text" class="form-input" id="nisnInfo" readonly>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label class="form-label">Tanggal Kejadian <span>*</span></label>
-                        <input type="date" class="form-input" name="tanggal_kejadian" value="<?= date('Y-m-d') ?>" required>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Lokasi</label>
-                        <input type="text" class="form-input" name="lokasi" placeholder="Contoh: Kantin, Kelas...">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label class="form-label">Jenis Pelanggaran <span>*</span></label>
-                        <select class="form-select" name="jenis_pelanggaran" id="selectJenis" required onchange="autoFillPoin()">
-                            <option value="">— Pilih Jenis —</option>
-                            <optgroup label="Pelanggaran Ringan">
-                                <option value="Terlambat Masuk" data-poin="10" data-kat="ringan">Terlambat Masuk (10 poin)</option>
-                                <option value="Seragam Tidak Sesuai" data-poin="10" data-kat="ringan">Seragam Tidak Sesuai (10 poin)</option>
-                                <option value="Atribut Tidak Lengkap" data-poin="10" data-kat="ringan">Atribut Tidak Lengkap (10 poin)</option>
-                                <option value="Tidak Hadir (Alpha)" data-poin="10" data-kat="ringan">Tidak Hadir / Alpha (10 poin)</option>
-                            </optgroup>
-                            <optgroup label="Pelanggaran Sedang">
-                                <option value="Penggunaan HP di Kelas" data-poin="25" data-kat="sedang">Penggunaan HP di Kelas (25 poin)</option>
-                                <option value="Membolos Pelajaran" data-poin="30" data-kat="sedang">Membolos Pelajaran (30 poin)</option>
-                                <option value="Berkata Kasar" data-poin="35" data-kat="sedang">Berkata Kasar (35 poin)</option>
-                                <option value="Merokok di Lingkungan" data-poin="50" data-kat="sedang">Merokok di Lingkungan (50 poin)</option>
-                            </optgroup>
-                            <optgroup label="Pelanggaran Berat">
-                                <option value="Perkelahian" data-poin="75" data-kat="berat">Perkelahian (75 poin)</option>
-                                <option value="Membawa Rokok" data-poin="75" data-kat="berat">Membawa Rokok (75 poin)</option>
-                                <option value="Bullying / Intimidasi" data-poin="80" data-kat="berat">Bullying / Intimidasi (80 poin)</option>
-                                <option value="Membawa Senjata Tajam" data-poin="100" data-kat="berat">Membawa Senjata Tajam (100 poin)</option>
-                            </optgroup>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Kategori <span>*</span></label>
-                        <select class="form-select" name="kategori" id="selectKategori" required>
-                            <option value="ringan">Ringan</option>
-                            <option value="sedang">Sedang</option>
-                            <option value="berat">Berat</option>
-                        </select>
-                    </div>
-                </div>
-                <div id="poinPreview" class="poin-preview">
-                    <i class="fa fa-star" style="color:var(--warning)"></i>
-                    <span id="poinText">—</span>
-                </div>
-                <div class="form-row" style="margin-top:14px">
-                    <div class="form-group">
-                        <label class="form-label">Poin <span>*</span></label>
-                        <input type="number" class="form-input" name="poin" id="inputPoin" placeholder="1–100" min="1" max="100" required>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Status</label>
-                        <select class="form-select" name="status">
-                            <option value="baru">Baru Masuk</option>
-                            <option value="proses">Dalam Proses</option>
-                            <option value="diproses">Sudah Diproses</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-row full">
-                    <div class="form-group">
-                        <label class="form-label">Deskripsi Kejadian</label>
-                        <textarea class="form-textarea" name="deskripsi" placeholder="Ceritakan kronologi kejadian..."></textarea>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn-cancel" onclick="closeModal('modalTambah')">Batal</button>
-                <button type="submit" class="btn-primary"><i class="fa fa-save"></i> Simpan Pelanggaran</button>
-            </div>
-        </form>
-    </div>
 </div>
 
 <!-- ══ NOTIF POPUP ══ -->
@@ -399,82 +256,13 @@
     </div>
 </div>
 
-<!-- ══ MODAL DETAIL PELANGGARAN ══ -->
-<div class="modal-overlay" id="modalDetail" style="display:none;position:fixed;inset:0;background:rgba(10,22,40,.55);z-index:300;align-items:center;justify-content:center;padding:20px">
-    <div style="background:white;border-radius:16px;width:100%;max-width:520px;max-height:90vh;overflow-y:auto;box-shadow:0 24px 80px rgba(10,22,40,.3);animation:modalIn .25s ease">
-
-        <!-- Header -->
-        <div id="modalDetailHero" style="background:linear-gradient(135deg,#0a1628,#0f2d6b);padding:26px;display:flex;align-items:center;gap:18px">
-            <div id="mdAvatar" style="width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Outfit',sans-serif;font-size:20px;font-weight:800;color:white;box-shadow:0 4px 14px rgba(0,0,0,.3);flex-shrink:0;background:#1a56db">AF</div>
-            <div style="flex:1">
-                <div id="mdNama" style="font-family:'Outfit',sans-serif;font-size:19px;font-weight:700;color:white">—</div>
-                <div id="mdMeta" style="font-size:12.5px;color:#93c5fd;margin-top:3px">—</div>
-            </div>
-            <button onclick="closeModalDetail()" style="width:32px;height:32px;border-radius:8px;border:none;background:rgba(255,255,255,.15);color:white;cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center">
-                <i class="fa fa-times"></i>
-            </button>
-        </div>
-
-        <!-- Body -->
-        <div style="padding:24px 26px">
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px">
-                <div>
-                    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#94a3b8;margin-bottom:4px">Jenis Pelanggaran</div>
-                    <div id="mdJenis" style="font-size:13.5px;font-weight:500;color:#1e293b">—</div>
-                </div>
-                <div>
-                    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#94a3b8;margin-bottom:4px">Kategori</div>
-                    <div id="mdKategori">—</div>
-                </div>
-                <div>
-                    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#94a3b8;margin-bottom:4px">Tanggal Kejadian</div>
-                    <div id="mdTanggal" style="font-size:13.5px;font-weight:500;color:#1e293b">—</div>
-                </div>
-                <div>
-                    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#94a3b8;margin-bottom:4px">Poin</div>
-                    <div id="mdPoin">—</div>
-                </div>
-                <div>
-                    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#94a3b8;margin-bottom:4px">Guru BK</div>
-                    <div id="mdGuru" style="font-size:13.5px;font-weight:500;color:#1e293b">—</div>
-                </div>
-                <div>
-                    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#94a3b8;margin-bottom:4px">Status</div>
-                    <div id="mdStatus">—</div>
-                </div>
-                <div>
-                    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#94a3b8;margin-bottom:4px">Lokasi</div>
-                    <div id="mdLokasi" style="font-size:13.5px;font-weight:500;color:#1e293b">—</div>
-                </div>
-                <div>
-                    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#94a3b8;margin-bottom:4px">Notif Ortu</div>
-                    <div id="mdNotif" style="font-size:13.5px;font-weight:500;color:#1e293b">—</div>
-                </div>
-            </div>
-            <div style="height:1px;background:#f1f5f9;margin:18px 0"></div>
-            <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#94a3b8;margin-bottom:8px">Deskripsi Kejadian</div>
-            <div id="mdDeskripsi" style="background:#f8fafc;border-radius:10px;padding:14px;font-size:13px;color:#475569;line-height:1.7;border-left:3px solid #3b82f6">—</div>
-        </div>
-
-        <!-- Footer -->
-        <div style="padding:16px 26px;border-top:1px solid #f1f5f9;display:flex;justify-content:flex-end;gap:10px;background:white;border-radius:0 0 16px 16px">
-            <button onclick="closeModalDetail()" style="padding:10px 20px;border-radius:10px;border:1.5px solid #e2e8f0;background:white;font-family:'DM Sans',sans-serif;font-size:13px;color:#475569;cursor:pointer">Tutup</button>
-            <a id="mdLinkEdit" href="#" style="padding:10px 20px;border-radius:10px;border:none;background:#f59e0b;color:white;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:6px">
-                <i class="fa fa-pen"></i> Edit
-            </a>
-            <a href="<?= base_url('pelanggaran?tab=semua') ?>" style="padding:10px 20px;border-radius:10px;border:none;background:#1a56db;color:white;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:6px">
-                <i class="fa fa-arrow-right"></i> Ke Halaman Pelanggaran
-            </a>
-        </div>
-    </div>
-</div>
-
 <!-- ════════════ SIDEBAR ════════════ -->
 <aside class="sidebar" id="sidebar">
     <div class="sidebar-brand">
         <div class="brand-icon"><i class="fa fa-graduation-cap"></i></div>
         <div class="brand-text">
-            <div class="brand-title">BK SMKN 1</div>
+            <!-- NAMA SEKOLAH DIGANTI -->
+            <div class="brand-title">BK SMA Karya Sekadau</div>
             <div class="brand-sub">Bimbingan &amp; Konseling</div>
         </div>
     </div>
@@ -482,10 +270,12 @@
     <!-- ── MENU UTAMA ── -->
     <div class="sidebar-section">
         <div class="sidebar-section-label">Menu Utama</div>
+        <!-- IKON DASHBOARD: fa-gauge-high (konsisten) -->
         <a class="nav-item <?= (uri_string()==''||uri_string()=='dashboard')?'active':'' ?>"
            href="<?= base_url('/') ?>">
-            <i class="fa fa-chart-pie"></i> Dashboard
+            <i class="fa fa-gauge-high"></i> Dashboard
         </a>
+        <!-- IKON DATA PELANGGARAN: fa-triangle-exclamation (konsisten) -->
         <a class="nav-item <?= str_starts_with(uri_string(),'pelanggaran')?'active':'' ?>"
            href="<?= base_url('pelanggaran') ?>">
             <i class="fa fa-triangle-exclamation"></i> Data Pelanggaran
@@ -616,14 +406,16 @@
 
         <div class="page-header">
             <h1>Dashboard Bimbingan Konseling</h1>
-            <p>Selamat datang. Berikut ringkasan aktivitas pelanggaran hari ini.</p>
+            <!-- NAMA SEKOLAH DIGANTI -->
+            <p>Selamat datang di sistem BK SMA Karya Sekadau. Berikut ringkasan aktivitas pelanggaran hari ini.</p>
         </div>
 
-        <!-- 4 STAT CARDS — klik untuk filter ke halaman pelanggaran -->
+        <!-- 4 STAT CARDS — klik langsung ke halaman pelanggaran -->
         <div class="stats-grid">
-            <div class="stat-card total" onclick="window.location='<?= base_url('pelanggaran?tab=semua') ?>'" title="Lihat semua pelanggaran">
+            <a class="stat-card total" href="<?= base_url('pelanggaran?tab=semua') ?>" title="Lihat semua pelanggaran">
                 <div class="stat-top">
                     <div class="stat-label">Total Pelanggaran</div>
+                    <!-- IKON SAMAKAN: fa-triangle-exclamation -->
                     <div class="stat-icon"><i class="fa fa-triangle-exclamation"></i></div>
                 </div>
                 <div class="stat-value"><?= $stats['total'] ?? 0 ?></div>
@@ -631,8 +423,8 @@
                     <span class="stat-change up"><i class="fa fa-arrow-up" style="font-size:9px"></i> 12%</span>
                     <span class="stat-period">dari bulan lalu</span>
                 </div>
-            </div>
-            <div class="stat-card new" onclick="window.location='<?= base_url('pelanggaran?tab=baru') ?>'" title="Lihat pelanggaran baru">
+            </a>
+            <a class="stat-card new" href="<?= base_url('pelanggaran?tab=baru') ?>" title="Lihat pelanggaran baru">
                 <div class="stat-top">
                     <div class="stat-label">Baru Masuk</div>
                     <div class="stat-icon"><i class="fa fa-circle-exclamation"></i></div>
@@ -642,8 +434,8 @@
                     <span class="stat-change up"><i class="fa fa-arrow-up" style="font-size:9px"></i> 5</span>
                     <span class="stat-period">hari ini</span>
                 </div>
-            </div>
-            <div class="stat-card proc" onclick="window.location='<?= base_url('pelanggaran?tab=proses') ?>'" title="Lihat yang dalam proses">
+            </a>
+            <a class="stat-card proc" href="<?= base_url('pelanggaran?tab=proses') ?>" title="Lihat yang dalam proses">
                 <div class="stat-top">
                     <div class="stat-label">Dalam Proses</div>
                     <div class="stat-icon"><i class="fa fa-spinner"></i></div>
@@ -653,8 +445,8 @@
                     <span class="stat-change same"><i class="fa fa-minus" style="font-size:9px"></i> 0%</span>
                     <span class="stat-period">dari kemarin</span>
                 </div>
-            </div>
-            <div class="stat-card done" onclick="window.location='<?= base_url('pelanggaran?tab=diproses') ?>'" title="Lihat yang sudah diproses">
+            </a>
+            <a class="stat-card done" href="<?= base_url('pelanggaran?tab=diproses') ?>" title="Lihat yang sudah diproses">
                 <div class="stat-top">
                     <div class="stat-label">Sudah Diproses</div>
                     <div class="stat-icon"><i class="fa fa-circle-check"></i></div>
@@ -664,7 +456,7 @@
                     <span class="stat-change up"><i class="fa fa-arrow-up" style="font-size:9px"></i> 8%</span>
                     <span class="stat-period">dari bulan lalu</span>
                 </div>
-            </div>
+            </a>
         </div>
 
         <!-- NOTIFICATION BANNER -->
@@ -675,13 +467,13 @@
                     ⚠️ Ada <?= ($stats['baru'] ?? 0) ?> pelanggaran baru yang membutuhkan perhatian
                 </div>
                 <div class="notif-items">
-                    <div class="notif-item" onclick="window.location='<?= base_url('pelanggaran?tab=baru&kategori=berat') ?>'" style="cursor:pointer">
+                    <div class="notif-item" onclick="window.location='<?= base_url('pelanggaran?tab=baru&kategori=berat') ?>'">
                         <span class="dot" style="background:#ef4444"></span> <?= $notifikasi['kritis'] ?? 0 ?> Pelanggaran Berat
                     </div>
-                    <div class="notif-item" style="cursor:pointer" onclick="window.location='<?= base_url('pelanggaran?tab=baru&kategori=sedang') ?>'">
+                    <div class="notif-item" onclick="window.location='<?= base_url('pelanggaran?tab=baru&kategori=sedang') ?>'">
                         <span class="dot" style="background:#f59e0b"></span> Pelanggaran Sedang
                     </div>
-                    <div class="notif-item" style="cursor:pointer" onclick="window.location='<?= base_url('pelanggaran?tab=baru&kategori=ringan') ?>'">
+                    <div class="notif-item" onclick="window.location='<?= base_url('pelanggaran?tab=baru&kategori=ringan') ?>'">
                         <span class="dot" style="background:#93c5fd"></span> Pelanggaran Ringan
                     </div>
                     <div class="notif-item">
@@ -705,7 +497,7 @@
             <!-- Chart -->
             <div class="card">
                 <div class="card-header">
-                    <div class="card-title"><i class="fa fa-chart-bar"></i> Grafik Pelanggaran Terbanyak</div>
+                    <div class="card-title"><i class="fa fa-chart-bar"></i> Grafik Pelanggaran Mingguan</div>
                     <div class="card-actions">
                         <button class="btn-sm active" id="btnMinggu" onclick="switchChart('minggu')">Minggu</button>
                         <button class="btn-sm" id="btnBulan"  onclick="switchChart('bulan')">Bulan</button>
@@ -719,12 +511,12 @@
                 </div>
             </div>
 
-            <!-- Berita Terbaru -->
+            <!-- Berita Pelanggaran Terbaru — klik ke halaman pelanggaran -->
             <div class="card">
                 <div class="card-header">
-                    <div class="card-title"><i class="fa fa-newspaper"></i> Berita Pelanggaran Terbaru</div>
+                    <div class="card-title"><i class="fa fa-newspaper"></i> Pelanggaran Terbaru</div>
                     <a href="<?= base_url('pelanggaran') ?>" class="btn-primary" style="font-size:12px;padding:6px 14px">
-                        <i class="fa fa-plus"></i> Tambah
+                        <i class="fa fa-arrow-right"></i> Lihat Semua
                     </a>
                 </div>
                 <div class="news-list">
@@ -738,7 +530,7 @@
                         ['color'=>'#1a56db','cat'=>'Ringan', 'catClr'=>'#dbeafe;color:#1d4ed8','title'=>'Nadia Pratiwi tidak hadir tanpa keterangan',       'kelas'=>'XII AP 1','time'=>'11:30'],
                     ];
                     foreach ($news as $n): ?>
-                    <div class="news-item" onclick="window.location='<?= base_url('pelanggaran?tab=semua') ?>'">
+                    <a class="news-item" href="<?= base_url('pelanggaran?tab=semua') ?>">
                         <div class="news-badge" style="background:<?= $n['color'] ?>"></div>
                         <div class="news-content">
                             <div class="news-title"><?= esc($n['title']) ?></div>
@@ -748,134 +540,131 @@
                                 <span class="news-tag" style="background:<?= $n['catClr'] ?>"><?= esc($n['cat']) ?></span>
                             </div>
                         </div>
-                    </div>
+                    </a>
                     <?php endforeach; ?>
                 </div>
             </div>
         </div>
 
-        <!-- TABLE PELANGGARAN -->
-        <div class="card" style="margin-bottom:28px">
-            <div class="card-header">
-                <div class="card-title"><i class="fa fa-table-list"></i> Data Pelanggaran Siswa</div>
-                <div style="display:flex;gap:8px;align-items:center">
-                    <div style="position:relative">
-                        <i class="fa fa-magnifying-glass" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--gray-400);font-size:12px"></i>
-                        <input type="text" id="tableSearch" placeholder="Cari..."
-                               style="padding:7px 14px 7px 30px;border-radius:8px;border:1.5px solid var(--gray-200);font-family:'DM Sans',sans-serif;font-size:13px;outline:none;color:var(--gray-800)"
-                               oninput="searchTable(this.value)">
+        <!-- ══ RINGKASAN PER KATEGORI + SISWA AKUMULASI POIN TERBANYAK ══ -->
+        <div class="dashboard-grid" style="margin-bottom:28px">
+
+            <!-- Ringkasan per Kategori -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title"><i class="fa fa-layer-group"></i> Ringkasan per Kategori</div>
+                    <a href="<?= base_url('pelanggaran') ?>" class="btn-primary" style="font-size:12px;padding:6px 14px">
+                        <i class="fa fa-arrow-right"></i> Detail
+                    </a>
+                </div>
+                <div class="card-body" style="padding-bottom:8px">
+                    <div class="ringkasan-grid">
+                        <!-- Pelanggaran Berat -->
+                        <a class="ringkasan-card" href="<?= base_url('pelanggaran?tab=semua&kategori=berat') ?>">
+                            <div class="ringkasan-icon berat"><i class="fa fa-triangle-exclamation"></i></div>
+                            <div class="ringkasan-body">
+                                <div class="ringkasan-label">Berat</div>
+                                <div class="ringkasan-val"><?= $stats['berat'] ?? 0 ?></div>
+                                <div class="ringkasan-sub"><i class="fa fa-circle" style="font-size:7px;color:#dc2626"></i> Perlu tindak lanjut segera</div>
+                            </div>
+                            <i class="fa fa-chevron-right ringkasan-arrow"></i>
+                        </a>
+                        <!-- Pelanggaran Sedang -->
+                        <a class="ringkasan-card" href="<?= base_url('pelanggaran?tab=semua&kategori=sedang') ?>">
+                            <div class="ringkasan-icon sedang"><i class="fa fa-circle-exclamation"></i></div>
+                            <div class="ringkasan-body">
+                                <div class="ringkasan-label">Sedang</div>
+                                <div class="ringkasan-val"><?= $stats['sedang'] ?? 0 ?></div>
+                                <div class="ringkasan-sub"><i class="fa fa-circle" style="font-size:7px;color:#b45309"></i> Dalam pemantauan</div>
+                            </div>
+                            <i class="fa fa-chevron-right ringkasan-arrow"></i>
+                        </a>
+                        <!-- Pelanggaran Ringan -->
+                        <a class="ringkasan-card" href="<?= base_url('pelanggaran?tab=semua&kategori=ringan') ?>">
+                            <div class="ringkasan-icon ringan"><i class="fa fa-circle-info"></i></div>
+                            <div class="ringkasan-body">
+                                <div class="ringkasan-label">Ringan</div>
+                                <div class="ringkasan-val"><?= $stats['ringan'] ?? 0 ?></div>
+                                <div class="ringkasan-sub"><i class="fa fa-circle" style="font-size:7px;color:#1a56db"></i> Penanganan standar</div>
+                            </div>
+                            <i class="fa fa-chevron-right ringkasan-arrow"></i>
+                        </a>
                     </div>
-                    <button class="btn-primary" onclick="openModal('modalTambah')">
-                        <i class="fa fa-plus"></i> Tambah Pelanggaran
-                    </button>
+
+                    <!-- Tabel ringkas pelanggaran per jenis -->
+                    <div style="margin-top:20px">
+                        <div style="font-size:12px;font-weight:600;color:var(--gray-400);text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px">Jenis Pelanggaran Terbanyak</div>
+                        <?php
+                        // Gunakan $jenis_terbanyak dari controller, fallback ke dummy
+                        $jenisList = $jenis_terbanyak ?? [
+                            ['jenis'=>'Terlambat Masuk',   'jumlah'=>14,'persen'=>42,'kat'=>'ringan'],
+                            ['jenis'=>'Seragam Tidak Sesuai','jumlah'=>8,'persen'=>24,'kat'=>'ringan'],
+                            ['jenis'=>'Membolos',           'jumlah'=>6,'persen'=>18,'kat'=>'sedang'],
+                            ['jenis'=>'Perkelahian',        'jumlah'=>3,'persen'=>9, 'kat'=>'berat'],
+                            ['jenis'=>'Penggunaan HP',      'jumlah'=>2,'persen'=>6, 'kat'=>'sedang'],
+                        ];
+                        $barColors = ['ringan'=>'var(--blue-400)','sedang'=>'#f59e0b','berat'=>'#ef4444'];
+                        foreach ($jenisList as $j): ?>
+                        <div style="margin-bottom:12px">
+                            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+                                <span style="font-size:12.5px;color:var(--gray-800);font-weight:500"><?= esc($j['jenis']) ?></span>
+                                <span style="font-size:12px;font-weight:600;color:var(--gray-600)"><?= $j['jumlah'] ?> kasus</span>
+                            </div>
+                            <div style="height:6px;background:var(--gray-100);border-radius:10px;overflow:hidden">
+                                <div style="height:100%;width:<?= $j['persen'] ?>%;background:<?= $barColors[$j['kat']] ?? 'var(--blue-400)' ?>;border-radius:10px;transition:width .6s ease"></div>
+                            </div>
+                        </div>
+                        <?php endforeach; ?>
+                    </div>
                 </div>
             </div>
 
-            <div class="tab-nav">
-                <button class="tab-btn active" onclick="switchTab('baru',this)">
-                    <i class="fa fa-circle-exclamation"></i> Baru Masuk
-                    <span class="tab-count new"><?= $stats['baru'] ?? 0 ?></span>
-                </button>
-                <button class="tab-btn" onclick="switchTab('proses',this)">
-                    <i class="fa fa-spinner"></i> Dalam Proses
-                    <span class="tab-count warn"><?= $stats['proses'] ?? 0 ?></span>
-                </button>
-                <button class="tab-btn" onclick="switchTab('selesai',this)">
-                    <i class="fa fa-circle-check"></i> Sudah Diproses
-                    <span class="tab-count"><?= $stats['diproses'] ?? 0 ?></span>
-                </button>
-            </div>
-
-            <div class="table-wrap">
-    <table>
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Siswa</th>
-                <th>Jenis Pelanggaran</th>
-                <th>Kategori</th>
-                <th>Tanggal</th>
-                <th>Status</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody id="tableBody">
-            <?php
-            // Default tampilkan tab baru
-            $tampilData = $tabel_baru;
-            ?>
-            <?php if (empty($tampilData)): ?>
-            <tr>
-                <td colspan="7" style="text-align:center;padding:36px;color:var(--gray-400)">
-                    <i class="fa fa-inbox" style="font-size:24px;display:block;margin-bottom:8px;color:var(--gray-200)"></i>
-                    Tidak ada data pelanggaran
-                </td>
-            </tr>
-            <?php else: ?>
-            <?php
-            $avatarColors = ['#1a56db','#ef4444','#f59e0b','#10b981','#8b5cf6','#ec4899','#06b6d4','#f97316'];
-            foreach ($tampilData as $i => $r):
-                $nama     = $r['nama_siswa'] ?? 'Tidak Diketahui';
-                $inisial  = strtoupper(substr(implode('', array_map(fn($w)=>$w[0], explode(' ',$nama))),0,2));
-                $color    = $avatarColors[$i % count($avatarColors)];
-                $katClass = $r['kategori'] ?? 'ringan';
-                $statusLabel = ['baru'=>'Baru','proses'=>'Proses','diproses'=>'Selesai'];
-            ?>
-            <tr style="cursor:pointer" onclick="window.location='<?= base_url('pelanggaran?tab=semua') ?>'">
-                <td style="color:var(--gray-400);font-weight:500"><?= $i+1 ?></td>
-                <td>
-                    <div class="td-student">
-                        <div class="td-avatar" style="background:<?= $color ?>"><?= $inisial ?></div>
-                        <div>
-                            <div class="td-name"><?= esc($nama) ?></div>
-                            <div class="td-class"><?= esc($r['kelas'] ?? '—') ?></div>
+            <!-- Siswa dengan Akumulasi Poin Terbanyak -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title"><i class="fa fa-user-xmark"></i> Siswa Poin Tertinggi</div>
+                    <a href="<?= base_url('siswa') ?>" class="btn-primary" style="font-size:12px;padding:6px 14px">
+                        <i class="fa fa-arrow-right"></i> Data Siswa
+                    </a>
+                </div>
+                <div class="siswa-list">
+                    <?php
+                    // Gunakan $siswa_poin dari controller, fallback ke dummy
+                    $siswaPoin = $siswa_poin ?? [
+                        ['nama'=>'Aldi Firmansyah','kelas'=>'XI RPL 2','poin'=>175,'warna'=>'#ef4444'],
+                        ['nama'=>'Rafi Hidayat',   'kelas'=>'XII MM',  'poin'=>150,'warna'=>'#ef4444'],
+                        ['nama'=>'Putri Ayu',       'kelas'=>'X TKJ 1', 'poin'=>95, 'warna'=>'#f59e0b'],
+                        ['nama'=>'Bima Saputra',    'kelas'=>'XI TSM 3','poin'=>80, 'warna'=>'#f59e0b'],
+                        ['nama'=>'Sinta Wulandari', 'kelas'=>'X AKL',  'poin'=>30, 'warna'=>'#1a56db'],
+                    ];
+                    foreach ($siswaPoin as $s):
+                        $inisial = strtoupper(implode('', array_map(fn($w)=>$w[0], array_slice(explode(' ', $s['nama']), 0, 2))));
+                        $poin    = $s['poin'];
+                        $level   = $poin >= 100 ? 'high' : ($poin >= 50 ? 'mid' : 'low');
+                    ?>
+                    <a class="siswa-item" href="<?= base_url('siswa') ?>">
+                        <div class="siswa-avatar" style="background:<?= $s['warna'] ?>"><?= $inisial ?></div>
+                        <div class="siswa-info">
+                            <div class="siswa-name"><?= esc($s['nama']) ?></div>
+                            <div class="siswa-meta"><i class="fa fa-user-graduate" style="font-size:10px"></i> <?= esc($s['kelas']) ?></div>
                         </div>
-                    </div>
-                </td>
-                <td><?= esc($r['jenis_pelanggaran']) ?></td>
-                <td><span class="badge <?= $katClass ?>"><?= ucfirst($katClass) ?></span></td>
-                <td style="color:var(--gray-400)"><?= date('d M Y', strtotime($r['tanggal_kejadian'])) ?></td>
-                <td><span class="badge <?= $r['status'] ?>"><?= $statusLabel[$r['status']] ?></span></td>
-                <td onclick="event.stopPropagation()">
-                    <div class="action-btns">
-                        <button class="btn-icon view" title="Lihat Detail"
-                            onclick="openModalDetail({
-                                id: <?= $r['id'] ?>,
-                                nama_siswa: '<?= esc($nama) ?>',
-                                kelas: '<?= esc($r['kelas'] ?? '') ?>',
-                                jenis_pelanggaran: '<?= esc($r['jenis_pelanggaran']) ?>',
-                                kategori: '<?= $katClass ?>',
-                                poin: <?= $r['poin'] ?>,
-                                tanggal_kejadian: '<?= $r['tanggal_kejadian'] ?>',
-                                status: '<?= $r['status'] ?>',
-                                lokasi: '<?= esc($r['lokasi'] ?? '') ?>',
-                                deskripsi: '<?= addslashes($r['deskripsi'] ?? '') ?>',
-                                notif_ortu: <?= (int)$r['notif_ortu'] ?>,
-                                nama_konselor: '<?= esc($r['nama_konselor'] ?? '') ?>'
-                            })">
-                            <i class="fa fa-eye"></i>
-                        </button>
-                        <a href="<?= base_url('pelanggaran?tab=semua') ?>" class="btn-icon edit" title="Edit"><i class="fa fa-pen"></i></a>
-                        <a href="<?= base_url('pelanggaran?tab=semua') ?>" class="btn-icon del"  title="Hapus"><i class="fa fa-trash"></i></a>
-                    </div>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-            <?php endif; ?>
-        </tbody>
-    </table>
-</div>
-
-            <div style="padding:14px 24px;border-top:1px solid var(--gray-100);display:flex;align-items:center;justify-content:space-between;font-size:12.5px;color:var(--gray-400)">
-                <span id="tableInfo">Menampilkan data pelanggaran</span>
-                <a href="<?= base_url('pelanggaran?tab=semua') ?>" class="btn-primary" style="font-size:12px;padding:6px 16px">
-                    <i class="fa fa-arrow-right"></i> Lihat Semua
-                </a>
+                        <div class="siswa-poin">
+                            <div class="poin-badge <?= $level ?>"><?= $poin ?></div>
+                            <div class="siswa-poin-label">poin</div>
+                        </div>
+                    </a>
+                    <?php endforeach; ?>
+                </div>
+                <div style="padding:12px 24px;border-top:1px solid var(--gray-100);text-align:center">
+                    <a href="<?= base_url('siswa') ?>" style="font-size:12.5px;color:var(--blue-500);font-weight:500;text-decoration:none;display:inline-flex;align-items:center;gap:5px">
+                        Lihat semua siswa <i class="fa fa-arrow-right" style="font-size:11px"></i>
+                    </a>
+                </div>
             </div>
         </div>
 
-    </div>
-</div>
+    </div><!-- /page-content -->
+</div><!-- /main-wrapper -->
 
 <script>
 // ══ CLOCK ══
@@ -895,19 +684,11 @@ function closeSidebar(){document.getElementById('sidebar').classList.remove('ope
 // ══ FULLSCREEN ══
 function toggleFS(){if(!document.fullscreenElement){document.documentElement.requestFullscreen();document.getElementById('fsIcon').className='fa fa-compress'}else{document.exitFullscreen();document.getElementById('fsIcon').className='fa fa-expand'}}
 
-// ══ MODAL ══
-function openModal(id){document.getElementById(id).classList.add('show')}
-function closeModal(id){document.getElementById(id).classList.remove('show')}
-document.querySelectorAll('.modal-overlay').forEach(m=>{
-    m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('show')})
-});
-
 // ══ TOAST ══
 function showToast(msg, type='success'){
     const t=document.getElementById('toast');
-    const m=document.getElementById('toastMsg');
+    document.getElementById('toastMsg').textContent=msg;
     t.className='toast '+type;
-    m.textContent=msg;
     t.classList.add('show');
     setTimeout(()=>t.classList.remove('show'),3500);
 }
@@ -916,61 +697,32 @@ function showToast(msg, type='success'){
 function toggleNotif(){document.getElementById('notifPopup').classList.toggle('show')}
 document.addEventListener('click',e=>{
     const popup=document.getElementById('notifPopup');
-    if(popup.classList.contains('show')&&!popup.contains(e.target)&&!e.target.closest('.nav-action-btn[title="Notifikasi"]'))
+    if(popup.classList.contains('show')&&!popup.contains(e.target)&&!e.target.closest('[title="Notifikasi"]'))
         popup.classList.remove('show');
 });
-
-// Tandai satu notif dibaca
 function tandaiSatuNotif(idx){
     const item=document.getElementById('notifItem'+idx);
-    if(item){
-        item.style.opacity='.4';
-        item.style.textDecoration='line-through';
-        showToast('Notifikasi ditandai dibaca','info');
-    }
+    if(item){item.style.opacity='.4';item.style.textDecoration='line-through';showToast('Notifikasi ditandai dibaca','info')}
 }
-
-// Lihat semua notif
 function lihatSemuaNotif(){
     document.getElementById('notifPopup').classList.remove('show');
     window.location='<?= base_url('pelanggaran?tab=baru') ?>';
 }
 
-// ══ TANDAI BANNER DIBACA ══
+// ══ TANDAI BANNER ══
 function tandaiBannerDibaca(){
-    const banner=document.getElementById('notifBanner');
-    banner.style.opacity='.6';
-    document.getElementById('btnTandaiBaca').disabled=true;
-    document.getElementById('btnTandaiBaca').innerHTML='<i class="fa fa-check"></i> Sudah Dibaca';
+    document.getElementById('notifBanner').style.opacity='.6';
+    const btn=document.getElementById('btnTandaiBaca');
+    btn.disabled=true;
+    btn.innerHTML='<i class="fa fa-check"></i> Sudah Dibaca';
     document.getElementById('notifDot').style.display='none';
     showToast('Semua notifikasi ditandai dibaca ✓','success');
 }
 
 // ══ NAVBAR SEARCH ══
-function handleSearch(e, val){
-    if(e.key==='Enter' && val.trim()){
+function handleSearch(e,val){
+    if(e.key==='Enter'&&val.trim())
         window.location='<?= base_url('pelanggaran') ?>?tab=semua&q='+encodeURIComponent(val.trim());
-    }
-}
-
-// ══ FORM AUTO FILL ══
-function fillSiswaInfo(sel){
-    const opt=sel.options[sel.selectedIndex];
-    if(!opt.value){document.getElementById('siswaInfoRow').style.display='none';return}
-    document.getElementById('kelasInfo').value=opt.dataset.kelas||'';
-    document.getElementById('nisnInfo').value=opt.dataset.nisn||'';
-    document.getElementById('siswaInfoRow').style.display='grid';
-}
-function autoFillPoin(){
-    const sel=document.getElementById('selectJenis');
-    const opt=sel.options[sel.selectedIndex];
-    if(!opt.value) return;
-    const poin=opt.dataset.poin||0;
-    const kat=opt.dataset.kat||'ringan';
-    document.getElementById('inputPoin').value=poin;
-    document.getElementById('selectKategori').value=kat;
-    document.getElementById('poinText').textContent='Poin otomatis: '+poin+' — Kategori: '+kat.charAt(0).toUpperCase()+kat.slice(1);
-    document.getElementById('poinPreview').classList.add('show');
 }
 
 // ══ CHART ══
@@ -988,82 +740,10 @@ function buildChart(key){
 }
 function switchChart(key){
     buildChart(key);
-    document.querySelectorAll('[id^="btn"]').forEach(b=>b.classList.remove('active'));
+    ['Minggu','Bulan','Tahun'].forEach(k=>document.getElementById('btn'+k).classList.remove('active'));
     document.getElementById('btn'+key.charAt(0).toUpperCase()+key.slice(1)).classList.add('active');
 }
 buildChart('minggu');
-
-
-const tableDataDB = {
-    baru:    <?= json_encode(array_values($tabel_baru)) ?>,
-    proses:  <?= json_encode(array_values($tabel_proses)) ?>,
-    selesai: <?= json_encode(array_values($tabel_selesai)) ?>
-};
-
-let currentTableData = tableDataDB.baru;
-
-function switchTab(key, btn) {
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    currentTableData = tableDataDB[key];
-    renderTableDB(currentTableData);
-}
-
-function renderTableDB(data) { 
-    const tbody  = document.getElementById('tableBody');
-    const colors = ['#1a56db','#ef4444','#f59e0b','#10b981','#8b5cf6','#ec4899','#06b6d4','#f97316'];
-    const statusLabel = {baru:'Baru', proses:'Proses', diproses:'Selesai'};
-
-    if (!data || !data.length) {
-        tbody.innerHTML = `<tr><td colspan="7" style="text-align:center;padding:36px;color:var(--gray-400)">
-            <i class="fa fa-inbox" style="font-size:24px;display:block;margin-bottom:8px;color:var(--gray-200)"></i>
-            Tidak ada data</td></tr>`;
-        return;
-    }
-
-    tbody.innerHTML = data.map((r, i) => {
-        const nama    = r.nama_siswa || 'Tidak Diketahui';
-        const inisial = nama.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
-        const color   = colors[i % colors.length];
-        const kat     = r.kategori || 'ringan';
-        return `
-        <tr style="cursor:pointer" onclick="window.location='<?= base_url('pelanggaran?tab=semua') ?>'">
-            <td style="color:var(--gray-400);font-weight:500">${i+1}</td>
-            <td>
-                <div class="td-student">
-                    <div class="td-avatar" style="background:${color}">${inisial}</div>
-                    <div>
-                        <div class="td-name">${nama}</div>
-                        <div class="td-class">${r.kelas || '—'}</div>
-                    </div>
-                </div>
-            </td>
-            <td>${r.jenis_pelanggaran}</td>
-            <td><span class="badge ${kat}">${kat.charAt(0).toUpperCase()+kat.slice(1)}</span></td>
-            <td style="color:var(--gray-400)">${r.tanggal_kejadian}</td>
-            <td><span class="badge ${r.status}">${statusLabel[r.status] || r.status}</span></td>
-            <td onclick="event.stopPropagation()">
-                <div class="action-btns">
-                    <button class="btn-icon view" title="Detail" onclick='openModalDetail(${JSON.stringify(r).replace(/\\/g, "\\\\").replace(/'/g, "\\'")})'><i class="fa fa-eye"></i></button>
-                    <a href="<?= base_url('pelanggaran?tab=semua') ?>" class="btn-icon edit" title="Edit"><i class="fa fa-pen"></i></a>
-                    <a href="<?= base_url('pelanggaran?tab=semua') ?>" class="btn-icon del"  title="Hapus"><i class="fa fa-trash"></i></a>
-                </div>
-            </td>
-        </tr>`;
-    }).join('');
-}
-
-function searchTable(q) {
-    const lower    = q.toLowerCase();
-    const filtered = currentTableData.filter(r =>
-        (r.nama_siswa || '').toLowerCase().includes(lower) ||
-        (r.jenis_pelanggaran || '').toLowerCase().includes(lower) ||
-        (r.kelas || '').toLowerCase().includes(lower)
-    );
-    renderTableDB(filtered);
-}
-
-renderTableDB(tableDataDB.baru);
 </script>
 
 </body>
