@@ -4,18 +4,15 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-/**
- * Jalankan: php spark migrate
- * Menambah kolom kategori & lokasi ke tabel pelanggaran
- * (jika tabel sudah ada dari migrasi sebelumnya)
- */
 class AddKolomPelanggaran extends Migration
 {
     public function up()
     {
-        // Cek apakah kolom sudah ada sebelum menambahkan
-        $fields = $this->db->getFieldNames('pelanggaran');
-
+   
+        /** @var \CodeIgniter\Database\BaseConnection $db */
+        $db     = $this->db;
+        $fields = $db->getFieldNames('pelanggaran');
+        
         if (!in_array('kategori', $fields)) {
             $this->forge->addColumn('pelanggaran', [
                 'kategori' => [
