@@ -58,20 +58,19 @@ class TindakLanjut extends BaseController
         $jenisBimbinganStr = is_array($jenisBimbingan) ? implode(',', $jenisBimbingan) : null;
 
         $pelanggaranId = $this->request->getPost('pelanggaran_id');
-        $pelanggaranId = ($pelanggaranId !== '' && $pelanggaranId !== null) ? (int) $pelanggaranId : 0;
+        $pelanggaranId = ($pelanggaranId !== '' && $pelanggaranId !== null) ? (int) $pelanggaranId : null;
 
-        $this->tindakLanjutModel->insert([
-            'siswa_id'        => (int) $this->request->getPost('siswa_id'),
-            'pelanggaran_id'  => $pelanggaranId,
-            'konselor_id'     => null,
-            'masalah'         => $this->request->getPost('masalah'),
-            'tindak_lanjut'   => $this->request->getPost('tindak_lanjut'),
-            'yang_menangani'  => $this->request->getPost('yang_menangani'),
-            'jenis_bimbingan' => $jenisBimbinganStr,
-            'tanggal'         => $this->request->getPost('tanggal'),
-            'ttd'             => $this->request->getPost('ttd') ?: null,
-            'status'          => 'proses',
-        ]);
+      $this->tindakLanjutModel->insert([
+        'siswa_id'        => (int) $this->request->getPost('siswa_id'),
+        'konselor_id'     => null,
+        'masalah'         => $this->request->getPost('masalah'),
+        'tindak_lanjut'   => $this->request->getPost('tindak_lanjut'),
+        'yang_menangani'  => $this->request->getPost('yang_menangani'),
+        'jenis_bimbingan' => $jenisBimbinganStr,
+        'tanggal'         => $this->request->getPost('tanggal'),
+        'ttd'             => $this->request->getPost('ttd') ?: null,
+        'status'          => 'proses',
+    ]);
 
         return redirect()->to(base_url('tindak-lanjut'))->with('success', 'Tindak lanjut berhasil ditambahkan.');
     }
@@ -104,7 +103,8 @@ class TindakLanjut extends BaseController
     public function update(int $id)
     {
         if (!$this->tindakLanjutModel->find($id)) {
-            return redirect()->to(base_url('tindak-lanjut'))->with('error', 'Data tidak ditemukan.');
+            return redirect()->to(base_url('tindak-lanjut'))
+                ->with('error', 'Data tidak ditemukan.');
         }
 
         $rules = [
@@ -117,10 +117,11 @@ class TindakLanjut extends BaseController
         ];
 
         if (!$this->validate($rules)) {
-            return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+            return redirect()->to(base_url('tindak-lanjut'))
+                ->with('error', 'Validasi gagal: ' . implode(', ', $this->validator->getErrors()));
         }
 
-        $jenisBimbingan = $this->request->getPost('jenis_bimbingan');
+        $jenisBimbingan    = $this->request->getPost('jenis_bimbingan');
         $jenisBimbinganStr = is_array($jenisBimbingan) ? implode(',', $jenisBimbingan) : null;
 
         $this->tindakLanjutModel->update($id, [
@@ -134,9 +135,9 @@ class TindakLanjut extends BaseController
             'status'          => $this->request->getPost('status'),
         ]);
 
-        return redirect()->to(base_url('tindak-lanjut'))->with('success', 'Tindak lanjut berhasil diperbarui.');
+        return redirect()->to(base_url('tindak-lanjut'))
+            ->with('success', 'Tindak lanjut berhasil diperbarui.');
     }
-
     public function updateStatus(int $id)
     {
         $status = $this->request->getPost('status');

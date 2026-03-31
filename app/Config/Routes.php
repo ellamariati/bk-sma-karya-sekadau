@@ -38,6 +38,16 @@ $routes->post('tindak-lanjut/status/(:num)', 'TindakLanjut::updateStatus/$1');
 $routes->get( 'tindak-lanjut/hapus/(:num)',  'TindakLanjut::hapus/$1');
 $routes->get( 'tindak-lanjut/export',        'TindakLanjut::export');
 
+// Buku Kunjungan
+$routes->get( 'buku-kunjungan',                   'BukuKunjungan::index');
+$routes->post('buku-kunjungan/simpan',             'BukuKunjungan::simpan');
+$routes->get( 'buku-kunjungan/detail/(:num)',      'BukuKunjungan::detail/$1');
+$routes->get( 'buku-kunjungan/edit/(:num)',        'BukuKunjungan::edit/$1');
+$routes->post('buku-kunjungan/update/(:num)',      'BukuKunjungan::update/$1');
+$routes->post('buku-kunjungan/status/(:num)',      'BukuKunjungan::updateStatus/$1');
+$routes->get( 'buku-kunjungan/hapus/(:num)',       'BukuKunjungan::hapus/$1');
+$routes->get( 'buku-kunjungan/export',             'BukuKunjungan::export');
+
 // ══ Auth ══
 $routes->get( 'login',  'Auth::index');
 $routes->post('login',  'Auth::proses');

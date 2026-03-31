@@ -401,7 +401,11 @@
 <!-- ════ SIDEBAR ════ -->
 <aside class="sidebar" id="sidebar">
     <div class="sidebar-brand">
-        <div class="brand-icon"><i class="fa fa-graduation-cap"></i></div>
+        <div class="brand-icon" style="background:white;padding:3px;border-radius:13px;overflow:hidden;">
+            <img src="<?= base_url('img/logo_sma.png') ?>" 
+                alt="Logo SMA Karya Sekadau" 
+                style="width:40px;height:40px;object-fit:contain;display:block;">
+        </div>
         <div class="brand-text">
             <div class="brand-title">BK SMA Karya Sekadau</div>
             <div class="brand-sub">Bimbingan &amp; Konseling</div>
