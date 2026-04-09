@@ -48,6 +48,9 @@ $routes->post('buku-kunjungan/status/(:num)',      'BukuKunjungan::updateStatus/
 $routes->get( 'buku-kunjungan/hapus/(:num)',       'BukuKunjungan::hapus/$1');
 $routes->get( 'buku-kunjungan/export',             'BukuKunjungan::export');
 
+$routes->get('jadwal', 'JadwalKonseling::index');
+$routes->post('jadwal/store', 'JadwalKonseling::store');
+
 // ══ Auth ══
 $routes->get( 'login',  'Auth::index');
 $routes->post('login',  'Auth::proses');

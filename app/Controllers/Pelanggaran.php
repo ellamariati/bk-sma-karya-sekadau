@@ -68,8 +68,8 @@ public function index()
 
     // Filter kelas
     if (!empty($kelas)) {
-        $builder->like('siswa.kelas', $kelas, 'after');
-    }
+    $builder->like('siswa.kelas', $kelas.' ', 'after');
+}
 
     // Filter guru BK
     if (!empty($guru)) {
