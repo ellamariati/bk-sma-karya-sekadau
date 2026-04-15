@@ -198,8 +198,36 @@
         .status-dot{width:14px;height:14px;border-radius:50%;flex-shrink:0}
         .status-option-text .st-title{font-weight:600;font-size:13.5px;color:var(--gray-800)}
         .status-option-text .st-desc{font-size:11.5px;color:var(--gray-400);margin-top:2px}
-        /* kelas-badge: label nama kelas */
         .kelas-badge{display:inline-block;font-size:10.5px;font-weight:600;padding:2px 7px;border-radius:5px;background:var(--blue-50);color:var(--blue-600);margin-left:4px;white-space:nowrap}
+
+        /* ══ SEARCHABLE SISWA DROPDOWN ══ */
+        .siswa-search-wrap{position:relative}
+        .siswa-search-input{width:100%;padding:10px 36px 10px 38px;border-radius:var(--radius-sm);border:1.5px solid var(--gray-200);background:var(--gray-50);font-family:'DM Sans',sans-serif;font-size:13.5px;color:var(--gray-800);outline:none;transition:var(--transition);cursor:pointer}
+        .siswa-search-input:focus{border-color:var(--blue-400);background:white;box-shadow:0 0 0 3px rgba(59,130,246,.1)}
+        .siswa-search-input.has-value{background:white;border-color:var(--blue-300)}
+        .siswa-search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--gray-400);font-size:13px;pointer-events:none}
+        .siswa-clear-btn{position:absolute;right:10px;top:50%;transform:translateY(-50%);width:20px;height:20px;border-radius:50%;border:none;background:var(--gray-300);color:white;font-size:10px;cursor:pointer;display:none;align-items:center;justify-content:center;transition:var(--transition)}
+        .siswa-clear-btn:hover{background:var(--danger)}
+        .siswa-clear-btn.show{display:flex}
+        .siswa-dropdown{position:absolute;top:calc(100% + 6px);left:0;right:0;background:white;border-radius:var(--radius-sm);border:1.5px solid var(--blue-200);box-shadow:0 8px 32px rgba(19,64,160,.15);z-index:500;max-height:240px;overflow-y:auto;display:none}
+        .siswa-dropdown.show{display:block;animation:dropIn .15s ease}
+        @keyframes dropIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+        .siswa-dropdown-search{padding:10px 12px;border-bottom:1px solid var(--gray-100);position:sticky;top:0;background:white;z-index:1}
+        .siswa-dropdown-search input{width:100%;padding:8px 12px 8px 32px;border-radius:8px;border:1.5px solid var(--gray-200);background:var(--gray-50);font-family:'DM Sans',sans-serif;font-size:12.5px;outline:none;transition:var(--transition)}
+        .siswa-dropdown-search input:focus{border-color:var(--blue-400);background:white}
+        .siswa-dropdown-search .search-icon{position:absolute;left:22px;top:50%;transform:translateY(-50%);color:var(--gray-400);font-size:11px;pointer-events:none}
+        .siswa-option{display:flex;align-items:center;gap:10px;padding:10px 14px;cursor:pointer;transition:var(--transition);border-bottom:1px solid var(--gray-50)}
+        .siswa-option:last-child{border-bottom:none}
+        .siswa-option:hover,.siswa-option.selected{background:var(--blue-50)}
+        .siswa-opt-avatar{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:white;flex-shrink:0}
+        .siswa-opt-name{font-size:13px;font-weight:600;color:var(--blue-900)}
+        .siswa-opt-kelas{font-size:11px;color:var(--gray-400);margin-top:1px}
+        .siswa-no-result{padding:20px;text-align:center;color:var(--gray-400);font-size:13px}
+        .siswa-selected-card{display:none;align-items:center;gap:10px;padding:10px 14px;background:var(--blue-50);border-radius:var(--radius-sm);border:1.5px solid var(--blue-200);margin-top:6px}
+        .siswa-selected-card.show{display:flex}
+        .siswa-selected-name{font-size:13px;font-weight:600;color:var(--blue-900)}
+        .siswa-selected-kelas{font-size:11.5px;color:var(--blue-600)}
+
         ::-webkit-scrollbar{width:6px;height:6px}
         ::-webkit-scrollbar-track{background:transparent}
         ::-webkit-scrollbar-thumb{background:var(--gray-200);border-radius:10px}
@@ -221,8 +249,6 @@
 
 <?php
 // ── Helper format kelas ──
-// Simpan di app/Helpers/KelasHelper.php dan load via helper('kelas')
-// Di sini didefinisikan inline agar file ini standalone
 if (!function_exists('format_kelas')) {
     function format_kelas(?string $kelas): string {
         if (empty($kelas)) return '—';
@@ -236,7 +262,7 @@ if (!function_exists('format_kelas')) {
     }
 }
 
-// ── Data dummy siswa (format kelas baru) ──
+// ── Data dummy siswa ──
 $listSiswa = [
     ['id'=>1, 'nisn'=>'0041230001','nama'=>'Aldi Firmansyah',   'kelas'=>'XI A'],
     ['id'=>2, 'nisn'=>'0041230002','nama'=>'Putri Ayu Lestari', 'kelas'=>'X C'],
@@ -273,6 +299,15 @@ $jenisPelanggaran = [
         'Terlibat Narkoba'      => 100,
     ],
 ];
+
+// ── Siapkan data siswa untuk JS (sama persis dengan pola buku-kunjungan) ──
+$siswaJs = array_map(fn($s) => [
+    'id'         => $s['id'],
+    'nama'       => $s['nama'],
+    'kelas'      => $s['kelas'],
+    'kelasLabel' => format_kelas($s['kelas']),
+    'nisn'       => $s['nisn'] ?? '',
+], $listSiswa);
 ?>
 
 <!-- ════ MODAL TAMBAH ════ -->
@@ -286,31 +321,36 @@ $jenisPelanggaran = [
             <?= csrf_field() ?>
             <div class="modal-body">
 
+                <!-- ══ SEARCHABLE SISWA — TAMBAH ══ -->
                 <div class="form-row full">
                     <div class="form-group">
                         <label class="form-label">Siswa <span>*</span></label>
-                        <select class="form-select" name="siswa_id" required onchange="fillSiswaInfo(this)">
-                            <option value="">— Pilih Siswa —</option>
-                            <?php foreach ($listSiswa as $s): ?>
-                            <option value="<?= $s['id'] ?>"
-                                    data-kelas="<?= esc($s['kelas']) ?>"
-                                    data-kelas-label="<?= esc(format_kelas($s['kelas'])) ?>"
-                                    data-nisn="<?= esc($s['nisn']) ?>">
-                                <?= esc($s['nama']) ?> — <?= esc(format_kelas($s['kelas'])) ?>
-                            </option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-row" id="siswaInfoTambah" style="display:none">
-                    <div class="form-group">
-                        <label class="form-label">Kelas</label>
-                        <input type="text" class="form-input" id="kelasInfoTambah" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">NISN</label>
-                        <input type="text" class="form-input" id="nisnInfoTambah" readonly>
+                        <input type="hidden" name="siswa_id" id="tambah_siswa_id" value="<?= old('siswa_id') ?>">
+                        <div class="siswa-search-wrap">
+                            <input type="text" class="siswa-search-input" id="tambah_siswa_display"
+                                placeholder="Cari nama atau kelas siswa..." readonly
+                                onclick="toggleSiswaDropdown('tambah')" autocomplete="off">
+                            <i class="fa fa-user-graduate siswa-search-icon"></i>
+                            <button type="button" class="siswa-clear-btn" id="tambah_siswa_clear"
+                                onclick="clearSiswa('tambah')"><i class="fa fa-times"></i></button>
+                            <div class="siswa-dropdown" id="tambah_siswa_dropdown">
+                                <div class="siswa-dropdown-search" style="position:relative">
+                                    <i class="fa fa-magnifying-glass search-icon"></i>
+                                    <input type="text" id="tambah_siswa_search"
+                                        placeholder="Ketik nama, kelas, atau NISN..."
+                                        oninput="filterSiswaOptions('tambah')" autocomplete="off">
+                                </div>
+                                <div id="tambah_siswa_list"></div>
+                            </div>
+                        </div>
+                        <!-- Kartu info siswa yang dipilih -->
+                        <div class="siswa-selected-card" id="tambah_siswa_card">
+                            <div class="siswa-opt-avatar" id="tambah_siswa_avatar">--</div>
+                            <div>
+                                <div class="siswa-selected-name" id="tambah_siswa_name">—</div>
+                                <div class="siswa-selected-kelas" id="tambah_siswa_kelas">—</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -450,23 +490,44 @@ $jenisPelanggaran = [
             <?= csrf_field() ?>
             <input type="hidden" name="_method" value="POST">
             <div class="modal-body">
-                <div class="form-row full">
-                    <div class="form-group">
-                        <label class="form-label">Siswa</label>
-                        <input type="text" class="form-input" id="editSiswaLabel" readonly>
-                        <input type="hidden" name="siswa_id" id="editSiswaId">
-                    </div>
-                </div>
+
+                <!-- ══ SEARCHABLE SISWA — EDIT ══ -->
                 <div class="form-row">
                     <div class="form-group">
-                        <label class="form-label">Kelas</label>
-                        <input type="text" class="form-input" id="editKelas" readonly>
+                        <label class="form-label">Siswa <span>*</span></label>
+                        <input type="hidden" name="siswa_id" id="edit_siswa_id">
+                        <div class="siswa-search-wrap">
+                            <input type="text" class="siswa-search-input" id="edit_siswa_display"
+                                placeholder="Cari nama atau kelas siswa..." readonly
+                                onclick="toggleSiswaDropdown('edit')" autocomplete="off">
+                            <i class="fa fa-user-graduate siswa-search-icon"></i>
+                            <button type="button" class="siswa-clear-btn" id="edit_siswa_clear"
+                                onclick="clearSiswa('edit')"><i class="fa fa-times"></i></button>
+                            <div class="siswa-dropdown" id="edit_siswa_dropdown">
+                                <div class="siswa-dropdown-search" style="position:relative">
+                                    <i class="fa fa-magnifying-glass search-icon"></i>
+                                    <input type="text" id="edit_siswa_search"
+                                        placeholder="Ketik nama, kelas, atau NISN..."
+                                        oninput="filterSiswaOptions('edit')" autocomplete="off">
+                                </div>
+                                <div id="edit_siswa_list"></div>
+                            </div>
+                        </div>
+                        <!-- Kartu info siswa yang dipilih -->
+                        <div class="siswa-selected-card" id="edit_siswa_card">
+                            <div class="siswa-opt-avatar" id="edit_siswa_avatar">--</div>
+                            <div>
+                                <div class="siswa-selected-name" id="edit_siswa_name">—</div>
+                                <div class="siswa-selected-kelas" id="edit_siswa_kelas">—</div>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label class="form-label">Tanggal Kejadian <span>*</span></label>
                         <input type="date" class="form-input" name="tanggal_kejadian" id="editTanggal" required>
                     </div>
                 </div>
+
                 <div class="form-row">
                     <div class="form-group">
                         <label class="form-label">Jenis Pelanggaran <span>*</span></label>
@@ -602,8 +663,8 @@ $jenisPelanggaran = [
 <aside class="sidebar" id="sidebar">
     <div class="sidebar-brand">
         <div class="brand-icon" style="background:white;padding:3px;border-radius:13px;overflow:hidden;">
-            <img src="<?= base_url('img/logo_sma.png') ?>" 
-                alt="Logo SMA Karya Sekadau" 
+            <img src="<?= base_url('img/logo_sma.png') ?>"
+                alt="Logo SMA Karya Sekadau"
                 style="width:40px;height:40px;object-fit:contain;display:block;">
         </div>
         <div class="brand-text">
@@ -775,7 +836,6 @@ $jenisPelanggaran = [
                     <option value="sedang" <?= ($filter['kategori'] ?? '') === 'sedang' ? 'selected' : '' ?>>Sedang</option>
                     <option value="berat"  <?= ($filter['kategori'] ?? '') === 'berat'  ? 'selected' : '' ?>>Berat</option>
                 </select>
-                <!-- Filter kelas: X, XI, XII -->
                 <select class="filter-select" name="kelas" onchange="submitFilter()">
                     <option value="">Semua Kelas</option>
                     <option value="X"   <?= ($filter['kelas'] ?? '') === 'X'   ? 'selected' : '' ?>>Kelas X</option>
@@ -849,10 +909,8 @@ $jenisPelanggaran = [
                             $poinClass = $r['poin'] >= 75 ? 'high' : ($r['poin'] >= 30 ? 'medium' : 'low');
                             $katClass  = $r['kategori'] ?? 'ringan';
                             $statusLabel = ['baru'=>'Baru','proses'=>'Proses','diproses'=>'Selesai'];
-                            // Format kelas dari DB
                             $kelasRaw    = $r['kelas'] ?? '';
                             $kelasFormat = format_kelas($kelasRaw);
-                            // Data untuk JS (escape untuk inline onclick)
                             $jsKelas = addslashes($kelasFormat);
                             $jsNama  = addslashes($nama);
                             $jsJenis = addslashes($r['jenis_pelanggaran']);
@@ -866,7 +924,6 @@ $jenisPelanggaran = [
                                     <div class="td-avatar" style="background:<?= $color ?>"><?= $inisial ?></div>
                                     <div>
                                         <div class="td-name"><?= esc($nama) ?></div>
-                                        <!-- KELAS FORMAT BARU: X A (MIA 1) -->
                                         <div class="td-class"><?= esc($kelasFormat) ?></div>
                                     </div>
                                 </div>
@@ -879,7 +936,7 @@ $jenisPelanggaran = [
                             <td>
                                 <div class="action-btns">
                                     <button class="btn-icon view" title="Detail"
-                                        onclick="openDetail(<?= $r['id'] ?>,'<?= $jsNama ?>','<?= $jsKelas ?>','<?= $jsJenis ?>','<?= $katClass ?>',<?= $r['poin'] ?>,'<?= $r['tanggal_kejadian'] ?>','<?= $r['status'] ?>',<?= (int)$r['notif_ortu'] ?>,'<?= $jsLok ?>',`<?= $jsDesk ?>`)">
+                                        onclick="openDetail(<?= $r['id'] ?>,'<?= $jsNama ?>','<?= $jsKelas ?>','<?= $jsJenis ?>','<?= $katClass ?>',<?= $r['poin'] ?>,'<?= $r['tanggal_kejadian'] ?>','<?= $r['status'] ?>',<?= (int)$r['notif_ortu'] ?>,'<?= $jsLok ?>',`<?= $jsDesk ?>`,<?= $r['siswa_id'] ?>)">
                                         <i class="fa fa-eye"></i>
                                     </button>
                                     <button class="btn-icon edit" title="Edit"
@@ -917,6 +974,98 @@ $jenisPelanggaran = [
 </div>
 
 <script>
+const BASE_URL   = '<?= base_url() ?>';
+// ── Data siswa dari PHP untuk searchable dropdown ──
+const SISWA_DATA = <?= json_encode($siswaJs) ?>;
+const AVATAR_COLORS = ['#1a56db','#ef4444','#f59e0b','#10b981','#8b5cf6','#ec4899','#06b6d4','#f97316'];
+
+// ══ HELPER ══
+function getAvatarColor(nama){
+    let h=0;
+    for(let c of nama) h=(h+c.charCodeAt(0))%AVATAR_COLORS.length;
+    return AVATAR_COLORS[h];
+}
+function getInitials(nama){
+    return nama.trim().split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
+}
+
+// ══ SEARCHABLE DROPDOWN — RENDER LIST ══
+function renderSiswaList(prefix, query=''){
+    const list       = document.getElementById(prefix+'_siswa_list');
+    const selectedId = document.getElementById(prefix+'_siswa_id').value;
+    const q          = query.toLowerCase();
+    const filtered   = q
+        ? SISWA_DATA.filter(s =>
+            s.nama.toLowerCase().includes(q) ||
+            s.kelas.toLowerCase().includes(q) ||
+            s.kelasLabel.toLowerCase().includes(q) ||
+            s.nisn.includes(q))
+        : SISWA_DATA;
+
+    if(!filtered.length){
+        list.innerHTML='<div class="siswa-no-result"><i class="fa fa-user-slash" style="font-size:22px;display:block;margin-bottom:6px;color:var(--gray-200)"></i>Siswa tidak ditemukan</div>';
+        return;
+    }
+    list.innerHTML = filtered.map(s=>`
+        <div class="siswa-option ${s.id==selectedId?'selected':''}"
+             onclick="selectSiswa('${prefix}',${s.id},'${s.nama.replace(/'/g,"\\'")}','${s.kelas}','${s.kelasLabel.replace(/'/g,"\\'")}','${s.nisn}')">
+            <div class="siswa-opt-avatar" style="background:${getAvatarColor(s.nama)}">${getInitials(s.nama)}</div>
+            <div>
+                <div class="siswa-opt-name">${s.nama}</div>
+                <div class="siswa-opt-kelas">${s.kelasLabel}${s.nisn?' · NISN: '+s.nisn:''}</div>
+            </div>
+        </div>`).join('');
+}
+
+// ══ TOGGLE DROPDOWN ══
+function toggleSiswaDropdown(prefix){
+    const dd     = document.getElementById(prefix+'_siswa_dropdown');
+    const isOpen = dd.classList.contains('show');
+    closeAllSiswaDropdowns();
+    if(!isOpen){
+        dd.classList.add('show');
+        renderSiswaList(prefix);
+        setTimeout(()=>{
+            const si = document.getElementById(prefix+'_siswa_search');
+            if(si){ si.value=''; si.focus(); }
+        },100);
+    }
+}
+function closeAllSiswaDropdowns(){
+    document.querySelectorAll('.siswa-dropdown').forEach(d=>d.classList.remove('show'));
+}
+function filterSiswaOptions(prefix){
+    renderSiswaList(prefix, document.getElementById(prefix+'_siswa_search').value);
+}
+
+// ══ SELECT SISWA ══
+function selectSiswa(prefix, id, nama, kelas, kelasLabel, nisn){
+    document.getElementById(prefix+'_siswa_id').value       = id;
+    document.getElementById(prefix+'_siswa_display').value  = nama+' — '+kelasLabel;
+    document.getElementById(prefix+'_siswa_display').classList.add('has-value');
+    document.getElementById(prefix+'_siswa_clear').classList.add('show');
+    document.getElementById(prefix+'_siswa_avatar').textContent  = getInitials(nama);
+    document.getElementById(prefix+'_siswa_avatar').style.background = getAvatarColor(nama);
+    document.getElementById(prefix+'_siswa_name').textContent   = nama;
+    document.getElementById(prefix+'_siswa_kelas').textContent  = kelasLabel+(nisn?' · NISN: '+nisn:'');
+    document.getElementById(prefix+'_siswa_card').classList.add('show');
+    closeAllSiswaDropdowns();
+}
+
+// ══ CLEAR SISWA ══
+function clearSiswa(prefix){
+    document.getElementById(prefix+'_siswa_id').value = '';
+    document.getElementById(prefix+'_siswa_display').value = '';
+    document.getElementById(prefix+'_siswa_display').classList.remove('has-value');
+    document.getElementById(prefix+'_siswa_clear').classList.remove('show');
+    document.getElementById(prefix+'_siswa_card').classList.remove('show');
+}
+
+// Tutup dropdown saat klik di luar
+document.addEventListener('click', function(e){
+    if(!e.target.closest('.siswa-search-wrap')) closeAllSiswaDropdowns();
+});
+
 // ── CLOCK ──
 function updateClock(){
     const d=new Date(),days=['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'],months=['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Ags','Sep','Okt','Nov','Des'];
@@ -929,25 +1078,24 @@ function toggleSidebar(){document.getElementById('sidebar').classList.toggle('op
 function closeSidebar(){document.getElementById('sidebar').classList.remove('open');document.getElementById('overlay').classList.remove('show')}
 function toggleFS(){if(!document.fullscreenElement){document.documentElement.requestFullscreen();document.getElementById('fsIcon').className='fa fa-compress'}else{document.exitFullscreen();document.getElementById('fsIcon').className='fa fa-expand'}}
 
+// ── MODAL ──
 function openModal(id){document.getElementById(id).classList.add('show')}
-function closeModal(id){document.getElementById(id).classList.remove('show')}
-document.querySelectorAll('.modal-overlay').forEach(m=>{m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('show')})});
-
-// ── FILL SISWA INFO (format kelas baru) ──
-function fillSiswaInfo(sel){
-    const opt=sel.options[sel.selectedIndex];
-    if(!opt.value){document.getElementById('siswaInfoTambah').style.display='none';return}
-    // Tampilkan format X A (MIA 1)
-    document.getElementById('kelasInfoTambah').value = opt.dataset.kelasLabel || opt.dataset.kelas || '';
-    document.getElementById('nisnInfoTambah').value  = opt.dataset.nisn || '';
-    document.getElementById('siswaInfoTambah').style.display='grid';
+function closeModal(id){
+    document.getElementById(id).classList.remove('show');
+    closeAllSiswaDropdowns(); // Pastikan dropdown tertutup saat modal ditutup
 }
+document.querySelectorAll('.modal-overlay').forEach(m=>{
+    m.addEventListener('click',e=>{
+        if(e.target===m){ m.classList.remove('show'); closeAllSiswaDropdowns(); }
+    });
+});
 
+// ── AUTO FILL POIN ──
 function autoFillPoin(mode){
-    const sel=document.getElementById(mode==='tambah'?'selectJenisTambah':'selectJenisEdit');
-    const opt=sel.options[sel.selectedIndex];
-    if(!opt.value)return;
-    const poin=opt.dataset.poin||0,kat=opt.dataset.kat||'ringan';
+    const sel = document.getElementById(mode==='tambah'?'selectJenisTambah':'selectJenisEdit');
+    const opt = sel.options[sel.selectedIndex];
+    if(!opt.value) return;
+    const poin=opt.dataset.poin||0, kat=opt.dataset.kat||'ringan';
     if(mode==='tambah'){
         document.getElementById('inputPoinTambah').value=poin;
         document.getElementById('selectKategoriTambah').value=kat;
@@ -961,31 +1109,25 @@ function autoFillPoin(mode){
 
 function selectStatus(el,val){
     document.querySelectorAll('.status-option').forEach(o=>o.classList.remove('selected'));
-    el.classList.add('selected');el.querySelector('input').checked=true;
+    el.classList.add('selected');
+    el.querySelector('input').checked=true;
 }
 
-// ── Helper JS format kelas (sama dengan PHP) ──
-function formatKelas(kelas){
-    if(!kelas)return'—';
-    const map={A:'MIA 1',B:'MIA 2',C:'IIS 1',D:'IIS 2',E:'IIS 3',F:'IIS 4'};
-    const m=kelas.trim().match(/([A-Fa-f])\s*$/);
-    if(m&&map[m[1].toUpperCase()])return kelas.trim()+' ('+map[m[1].toUpperCase()]+')';
-    return kelas;
+function fmtTgl(s){
+    const d=new Date(s),m=['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Ags','Sep','Okt','Nov','Des'];
+    return d.getDate()+' '+m[d.getMonth()]+' '+d.getFullYear();
 }
-
-function fmtTgl(s){const d=new Date(s),m=['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Ags','Sep','Okt','Nov','Des'];return d.getDate()+' '+m[d.getMonth()]+' '+d.getFullYear()}
 function getPoinClass(p){return p>=75?'high':p>=30?'medium':'low'}
 
 let currentDetailIdx=null;
 
-function openDetail(id,nama,kelas,jenis,kat,poin,tgl,status,notif,lokasi,deskripsi){
-    const colors=['#1a56db','#ef4444','#f59e0b','#10b981','#8b5cf6','#ec4899','#06b6d4','#f97316'];
+// ── DETAIL ──
+function openDetail(id,nama,kelas,jenis,kat,poin,tgl,status,notif,lokasi,deskripsi,siswaId){
     const inisial=nama.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
-    currentDetailIdx={id,nama,kelas,jenis,kat,poin,tgl,status,notif,lokasi,deskripsi,siswaId:id};
+    currentDetailIdx={id,nama,kelas,jenis,kat,poin,tgl,status,notif,lokasi,deskripsi,siswaId};
     document.getElementById('detailAvatar').textContent=inisial;
-    document.getElementById('detailAvatar').style.background=colors[id%colors.length];
+    document.getElementById('detailAvatar').style.background=getAvatarColor(nama);
     document.getElementById('detailNama').textContent=nama;
-    // Tampilkan kelas format baru di detail
     document.getElementById('detailMeta').textContent=kelas+' • '+fmtTgl(tgl);
     document.getElementById('dJenis').textContent=jenis;
     document.getElementById('dKategori').innerHTML=`<span class="badge ${kat}">${kat.charAt(0).toUpperCase()+kat.slice(1)}</span>`;
@@ -1000,40 +1142,75 @@ function openDetail(id,nama,kelas,jenis,kat,poin,tgl,status,notif,lokasi,deskrip
     openModal('modalDetail');
 }
 
-function openEditFromDetail(){closeModal('modalDetail');const r=currentDetailIdx;if(!r)return;openEdit(r.id,r.nama,r.kelas,r.jenis,r.kat,r.poin,r.tgl,r.status,r.notif,r.lokasi,r.deskripsi,r.siswaId??0)}
-function openUpdateStatusFromDetail(){closeModal('modalDetail');const r=currentDetailIdx;if(!r)return;openUpdateStatus(r.id,r.status,r.nama)}
-
-function openEdit(id,nama,kelas,jenis,kat,poin,tgl,status,notif,lokasi,deskripsi,siswaId){
-    document.getElementById('formEdit').action=`<?= base_url('pelanggaran/update/') ?>${id}`;
-    document.getElementById('editSiswaLabel').value=nama+' — '+kelas;
-    document.getElementById('editSiswaId').value=siswaId||id;
-    // Tampilkan format kelas baru di field edit
-    document.getElementById('editKelas').value=kelas;
-    document.getElementById('editTanggal').value=tgl;
-    document.getElementById('inputPoinEdit').value=poin;
-    document.getElementById('editLokasi').value=lokasi||'';
-    document.getElementById('editDeskripsi').value=deskripsi||'';
-    document.getElementById('editStatus').value=status;
-    document.getElementById('editNotifOrtu').value=notif;
-    document.getElementById('selectKategoriEdit').value=kat;
-    const sel=document.getElementById('selectJenisEdit');
-    for(let i=0;i<sel.options.length;i++){if(sel.options[i].value===jenis){sel.selectedIndex=i;break}}
-    closeModal('modalDetail');openModal('modalEdit');
+function openEditFromDetail(){
+    closeModal('modalDetail');
+    const r=currentDetailIdx;
+    if(!r) return;
+    openEdit(r.id,r.nama,r.kelas,r.jenis,r.kat,r.poin,r.tgl,r.status,r.notif,r.lokasi,r.deskripsi,r.siswaId??0);
+}
+function openUpdateStatusFromDetail(){
+    closeModal('modalDetail');
+    const r=currentDetailIdx;
+    if(!r) return;
+    openUpdateStatus(r.id,r.status,r.nama);
 }
 
+// ── EDIT — gunakan selectSiswa() bukan readonly input ──
+function openEdit(id,nama,kelas,jenis,kat,poin,tgl,status,notif,lokasi,deskripsi,siswaId){
+    document.getElementById('formEdit').action=`<?= base_url('pelanggaran/update/') ?>${id}`;
+
+    // Cari data siswa dari SISWA_DATA berdasarkan siswaId
+    const siswa = SISWA_DATA.find(s => s.id == siswaId);
+    if(siswa){
+        selectSiswa('edit', siswa.id, siswa.nama, siswa.kelas, siswa.kelasLabel, siswa.nisn||'');
+    } else {
+        // Fallback: isi manual jika siswa tidak ada di list (data lama)
+        clearSiswa('edit');
+        document.getElementById('edit_siswa_id').value      = siswaId || id;
+        document.getElementById('edit_siswa_display').value = nama+' — '+kelas;
+        document.getElementById('edit_siswa_display').classList.add('has-value');
+        document.getElementById('edit_siswa_clear').classList.add('show');
+        document.getElementById('edit_siswa_name').textContent  = nama;
+        document.getElementById('edit_siswa_kelas').textContent = kelas;
+        document.getElementById('edit_siswa_card').classList.add('show');
+    }
+
+    document.getElementById('editTanggal').value    = tgl;
+    document.getElementById('inputPoinEdit').value  = poin;
+    document.getElementById('editLokasi').value     = lokasi||'';
+    document.getElementById('editDeskripsi').value  = deskripsi||'';
+    document.getElementById('editStatus').value     = status;
+    document.getElementById('editNotifOrtu').value  = notif;
+    document.getElementById('selectKategoriEdit').value = kat;
+
+    const sel = document.getElementById('selectJenisEdit');
+    for(let i=0;i<sel.options.length;i++){
+        if(sel.options[i].value===jenis){ sel.selectedIndex=i; break; }
+    }
+    closeModal('modalDetail');
+    openModal('modalEdit');
+}
+
+// ── UPDATE STATUS ──
 function openUpdateStatus(id,currentStatus,nama){
     document.getElementById('formStatus').action=`<?= base_url('pelanggaran/status/') ?>${id}`;
     document.getElementById('statusSiswaName').textContent=nama;
-    document.querySelectorAll('.status-option').forEach(o=>{o.classList.remove('selected');const inp=o.querySelector('input');if(inp.value===currentStatus){o.classList.add('selected');inp.checked=true}});
+    document.querySelectorAll('.status-option').forEach(o=>{
+        o.classList.remove('selected');
+        const inp=o.querySelector('input');
+        if(inp.value===currentStatus){o.classList.add('selected');inp.checked=true;}
+    });
     openModal('modalStatus');
 }
 
+// ── HAPUS ──
 function openHapus(id,nama,jenis){
     document.getElementById('hapusNama').textContent=nama+' — '+jenis;
     document.getElementById('hapusLink').href=`<?= base_url('pelanggaran/hapus/') ?>${id}`;
     openModal('modalHapus');
 }
 
+// ── FILTER ──
 let filterTimer;
 function debounceFilter(){clearTimeout(filterTimer);filterTimer=setTimeout(()=>submitFilter(),500)}
 function submitFilter(){document.getElementById('formFilter').submit()}
