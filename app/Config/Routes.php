@@ -4,11 +4,11 @@ use CodeIgniter\Router\RouteCollection;
 
 /** @var RouteCollection $routes */
 
-// ══ Dashboard ══
+//  Dashboard 
 $routes->get('/',          'Dashboard::index');
 $routes->get('/dashboard', 'Dashboard::index');
 
-// ══ Pelanggaran ══
+//  Pelanggaran 
 $routes->get( 'pelanggaran',                   'Pelanggaran::index');
 $routes->post('pelanggaran/simpan',             'Pelanggaran::simpan');
 $routes->get( 'pelanggaran/detail/(:num)',      'Pelanggaran::detail/$1');   // JSON
@@ -28,7 +28,7 @@ $routes->get('siswa/export',         'Siswa::export');
 $routes->post('siswa/import',        'Siswa::import');
 $routes->get('siswa/search',         'Siswa::search');       // AJAX search
 
-// ══ Tindak Lanjut ══  ← 
+// Tindak Lanjut  
 $routes->get( 'tindak-lanjut',               'TindakLanjut::index');
 $routes->post('tindak-lanjut/simpan',        'TindakLanjut::simpan');
 $routes->get( 'tindak-lanjut/detail/(:num)', 'TindakLanjut::detail/$1');
@@ -48,15 +48,26 @@ $routes->post('buku-kunjungan/status/(:num)',      'BukuKunjungan::updateStatus/
 $routes->get( 'buku-kunjungan/hapus/(:num)',       'BukuKunjungan::hapus/$1');
 $routes->get( 'buku-kunjungan/export',             'BukuKunjungan::export');
 
+// Jadwal Konseling
 $routes->get('jadwal', 'JadwalKonseling::index');
 $routes->post('jadwal/store', 'JadwalKonseling::store');
 
-// ══ Auth ══
+// Sesi Bimbingan
+$routes->get('sesi-bimbingan',               'SesiBimbingan::index');
+$routes->post('sesi-bimbingan/simpan',        'SesiBimbingan::simpan');
+$routes->get('sesi-bimbingan/detail/(:num)',  'SesiBimbingan::detail/$1');
+$routes->get('sesi-bimbingan/edit/(:num)',    'SesiBimbingan::edit/$1');
+$routes->post('sesi-bimbingan/update/(:num)', 'SesiBimbingan::update/$1');
+$routes->post('sesi-bimbingan/status/(:num)', 'SesiBimbingan::status/$1');
+$routes->get('sesi-bimbingan/hapus/(:num)',   'SesiBimbingan::hapus/$1');
+$routes->get('sesi-bimbingan/export',         'SesiBimbingan::export');
+
+// Auth
 $routes->get( 'login',  'Auth::index');
 $routes->post('login',  'Auth::proses');
 $routes->get( 'logout', 'Auth::logout');
 
-// ===== API (AJAX) =====
+//  API (AJAX) 
 $routes->group('api', function($routes) {
     $routes->get('statistik/bulanan',    'Api\Statistik::bulanan');
     $routes->get('statistik/jenis',      'Api\Statistik::jenis');
