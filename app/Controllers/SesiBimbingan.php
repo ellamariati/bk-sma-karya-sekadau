@@ -39,7 +39,7 @@ class SesiBimbingan extends BaseController
             'stats'        => ['baru' => 0], // sesuaikan dengan model notifikasi kamu
         ];
 
-        return view('sesi_bimbingan/index', $data);
+        return view('sesi-bimbingan/index', $data);
     }
 
     // ── SIMPAN (Create) ──

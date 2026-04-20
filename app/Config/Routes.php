@@ -62,6 +62,10 @@ $routes->post('sesi-bimbingan/status/(:num)', 'SesiBimbingan::status/$1');
 $routes->get('sesi-bimbingan/hapus/(:num)',   'SesiBimbingan::hapus/$1');
 $routes->get('sesi-bimbingan/export',         'SesiBimbingan::export');
 
+// Rekap Bimbingan
+$routes->get('rekap-bimbingan', 'RekapBimbingan::index');
+$routes->get('rekap-bimbingan/export-csv', 'RekapBimbingan::exportCsv');
+
 // Auth
 $routes->get( 'login',  'Auth::index');
 $routes->post('login',  'Auth::proses');
