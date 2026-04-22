@@ -14,11 +14,16 @@ $judulPeriode = $bulan_aktif > 0
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar{width:6px;height:6px}
+        ::-webkit-scrollbar-track{background:transparent}
+        ::-webkit-scrollbar-thumb{background:var(--gray-200);border-radius:10px}
+        ::-webkit-scrollbar-thumb:hover{background:var(--blue-300)}
         :root{--blue-900:#0a1628;--blue-800:#0d2045;--blue-700:#0f2d6b;--blue-600:#1340a0;--blue-500:#1a56db;--blue-400:#3b82f6;--blue-300:#93c5fd;--blue-100:#dbeafe;--blue-50:#eff6ff;--gray-50:#f8fafc;--gray-100:#f1f5f9;--gray-200:#e2e8f0;--gray-400:#94a3b8;--gray-600:#475569;--gray-800:#1e293b;--success:#10b981;--warning:#f59e0b;--danger:#ef4444;--purple:#8b5cf6;--teal:#0d9488;--sidebar-w:270px;--navbar-h:72px;--radius:16px;--radius-sm:10px;--shadow:0 4px 24px rgba(19,64,160,.10);--shadow-lg:0 12px 40px rgba(19,64,160,.18);--transition:all .3s cubic-bezier(.4,0,.2,1)}
         *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
         body{font-family:'DM Sans',sans-serif;background:var(--gray-50);color:var(--gray-800);min-height:100vh;display:flex;overflow-x:hidden}
         .sidebar{width:var(--sidebar-w);min-height:100vh;background:linear-gradient(175deg,var(--blue-900) 0%,var(--blue-800) 50%,var(--blue-700) 100%);position:fixed;left:0;top:0;bottom:0;z-index:100;display:flex;flex-direction:column;box-shadow:4px 0 32px rgba(10,22,40,.25);transition:var(--transition);overflow-y:auto;overflow-x:hidden;}
-        .sidebar-brand{padding:28px 24px 22px;display:flex;align-items:center;gap:14px;border-bottom:1px solid rgba(255,255,255,.08)}
+        .sidebar-brand{padding:28px 24px 22px;display:flex;align-items:center;gap:14px;border-bottom:1px solid rgba(255,255,255,.08);flex-shrink:0}
         .brand-icon{width:46px;height:46px;background:linear-gradient(135deg,var(--blue-500),var(--blue-400));border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:20px;color:white;flex-shrink:0}
         .brand-text .brand-title{font-family:'Outfit',sans-serif;font-weight:700;font-size:17px;color:white;line-height:1.1}
         .brand-text .brand-sub{font-size:11px;color:var(--blue-300);margin-top:2px}
@@ -29,7 +34,7 @@ $judulPeriode = $bulan_aktif > 0
         .nav-item.active{background:linear-gradient(90deg,rgba(26,86,219,.6),rgba(26,86,219,.2));color:white;font-weight:500;box-shadow:inset 0 0 0 1px rgba(59,130,246,.3)}
         .nav-item.active::before{content:'';position:absolute;left:0;top:20%;bottom:20%;width:3px;background:var(--blue-400);border-radius:0 4px 4px 0}
         .nav-item i{width:20px;font-size:15px;text-align:center;flex-shrink:0}
-        .sidebar-footer{margin-top:auto;padding:16px 14px;border-top:1px solid rgba(255,255,255,.08)}
+        .sidebar-footer{margin-top:auto;padding:16px 14px;border-top:1px solid rgba(255,255,255,.08);flex-shrink:0}
         .user-card{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:var(--radius-sm);background:rgba(255,255,255,.07)}
         .user-avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--blue-500),#60a5fa);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;color:white;flex-shrink:0}
         .user-info .user-name{font-size:13px;font-weight:500;color:white}
@@ -125,7 +130,8 @@ $judulPeriode = $bulan_aktif > 0
 <aside class="sidebar" id="sidebar">
     <div class="sidebar-brand">
         <div class="brand-icon" style="background:white;padding:3px;border-radius:13px;overflow:hidden;">
-            <img src="<?= base_url('img/logo_sma.png') ?>" alt="Logo SMA Karya Sekadau" style="width:40px;height:40px;object-fit:contain;display:block;">
+            <img src="<?= base_url('img/logo_sma.png') ?>" alt="Logo SMA Karya Sekadau" 
+                style="width:40px;height:40px;object-fit:contain;display:block;">
         </div>
         <div class="brand-text">
             <div class="brand-title">BK SMA Karya Sekadau</div>

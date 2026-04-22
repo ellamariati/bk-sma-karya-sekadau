@@ -66,6 +66,12 @@ $routes->get('sesi-bimbingan/export',         'SesiBimbingan::export');
 $routes->get('rekap-bimbingan', 'RekapBimbingan::index');
 $routes->get('rekap-bimbingan/export-csv', 'RekapBimbingan::exportCsv');
 
+// Laporan Bimbingan
+$routes->get('laporan',                        'Laporan::index');
+$routes->get('laporan/export-csv-bimbingan',   'Laporan::exportCsvBimbingan');
+$routes->get('laporan/export-csv-pelanggaran', 'Laporan::exportCsvPelanggaran');
+$routes->get('laporan/export-csv-rekap',       'Laporan::exportCsvRekap');
+
 // Auth
 $routes->get( 'login',  'Auth::index');
 $routes->post('login',  'Auth::proses');
