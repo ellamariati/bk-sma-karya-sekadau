@@ -49,8 +49,13 @@ $routes->get( 'buku-kunjungan/hapus/(:num)',       'BukuKunjungan::hapus/$1');
 $routes->get( 'buku-kunjungan/export',             'BukuKunjungan::export');
 
 // Jadwal Konseling
-$routes->get('jadwal', 'JadwalKonseling::index');
-$routes->post('jadwal/store', 'JadwalKonseling::store');
+$routes->get( 'jadwal',                  'JadwalKonseling::index');
+$routes->get( 'jadwal/get-data',         'JadwalKonseling::getData');
+$routes->get( 'jadwal/get-siswa',        'JadwalKonseling::getSiswa');
+$routes->post('jadwal/simpan',           'JadwalKonseling::simpan');
+$routes->post('jadwal/update/(:num)',    'JadwalKonseling::update/$1');
+$routes->get( 'jadwal/hapus/(:num)',     'JadwalKonseling::hapus/$1');
+$routes->get( 'jadwal/detail/(:num)',    'JadwalKonseling::detail/$1');
 
 // Sesi Bimbingan
 $routes->get('sesi-bimbingan',               'SesiBimbingan::index');
@@ -63,8 +68,8 @@ $routes->get('sesi-bimbingan/hapus/(:num)',   'SesiBimbingan::hapus/$1');
 $routes->get('sesi-bimbingan/export',         'SesiBimbingan::export');
 
 // Rekap Bimbingan
-$routes->get('rekap-bimbingan', 'RekapBimbingan::index');
-$routes->get('rekap-bimbingan/export-csv', 'RekapBimbingan::exportCsv');
+// $routes->get('rekap-bimbingan', 'RekapBimbingan::index');
+// $routes->get('rekap-bimbingan/export-csv', 'RekapBimbingan::exportCsv'); 
 
 // Laporan Bimbingan
 $routes->get('laporan',                        'Laporan::index');

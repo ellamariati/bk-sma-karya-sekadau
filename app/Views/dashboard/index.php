@@ -311,10 +311,6 @@
            href="<?= base_url('sesi-bimbingan') ?>">
             <i class="fa fa-comments"></i> Sesi Bimbingan
         </a>
-        <a class="nav-item <?= str_starts_with(uri_string(),'rekap-bimbingan')?'active':'' ?>"
-           href="<?= base_url('rekap-bimbingan') ?>">
-            <i class="fa fa-chart-bar"></i> Rekap Bimbingan
-        </a>
     </div>
 
     <!-- ── PENGELOLAAN ── -->

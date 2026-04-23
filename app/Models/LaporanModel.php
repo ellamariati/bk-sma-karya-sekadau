@@ -127,7 +127,6 @@ class LaporanModel extends Model
      */
     public function getRekapPerKelas(int $bulan = 0, int $tahun = 0): array
     {
-        // Ambil semua kelas unik dari tabel siswa
         $kelasList = $this->db->table('siswa')
             ->select('kelas')
             ->distinct()
@@ -138,12 +137,10 @@ class LaporanModel extends Model
         foreach ($kelasList as $k) {
             $kelas = $k['kelas'];
 
-            // Jumlah siswa di kelas
             $jmlSiswa = $this->db->table('siswa')
                 ->where('kelas', $kelas)
                 ->countAllResults();
 
-            // Bimbingan kelas ini
             $bkQ = $this->db->table('buku_kunjungan bk')
                 ->join('siswa s', 's.id = bk.siswa_id', 'left')
                 ->where('s.kelas', $kelas);
@@ -151,7 +148,6 @@ class LaporanModel extends Model
             if ($bulan > 0) $bkQ->where('MONTH(bk.tanggal)', $bulan);
             $totalBimbingan = $bkQ->countAllResults();
 
-            // Pelanggaran kelas ini
             $plQ = $this->db->table('pelanggaran p')
                 ->join('siswa s', 's.id = p.siswa_id', 'left')
                 ->where('s.kelas', $kelas);
@@ -159,7 +155,6 @@ class LaporanModel extends Model
             if ($bulan > 0) $plQ->where('MONTH(p.tanggal_kejadian)', $bulan);
             $totalPelanggaran = $plQ->countAllResults();
 
-            // Tindak lanjut kelas ini
             $tlQ = $this->db->table('tindak_lanjut tl')
                 ->join('siswa s', 's.id = tl.siswa_id', 'left')
                 ->where('s.kelas', $kelas);
@@ -167,7 +162,6 @@ class LaporanModel extends Model
             if ($bulan > 0) $tlQ->where('MONTH(tl.tanggal)', $bulan);
             $totalTindak = $tlQ->countAllResults();
 
-            // Status kelas
             $status = 'baik';
             if ($totalPelanggaran >= 10 || ($totalBimbingan > 0 && $totalPelanggaran / max($jmlSiswa, 1) > 0.3)) {
                 $status = 'perlu_perhatian';
@@ -190,7 +184,6 @@ class LaporanModel extends Model
 
     /**
      * Distribusi kategori bimbingan (jenis_bimbingan di buku_kunjungan).
-     * Kolom jenis_bimbingan bisa berisi nilai tunggal atau koma-separated.
      */
     public function getDistribusiJenisBimbingan(int $bulan = 0, int $tahun = 0): array
     {
@@ -224,13 +217,13 @@ class LaporanModel extends Model
 
     /**
      * Distribusi kategori pelanggaran.
+     * PERBAIKAN: pakai p.kategori (enum) langsung, tidak JOIN kategori_pelanggaran
      */
     public function getDistribusiKategoriPelanggaran(int $bulan = 0, int $tahun = 0): array
     {
         $builder = $this->db->table('pelanggaran p')
-            ->select('kp.nama_kategori as kategori, COUNT(*) as total')
-            ->join('kategori_pelanggaran kp', 'kp.id = p.kategori_id', 'left')
-            ->groupBy('p.kategori_id')
+            ->select('p.kategori as kategori, COUNT(*) as total') // ← FIXED
+            ->groupBy('p.kategori')                               // ← FIXED
             ->orderBy('total', 'DESC');
 
         if ($tahun > 0) $builder->where('YEAR(p.tanggal_kejadian)', $tahun);
@@ -249,17 +242,10 @@ class LaporanModel extends Model
     // TAB LAPORAN BIMBINGAN
     // ═══════════════════════════════════════════════════════
 
-    /**
-     * Daftar sesi bimbingan dengan filter + pagination.
-     *
-     * @param array $filter  ['bulan', 'tahun', 'kelas', 'status', 'search']
-     * @param int   $limit
-     * @param int   $offset
-     */
     public function getDaftarBimbingan(array $filter = [], int $limit = 20, int $offset = 0): array
     {
         $builder = $this->db->table('buku_kunjungan bk')
-            ->select('bk.*, s.nama, s.nisn, s.kelas, s.jenis_kelamin')
+            ->select('bk.*, s.nama, s.nisn, s.kelas, s.jk')
             ->join('siswa s', 's.id = bk.siswa_id', 'left')
             ->orderBy('bk.tanggal', 'DESC')
             ->orderBy('bk.id', 'DESC');
@@ -299,13 +285,14 @@ class LaporanModel extends Model
 
     /**
      * Daftar pelanggaran dengan filter + pagination.
+     * PERBAIKAN: hapus JOIN kategori_pelanggaran, pakai p.kategori langsung
      */
     public function getDaftarPelanggaran(array $filter = [], int $limit = 20, int $offset = 0): array
     {
         $builder = $this->db->table('pelanggaran p')
-            ->select('p.*, s.nama, s.nisn, s.kelas, kp.nama_kategori as kategori, kp.bobot_poin')
+            ->select('p.*, s.nama, s.nisn, s.kelas, p.kategori as nama_kategori, p.poin as bobot_poin') // ← FIXED
             ->join('siswa s', 's.id = p.siswa_id', 'left')
-            ->join('kategori_pelanggaran kp', 'kp.id = p.kategori_id', 'left')
+            // ← HAPUS join kategori_pelanggaran
             ->orderBy('p.tanggal_kejadian', 'DESC')
             ->orderBy('p.id', 'DESC');
 
@@ -321,11 +308,14 @@ class LaporanModel extends Model
         return $builder->limit($limit, $offset)->get()->getResultArray();
     }
 
+    /**
+     * PERBAIKAN: hapus JOIN kategori_pelanggaran
+     */
     public function countDaftarPelanggaran(array $filter = []): int
     {
         $builder = $this->db->table('pelanggaran p')
-            ->join('siswa s', 's.id = p.siswa_id', 'left')
-            ->join('kategori_pelanggaran kp', 'kp.id = p.kategori_id', 'left');
+            ->join('siswa s', 's.id = p.siswa_id', 'left');
+            // ← HAPUS join kategori_pelanggaran
 
         $this->applyFilterPelanggaran($builder, $filter, 'p');
         if (!empty($filter['kelas']))  $builder->where('s.kelas', $filter['kelas']);
@@ -343,25 +333,16 @@ class LaporanModel extends Model
     // EXPORT DATA
     // ═══════════════════════════════════════════════════════
 
-    /**
-     * Semua data bimbingan untuk export (tanpa limit).
-     */
     public function getAllBimbinganForExport(array $filter = []): array
     {
         return $this->getDaftarBimbingan($filter, 9999, 0);
     }
 
-    /**
-     * Semua data pelanggaran untuk export (tanpa limit).
-     */
     public function getAllPelanggaranForExport(array $filter = []): array
     {
         return $this->getDaftarPelanggaran($filter, 9999, 0);
     }
 
-    /**
-     * Ringkasan lengkap per kelas untuk export rekap.
-     */
     public function getAllRekapKelasForExport(int $bulan = 0, int $tahun = 0): array
     {
         return $this->getRekapPerKelas($bulan, $tahun);
@@ -371,9 +352,6 @@ class LaporanModel extends Model
     // HELPER
     // ═══════════════════════════════════════════════════════
 
-    /**
-     * Daftar tahun unik dari data.
-     */
     public function getTahunList(): array
     {
         $rows = $this->db->table('buku_kunjungan')
@@ -387,21 +365,17 @@ class LaporanModel extends Model
         return $tahun;
     }
 
-    /**
-     * Daftar kelas unik dari tabel siswa.
-     */
     public function getKelasList(): array
     {
-        return $this->db->table('siswa')
+        $rows = $this->db->table('siswa')
             ->select('kelas')
             ->distinct()
             ->orderBy('kelas', 'ASC')
-            ->get()->getColumn('kelas');
+            ->get()->getResultArray();
+
+        return array_column($rows, 'kelas');
     }
 
-    /**
-     * Isi array 12 bulan dengan 0 untuk bulan yang tidak ada data.
-     */
     private function fillBulan(array $rows, array $fields): array
     {
         $default = array_fill_keys($fields, 0);
@@ -417,9 +391,6 @@ class LaporanModel extends Model
         return $hasil;
     }
 
-    /**
-     * Apply filter bulan/tahun/status ke query buku_kunjungan/sesi_bimbingan.
-     */
     private function applyFilter($builder, array $filter, string $alias = 'bk'): void
     {
         if (!empty($filter['tahun'])) $builder->where("YEAR({$alias}.tanggal)", $filter['tahun']);
@@ -427,14 +398,11 @@ class LaporanModel extends Model
         if (!empty($filter['status'])) $builder->where("{$alias}.status", $filter['status']);
     }
 
-    /**
-     * Apply filter bulan/tahun/status ke query pelanggaran.
-     */
     private function applyFilterPelanggaran($builder, array $filter, string $alias = 'p'): void
     {
         if (!empty($filter['tahun'])) $builder->where("YEAR({$alias}.tanggal_kejadian)", $filter['tahun']);
         if (!empty($filter['bulan'])) $builder->where("MONTH({$alias}.tanggal_kejadian)", $filter['bulan']);
         if (!empty($filter['status'])) $builder->where("{$alias}.status", $filter['status']);
-        if (!empty($filter['kategori'])) $builder->where("{$alias}.kategori_id", $filter['kategori']);
+        if (!empty($filter['kategori'])) $builder->where("{$alias}.kategori", $filter['kategori']); // ← FIXED
     }
 }
