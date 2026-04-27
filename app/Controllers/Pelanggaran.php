@@ -94,7 +94,7 @@ public function index()
     public function simpan()
     {
         $rules = [
-            'siswa_id'          => 'required|integer',
+            'siswa_id'          => 'required|integer|is_not_unique[siswa.id]',
             'jenis_pelanggaran' => 'required|min_length[3]',
             'tanggal_kejadian'  => 'required|valid_date',
             'poin'              => 'required|integer|greater_than[0]|less_than_equal_to[100]',

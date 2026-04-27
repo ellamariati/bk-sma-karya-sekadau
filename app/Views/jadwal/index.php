@@ -25,7 +25,6 @@
 body{font-family:'DM Sans',sans-serif;background:var(--gray-50);color:var(--gray-800);min-height:100vh;display:flex;overflow-x:hidden}
 .sidebar{width:var(--sidebar-w);min-height:100vh;background:linear-gradient(175deg,var(--blue-900) 0%,var(--blue-800) 50%,var(--blue-700) 100%);position:fixed;left:0;top:0;bottom:0;z-index:100;display:flex;flex-direction:column;box-shadow:4px 0 32px rgba(10,22,40,.25);transition:var(--transition);overflow-y:auto;overflow-x:hidden}
 .sidebar-brand{padding:28px 24px 22px;display:flex;align-items:center;gap:14px;border-bottom:1px solid rgba(255,255,255,.08);flex-shrink:0}
-.brand-icon{width:46px;height:46px;background:linear-gradient(135deg,var(--blue-500),var(--blue-400));border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:20px;color:white;flex-shrink:0}
 .brand-title{font-family:'Outfit',sans-serif;font-weight:700;font-size:17px;color:white;line-height:1.1}
 .brand-sub{font-size:11px;color:var(--blue-300);font-weight:400;margin-top:2px;letter-spacing:.4px}
 .sidebar-section{padding:18px 14px 6px}
@@ -48,7 +47,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--gray-50);color:var(--gray
 .main-wrapper{margin-left:var(--sidebar-w);flex:1;display:flex;flex-direction:column;min-height:100vh}
 .navbar{height:var(--navbar-h);background:white;border-bottom:1px solid var(--gray-200);display:flex;align-items:center;padding:0 32px;position:sticky;top:0;z-index:50;gap:16px;box-shadow:0 2px 16px rgba(19,64,160,.06)}
 .navbar-hamburger{display:none;background:none;border:none;font-size:20px;color:var(--blue-600);cursor:pointer;padding:8px;border-radius:8px;transition:var(--transition)}
-.navbar-hamburger:hover{background:var(--blue-50)}
 .navbar-search{flex:1;max-width:400px;position:relative}
 .navbar-search input{width:100%;padding:9px 16px 9px 40px;border-radius:50px;border:1.5px solid var(--gray-200);background:var(--gray-50);font-family:'DM Sans',sans-serif;font-size:13.5px;color:var(--gray-800);outline:none;transition:var(--transition)}
 .navbar-search input:focus{border-color:var(--blue-400);background:white;box-shadow:0 0 0 3px rgba(59,130,246,.12)}
@@ -67,8 +65,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--gray-50);color:var(--gray
 .page-header-right{display:flex;gap:10px;flex-shrink:0}
 .btn-primary{padding:10px 20px;border-radius:var(--radius-sm);border:none;background:var(--blue-500);color:white;font-family:'DM Sans',sans-serif;font-size:13.5px;font-weight:500;cursor:pointer;transition:var(--transition);display:inline-flex;align-items:center;gap:8px;text-decoration:none}
 .btn-primary:hover{background:var(--blue-600);box-shadow:0 4px 14px rgba(26,86,219,.4)}
-.btn-outline{padding:10px 20px;border-radius:var(--radius-sm);border:1.5px solid var(--gray-200);background:white;color:var(--gray-600);font-family:'DM Sans',sans-serif;font-size:13.5px;font-weight:500;cursor:pointer;transition:var(--transition);display:inline-flex;align-items:center;gap:8px;text-decoration:none}
-.btn-outline:hover{border-color:var(--blue-400);color:var(--blue-600);background:var(--blue-50)}
 .btn-danger{padding:10px 20px;border-radius:var(--radius-sm);border:none;background:var(--danger);color:white;font-family:'DM Sans',sans-serif;font-size:13.5px;font-weight:500;cursor:pointer;transition:var(--transition);display:inline-flex;align-items:center;gap:8px}
 .btn-danger:hover{background:#dc2626}
 .btn-cancel{padding:10px 20px;border-radius:var(--radius-sm);border:1.5px solid var(--gray-200);background:white;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--gray-600);cursor:pointer;transition:var(--transition)}
@@ -76,7 +72,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--gray-50);color:var(--gray
 .flash-alert{padding:14px 18px;border-radius:var(--radius-sm);margin-bottom:20px;display:flex;align-items:center;gap:10px;font-size:13.5px;font-weight:500;animation:fadeInUp .3s ease}
 .flash-alert.success{background:#d1fae5;color:#065f46;border:1px solid #6ee7b7}
 .flash-alert.error{background:#fee2e2;color:#991b1b;border:1px solid #fca5a5}
-.flash-alert.info{background:var(--blue-100);color:var(--blue-700);border:1px solid var(--blue-300)}
 .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:24px}
 .stat-card{background:white;border-radius:var(--radius);padding:20px 22px;box-shadow:var(--shadow);transition:var(--transition);position:relative;overflow:hidden}
 .stat-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
@@ -112,7 +107,6 @@ table{width:100%;border-collapse:collapse;font-size:13px}
 thead th{padding:12px 16px;text-align:left;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.6px;color:var(--gray-400);background:var(--gray-50);border-bottom:1px solid var(--gray-200);white-space:nowrap}
 tbody td{padding:13px 16px;border-bottom:1px solid var(--gray-100);color:var(--gray-800);vertical-align:middle}
 tbody tr:last-child td{border-bottom:none}
-tbody tr{transition:var(--transition)}
 tbody tr:hover{background:var(--blue-50)}
 .td-student{display:flex;align-items:center;gap:10px}
 .td-avatar{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:white;flex-shrink:0}
@@ -159,6 +153,9 @@ tbody tr:hover{background:var(--blue-50)}
 .form-input,.form-select,.form-textarea{padding:10px 14px;border-radius:var(--radius-sm);border:1.5px solid var(--gray-200);background:var(--gray-50);font-family:'DM Sans',sans-serif;font-size:13.5px;color:var(--gray-800);outline:none;transition:var(--transition);width:100%}
 .form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--blue-400);background:white;box-shadow:0 0 0 3px rgba(59,130,246,.1)}
 .form-textarea{resize:vertical;min-height:90px}
+.jam-wrap{display:flex;gap:6px;align-items:center}
+.jam-wrap .form-select{flex:1}
+.jam-sep{font-weight:700;color:var(--gray-600);flex-shrink:0}
 .detail-hero{background:linear-gradient(135deg,var(--blue-900),var(--blue-700));padding:26px;display:flex;align-items:center;gap:18px}
 .detail-avatar{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Outfit',sans-serif;font-size:22px;font-weight:800;color:white;box-shadow:0 4px 14px rgba(0,0,0,.3);flex-shrink:0}
 .detail-hero-name{font-family:'Outfit',sans-serif;font-size:19px;font-weight:700;color:white}
@@ -180,21 +177,31 @@ tbody tr:hover{background:var(--blue-50)}
 .toast.error{border-color:var(--danger);color:#991b1b}
 .toast.info{border-color:var(--blue-500);color:var(--blue-700)}
 .toast i{font-size:16px}
-::-webkit-scrollbar{width:6px;height:6px}
-::-webkit-scrollbar-track{background:transparent}
-::-webkit-scrollbar-thumb{background:var(--gray-200);border-radius:10px}
-::-webkit-scrollbar-thumb:hover{background:var(--blue-300)}
+::-webkit-scrollbar{width:6px;height:6px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--gray-200);border-radius:10px}
 @keyframes fadeInUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 @keyframes slideIn{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:translateX(0)}}
 @media(max-width:1200px){.stats-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:768px){:root{--sidebar-w:0px}.sidebar{transform:translateX(-270px);width:270px}.sidebar.open{transform:translateX(0)}.main-wrapper{margin-left:0}.navbar-hamburger{display:flex}.navbar,.page-content{padding:0 18px}.page-content{padding:20px 18px}.stats-grid{grid-template-columns:1fr 1fr}.page-header{flex-direction:column}.form-row{grid-template-columns:1fr}}
+@media(max-width:768px){:root{--sidebar-w:0px}.sidebar{transform:translateX(-270px);width:270px}.sidebar.open{transform:translateX(0)}.main-wrapper{margin-left:0}.navbar-hamburger{display:flex}.page-content{padding:20px 18px}.stats-grid{grid-template-columns:1fr 1fr}.page-header{flex-direction:column}.form-row{grid-template-columns:1fr}}
 @media(max-width:480px){.stats-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-
 <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
 <div class="toast-container" id="toastContainer"></div>
+
+<?php
+function jamOpts($sel='') {
+  $o='';
+  for($h=6;$h<=21;$h++){$hh=str_pad($h,2,'0',STR_PAD_LEFT);$o.="<option value=\"$hh\"".($hh===$sel?' selected':'').">$hh</option>";}
+  return $o;
+}
+function menitOpts($sel='00') {
+  $o='';
+  foreach(['00','05','10','15','20','25','30','35','40','45','50','55'] as $m)
+    $o.="<option value=\"$m\"".($m===$sel?' selected':'').">$m</option>";
+  return $o;
+}
+?>
 
 <!-- MODAL TAMBAH -->
 <div class="modal-overlay" id="modalTambah">
@@ -207,25 +214,31 @@ tbody tr:hover{background:var(--blue-50)}
       <div class="form-row full">
         <div class="form-group">
           <label class="form-label">Pilih Siswa <span>*</span></label>
-          <select class="form-select" id="f_siswa_id">
-            <option value="">-- Pilih Siswa --</option>
-          </select>
+          <select class="form-select" id="f_siswa_id"><option value="">-- Pilih Siswa --</option></select>
         </div>
       </div>
       <div class="form-row">
         <div class="form-group">
           <label class="form-label">Tanggal <span>*</span></label>
-          <input type="date" class="form-input" id="f_tanggal" required>
+          <input type="date" class="form-input" id="f_tanggal">
         </div>
         <div class="form-group">
           <label class="form-label">Jam Mulai <span>*</span></label>
-          <input type="time" class="form-input" id="f_jam_mulai" required>
+          <div class="jam-wrap">
+            <select class="form-select" id="f_jam_mulai_h"><?= jamOpts('08') ?></select>
+            <span class="jam-sep">:</span>
+            <select class="form-select" id="f_jam_mulai_m"><?= menitOpts('00') ?></select>
+          </div>
         </div>
       </div>
       <div class="form-row">
         <div class="form-group">
           <label class="form-label">Jam Selesai</label>
-          <input type="time" class="form-input" id="f_jam_selesai">
+          <div class="jam-wrap">
+            <select class="form-select" id="f_jam_selesai_h"><option value="">--</option><?= jamOpts() ?></select>
+            <span class="jam-sep">:</span>
+            <select class="form-select" id="f_jam_selesai_m"><?= menitOpts('00') ?></select>
+          </div>
         </div>
         <div class="form-group">
           <label class="form-label">Status</label>
@@ -239,7 +252,7 @@ tbody tr:hover{background:var(--blue-50)}
       <div class="form-row full">
         <div class="form-group">
           <label class="form-label">Keperluan / Topik <span>*</span></label>
-          <textarea class="form-textarea" id="f_keperluan" placeholder="Uraikan keperluan atau topik konseling..." required></textarea>
+          <textarea class="form-textarea" id="f_keperluan" placeholder="Uraikan keperluan atau topik konseling..."></textarea>
         </div>
       </div>
       <div class="form-row full">
@@ -268,25 +281,31 @@ tbody tr:hover{background:var(--blue-50)}
       <div class="form-row full">
         <div class="form-group">
           <label class="form-label">Pilih Siswa <span>*</span></label>
-          <select class="form-select" id="e_siswa_id">
-            <option value="">-- Pilih Siswa --</option>
-          </select>
+          <select class="form-select" id="e_siswa_id"><option value="">-- Pilih Siswa --</option></select>
         </div>
       </div>
       <div class="form-row">
         <div class="form-group">
           <label class="form-label">Tanggal <span>*</span></label>
-          <input type="date" class="form-input" id="e_tanggal" required>
+          <input type="date" class="form-input" id="e_tanggal">
         </div>
         <div class="form-group">
           <label class="form-label">Jam Mulai <span>*</span></label>
-          <input type="time" class="form-input" id="e_jam_mulai" required>
+          <div class="jam-wrap">
+            <select class="form-select" id="e_jam_mulai_h"><?= jamOpts('08') ?></select>
+            <span class="jam-sep">:</span>
+            <select class="form-select" id="e_jam_mulai_m"><?= menitOpts('00') ?></select>
+          </div>
         </div>
       </div>
       <div class="form-row">
         <div class="form-group">
           <label class="form-label">Jam Selesai</label>
-          <input type="time" class="form-input" id="e_jam_selesai">
+          <div class="jam-wrap">
+            <select class="form-select" id="e_jam_selesai_h"><option value="">--</option><?= jamOpts() ?></select>
+            <span class="jam-sep">:</span>
+            <select class="form-select" id="e_jam_selesai_m"><?= menitOpts('00') ?></select>
+          </div>
         </div>
         <div class="form-group">
           <label class="form-label">Status</label>
@@ -300,7 +319,7 @@ tbody tr:hover{background:var(--blue-50)}
       <div class="form-row full">
         <div class="form-group">
           <label class="form-label">Keperluan / Topik <span>*</span></label>
-          <textarea class="form-textarea" id="e_keperluan" required></textarea>
+          <textarea class="form-textarea" id="e_keperluan"></textarea>
         </div>
       </div>
       <div class="form-row full">
@@ -320,7 +339,7 @@ tbody tr:hover{background:var(--blue-50)}
 <!-- MODAL DETAIL -->
 <div class="modal-overlay" id="modalDetail">
   <div class="modal modal-md">
-    <div class="detail-hero" id="detailHero">
+    <div class="detail-hero">
       <div class="detail-avatar" id="detailAvatar">--</div>
       <div style="flex:1">
         <div class="detail-hero-name" id="detailNama">—</div>
@@ -340,7 +359,7 @@ tbody tr:hover{background:var(--blue-50)}
       <div class="detail-divider"></div>
       <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--gray-400);margin-bottom:8px">Keperluan / Topik</div>
       <div class="detail-catatan" id="dKeperluan">—</div>
-      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--gray-400);margin:14px 0 8px" id="catatanLabel">Catatan</div>
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--gray-400);margin:14px 0 8px">Catatan</div>
       <div class="detail-catatan" id="dCatatan" style="border-color:var(--success)">—</div>
     </div>
     <div class="modal-footer">
@@ -375,66 +394,42 @@ tbody tr:hover{background:var(--blue-50)}
 <!-- SIDEBAR -->
 <aside class="sidebar" id="sidebar">
   <div class="sidebar-brand">
-    <div class="brand-icon" style="background:white;padding:3px;border-radius:13px;overflow:hidden;">
+    <div style="background:white;padding:3px;border-radius:13px;overflow:hidden;width:46px;height:46px;flex-shrink:0">
       <img src="<?= base_url('img/logo_sma.png') ?>" alt="Logo" style="width:40px;height:40px;object-fit:contain;display:block;">
     </div>
-    <div class="brand-text">
-      <div class="brand-title">BK SMA Karya Sekadau</div>
-      <div class="brand-sub">Bimbingan &amp; Konseling</div>
-    </div>
+    <div><div class="brand-title">BK SMA Karya Sekadau</div><div class="brand-sub">Bimbingan &amp; Konseling</div></div>
   </div>
   <div class="sidebar-section">
     <div class="sidebar-section-label">Menu Utama</div>
-    <a class="nav-item <?= ((string)uri_string()==''||(string)uri_string()=='dashboard')?'active':'' ?>" href="<?= base_url('/') ?>">
-      <i class="fa fa-gauge-high"></i> Dashboard</a>
-    <a class="nav-item <?= str_starts_with((string)uri_string(),'pelanggaran')?'active':'' ?>" href="<?= base_url('pelanggaran') ?>">
-      <i class="fa fa-triangle-exclamation"></i> Data Pelanggaran
-      <span class="nav-badge"><?= $stats['baru'] ?? 0 ?></span></a>
-    <a class="nav-item <?= str_starts_with((string)uri_string(),'siswa')?'active':'' ?>" href="<?= base_url('siswa') ?>">
-      <i class="fa fa-users"></i> Data Siswa</a>
-    <a class="nav-item <?= str_starts_with((string)uri_string(),'tindak-lanjut')?'active':'' ?>" href="<?= base_url('tindak-lanjut') ?>">
-      <i class="fa fa-list-check"></i> Tindak Lanjut</a>
-    <a class="nav-item <?= str_starts_with((string)uri_string(),'buku-kunjungan')?'active':'' ?>" href="<?= base_url('buku-kunjungan') ?>">
-      <i class="fa fa-book-open"></i> Buku Kunjungan</a>
+    <a class="nav-item <?= ((string)uri_string()==''||(string)uri_string()=='dashboard')?'active':'' ?>" href="<?= base_url('/') ?>"><i class="fa fa-gauge-high"></i> Dashboard</a>
+    <a class="nav-item <?= str_starts_with((string)uri_string(),'pelanggaran')?'active':'' ?>" href="<?= base_url('pelanggaran') ?>"><i class="fa fa-triangle-exclamation"></i> Data Pelanggaran<span class="nav-badge"><?= $stats['baru']??0 ?></span></a>
+    <a class="nav-item <?= str_starts_with((string)uri_string(),'siswa')?'active':'' ?>" href="<?= base_url('siswa') ?>"><i class="fa fa-users"></i> Data Siswa</a>
+    <a class="nav-item <?= str_starts_with((string)uri_string(),'tindak-lanjut')?'active':'' ?>" href="<?= base_url('tindak-lanjut') ?>"><i class="fa fa-list-check"></i> Tindak Lanjut</a>
+    <a class="nav-item <?= str_starts_with((string)uri_string(),'buku-kunjungan')?'active':'' ?>" href="<?= base_url('buku-kunjungan') ?>"><i class="fa fa-book-open"></i> Buku Kunjungan</a>
   </div>
   <div class="sidebar-section">
     <div class="sidebar-section-label">Konseling</div>
-    <a class="nav-item <?= str_starts_with((string)uri_string(),'jadwal')?'active':'' ?>" href="<?= base_url('jadwal') ?>">
-      <i class="fa fa-calendar-check"></i> Jadwal Konseling
-      <span class="nav-badge warn"><?= $summary['terjadwal'] ?? 0 ?></span></a>
-    <a class="nav-item <?= str_starts_with((string)uri_string(),'sesi-bimbingan')?'active':'' ?>" href="<?= base_url('sesi-bimbingan') ?>">
-      <i class="fa fa-comments"></i> Sesi Bimbingan</a>
+    <a class="nav-item <?= str_starts_with((string)uri_string(),'jadwal')?'active':'' ?>" href="<?= base_url('jadwal') ?>"><i class="fa fa-calendar-check"></i> Jadwal Konseling<span class="nav-badge warn"><?= $summary['terjadwal']??0 ?></span></a>
+    <a class="nav-item <?= str_starts_with((string)uri_string(),'sesi-bimbingan')?'active':'' ?>" href="<?= base_url('sesi-bimbingan') ?>"><i class="fa fa-comments"></i> Sesi Bimbingan</a>
   </div>
   <div class="sidebar-section">
     <div class="sidebar-section-label">Pengelolaan</div>
-    <a class="nav-item <?= str_starts_with((string)uri_string(),'laporan')?'active':'' ?>" href="<?= base_url('laporan') ?>">
-      <i class="fa fa-file-lines"></i> Laporan &amp; Rekap</a>
-    <a class="nav-item <?= str_starts_with((string)uri_string(),'kategori-pelanggaran')?'active':'' ?>" href="<?= base_url('kategori-pelanggaran') ?>">
-      <i class="fa fa-scale-balanced"></i> Kategori Pelanggaran</a>
-    <a class="nav-item <?= str_starts_with((string)uri_string(),'surat-dokumen')?'active':'' ?>" href="<?= base_url('surat-dokumen') ?>">
-      <i class="fa fa-file-signature"></i> Surat &amp; Dokumen</a>
-    <a class="nav-item <?= str_starts_with((string)uri_string(),'notifikasi')?'active':'' ?>" href="<?= base_url('notifikasi') ?>">
-      <i class="fa fa-bell"></i> Notifikasi
-      <span class="nav-badge"><?= $stats['baru'] ?? 0 ?></span></a>
+    <a class="nav-item <?= str_starts_with((string)uri_string(),'laporan')?'active':'' ?>" href="<?= base_url('laporan') ?>"><i class="fa fa-file-lines"></i> Laporan &amp; Rekap</a>
+    <a class="nav-item <?= str_starts_with((string)uri_string(),'kategori-pelanggaran')?'active':'' ?>" href="<?= base_url('kategori-pelanggaran') ?>"><i class="fa fa-scale-balanced"></i> Kategori Pelanggaran</a>
+    <a class="nav-item <?= str_starts_with((string)uri_string(),'surat-dokumen')?'active':'' ?>" href="<?= base_url('surat-dokumen') ?>"><i class="fa fa-file-signature"></i> Surat &amp; Dokumen</a>
+    <a class="nav-item <?= str_starts_with((string)uri_string(),'notifikasi')?'active':'' ?>" href="<?= base_url('notifikasi') ?>"><i class="fa fa-bell"></i> Notifikasi<span class="nav-badge"><?= $stats['baru']??0 ?></span></a>
   </div>
   <div class="sidebar-section">
     <div class="sidebar-section-label">Sistem</div>
-    <a class="nav-item <?= str_starts_with((string)uri_string(),'guru-bk')?'active':'' ?>" href="<?= base_url('guru-bk') ?>">
-      <i class="fa fa-chalkboard-user"></i> Data Guru BK</a>
-    <a class="nav-item <?= str_starts_with((string)uri_string(),'manajemen-user')?'active':'' ?>" href="<?= base_url('manajemen-user') ?>">
-      <i class="fa fa-users-gear"></i> Manajemen User</a>
-    <a class="nav-item <?= str_starts_with((string)uri_string(),'pengaturan')?'active':'' ?>" href="<?= base_url('pengaturan') ?>">
-      <i class="fa fa-gear"></i> Pengaturan</a>
-    <a class="nav-item <?= str_starts_with((string)uri_string(),'bantuan')?'active':'' ?>" href="<?= base_url('bantuan') ?>">
-      <i class="fa fa-circle-question"></i> Bantuan</a>
+    <a class="nav-item <?= str_starts_with((string)uri_string(),'guru-bk')?'active':'' ?>" href="<?= base_url('guru-bk') ?>"><i class="fa fa-chalkboard-user"></i> Data Guru BK</a>
+    <a class="nav-item <?= str_starts_with((string)uri_string(),'manajemen-user')?'active':'' ?>" href="<?= base_url('manajemen-user') ?>"><i class="fa fa-users-gear"></i> Manajemen User</a>
+    <a class="nav-item <?= str_starts_with((string)uri_string(),'pengaturan')?'active':'' ?>" href="<?= base_url('pengaturan') ?>"><i class="fa fa-gear"></i> Pengaturan</a>
+    <a class="nav-item <?= str_starts_with((string)uri_string(),'bantuan')?'active':'' ?>" href="<?= base_url('bantuan') ?>"><i class="fa fa-circle-question"></i> Bantuan</a>
   </div>
   <div class="sidebar-footer">
     <div class="user-card">
       <div class="user-avatar">BK</div>
-      <div class="user-info">
-        <div class="user-name">Ibu Rina Marlina, S.Pd</div>
-        <div class="user-role">Guru BK – Administrator</div>
-      </div>
+      <div class="user-info"><div class="user-name">Ibu Rina Marlina, S.Pd</div><div class="user-role">Guru BK – Administrator</div></div>
       <i class="fa fa-right-from-bracket logout-icon"></i>
     </div>
   </div>
@@ -444,103 +439,45 @@ tbody tr:hover{background:var(--blue-50)}
 <div class="main-wrapper">
   <nav class="navbar">
     <button class="navbar-hamburger" onclick="toggleSidebar()"><i class="fa fa-bars"></i></button>
-    <div class="navbar-search">
-      <i class="fa fa-magnifying-glass"></i>
-      <input type="text" placeholder="Cari siswa, jadwal konseling...">
-    </div>
+    <div class="navbar-search"><i class="fa fa-magnifying-glass"></i><input type="text" placeholder="Cari siswa, jadwal konseling..."></div>
     <div class="navbar-actions">
       <button class="nav-action-btn"><i class="fa fa-bell"></i><span class="notif-dot"></span></button>
       <button class="nav-action-btn"><i class="fa fa-envelope"></i></button>
       <button class="nav-action-btn" onclick="toggleFS()"><i class="fa fa-expand" id="fsIcon"></i></button>
     </div>
-    <div class="navbar-date">
-      <span class="date-main" id="dateLive">—</span>
-      <span class="date-sub" id="timeLive">—</span>
-    </div>
+    <div class="navbar-date"><span class="date-main" id="dateLive">—</span><span class="date-sub" id="timeLive">—</span></div>
   </nav>
 
   <div class="page-content">
     <div id="flashZone"></div>
-
     <div class="page-header">
-      <div class="page-header-left">
-        <h1>Jadwal Konseling</h1>
-        <p>Kelola dan pantau seluruh jadwal sesi konseling siswa</p>
-      </div>
-      <div class="page-header-right">
-        <button class="btn-primary" onclick="openTambah()">
-          <i class="fa fa-plus"></i> Tambah Jadwal
-        </button>
-      </div>
+      <div class="page-header-left"><h1>Jadwal Konseling</h1><p>Kelola dan pantau seluruh jadwal sesi konseling siswa</p></div>
+      <div class="page-header-right"><button class="btn-primary" onclick="openTambah()"><i class="fa fa-plus"></i> Tambah Jadwal</button></div>
     </div>
 
-    <!-- STATS -->
     <div class="stats-grid">
-      <div class="stat-card s1">
-        <div class="stat-top"><div class="stat-ico"><i class="fa fa-calendar-check"></i></div></div>
-        <div class="stat-num"><?= $summary['total'] ?></div>
-        <div class="stat-lbl">Total Jadwal</div>
-      </div>
-      <div class="stat-card s2">
-        <div class="stat-top"><div class="stat-ico"><i class="fa fa-clock"></i></div></div>
-        <div class="stat-num"><?= $summary['terjadwal'] ?></div>
-        <div class="stat-lbl">Menunggu</div>
-      </div>
-      <div class="stat-card s3">
-        <div class="stat-top"><div class="stat-ico"><i class="fa fa-circle-check"></i></div></div>
-        <div class="stat-num"><?= $summary['selesai'] ?></div>
-        <div class="stat-lbl">Selesai</div>
-      </div>
-      <div class="stat-card s4">
-        <div class="stat-top"><div class="stat-ico"><i class="fa fa-circle-xmark"></i></div></div>
-        <div class="stat-num"><?= $summary['batal'] ?></div>
-        <div class="stat-lbl">Dibatalkan</div>
-      </div>
+      <div class="stat-card s1"><div class="stat-top"><div class="stat-ico"><i class="fa fa-calendar-check"></i></div></div><div class="stat-num"><?= $summary['total'] ?></div><div class="stat-lbl">Total Jadwal</div></div>
+      <div class="stat-card s2"><div class="stat-top"><div class="stat-ico"><i class="fa fa-clock"></i></div></div><div class="stat-num"><?= $summary['terjadwal'] ?></div><div class="stat-lbl">Menunggu</div></div>
+      <div class="stat-card s3"><div class="stat-top"><div class="stat-ico"><i class="fa fa-circle-check"></i></div></div><div class="stat-num"><?= $summary['selesai'] ?></div><div class="stat-lbl">Selesai</div></div>
+      <div class="stat-card s4"><div class="stat-top"><div class="stat-ico"><i class="fa fa-circle-xmark"></i></div></div><div class="stat-num"><?= $summary['batal'] ?></div><div class="stat-lbl">Dibatalkan</div></div>
     </div>
 
-    <!-- FILTER -->
     <div class="filter-bar">
-      <div class="filter-search">
-        <i class="fa fa-magnifying-glass"></i>
-        <input type="text" id="searchInput" placeholder="Cari nama siswa atau keperluan..." oninput="filterTable()">
-      </div>
+      <div class="filter-search"><i class="fa fa-magnifying-glass"></i><input type="text" id="searchInput" placeholder="Cari nama siswa atau keperluan..." oninput="filterTable()"></div>
       <select class="filter-select" id="filterStatus" onchange="filterTable()">
-        <option value="">Semua Status</option>
-        <option value="menunggu">Menunggu</option>
-        <option value="selesai">Selesai</option>
-        <option value="batal">Batal</option>
+        <option value="">Semua Status</option><option value="menunggu">Menunggu</option><option value="selesai">Selesai</option><option value="batal">Batal</option>
       </select>
       <select class="filter-select" id="filterSort" onchange="filterTable()">
-        <option value="newest">Terbaru Dulu</option>
-        <option value="oldest">Terlama Dulu</option>
-        <option value="name">Nama A-Z</option>
+        <option value="newest">Terbaru Dulu</option><option value="oldest">Terlama Dulu</option><option value="name">Nama A-Z</option>
       </select>
     </div>
 
     <div class="card" style="margin-bottom:28px">
-      <div class="tab-nav">
-        <button class="tab-btn active">
-          <i class="fa fa-calendar-check"></i> Semua Jadwal
-          <span class="tab-count" id="tabCount">0</span>
-        </button>
-      </div>
+      <div class="tab-nav"><button class="tab-btn active"><i class="fa fa-calendar-check"></i> Semua Jadwal <span class="tab-count" id="tabCount">0</span></button></div>
       <div class="table-wrap">
-        <table id="jadwalTable">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Nama Siswa</th>
-              <th>Kelas</th>
-              <th>Tanggal</th>
-              <th>Jam Mulai</th>
-              <th>Keperluan</th>
-              <th>Status</th>
-              <th>Aksi</th>
-            </tr>
-          </thead>
-          <tbody id="tableBody">
-            <tr><td colspan="8"><div class="empty-state"><i class="fa fa-spinner fa-spin"></i><p>Memuat data...</p></div></td></tr>
-          </tbody>
+        <table>
+          <thead><tr><th>#</th><th>Nama Siswa</th><th>Kelas</th><th>Tanggal</th><th>Jam Mulai</th><th>Keperluan</th><th>Status</th><th>Aksi</th></tr></thead>
+          <tbody id="tableBody"><tr><td colspan="8"><div class="empty-state"><i class="fa fa-spinner fa-spin"></i><p>Memuat data...</p></div></td></tr></tbody>
         </table>
       </div>
       <div class="pagination-bar">
@@ -552,330 +489,229 @@ tbody tr:hover{background:var(--blue-50)}
 </div>
 
 <script>
-const BASE_URL         = '<?= base_url() ?>';
-const CSRF_TOKEN_NAME  = '<?= csrf_token() ?>';
-const CSRF_HASH        = '<?= csrf_hash() ?>';
-const AVATAR_COLORS    = ['#1a56db','#ef4444','#f59e0b','#10b981','#8b5cf6','#ec4899','#06b6d4','#f97316'];
+const BASE_URL        = '<?= base_url() ?>';
+const CSRF_TOKEN_NAME = '<?= csrf_token() ?>';
+const CSRF_HASH       = '<?= csrf_hash() ?>';
+const AVATAR_COLORS   = ['#1a56db','#ef4444','#f59e0b','#10b981','#8b5cf6','#ec4899','#06b6d4','#f97316'];
 
-let allData     = [];
-let hapusId     = null;
-let currentPage = 1;
-const perPage   = 10;
+let allData=[], hapusId=null, currentPage=1;
+const perPage=10;
 
-// ── HELPERS ──
-function getInitials(nama) {
-  return String(nama || '?').split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
-}
-function getColor(nama) {
-  const hash = String(nama || '').split('').reduce((a, c) => a + c.charCodeAt(0), 0);
-  return AVATAR_COLORS[hash % AVATAR_COLORS.length];
-}
-function fmtTgl(s) {
-  if (!s) return '—';
-  const d = new Date(s + 'T00:00:00');
-  const m = ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Ags','Sep','Okt','Nov','Des'];
-  return d.getDate() + ' ' + m[d.getMonth()] + ' ' + d.getFullYear();
-}
-function esc(s) {
-  return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
-function csrfHeaders() {
-  return {
-    'Content-Type': 'application/json',
-    'X-Requested-With': 'XMLHttpRequest',
-    [CSRF_TOKEN_NAME]: CSRF_HASH,
-  };
+function getInitials(n){return String(n||'?').split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);}
+function getColor(n){const h=String(n||'').split('').reduce((a,c)=>a+c.charCodeAt(0),0);return AVATAR_COLORS[h%AVATAR_COLORS.length];}
+function fmtTgl(s){if(!s)return'—';const d=new Date(s+'T00:00:00'),m=['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Ags','Sep','Okt','Nov','Des'];return d.getDate()+' '+m[d.getMonth()]+' '+d.getFullYear();}
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function csrfHeaders(){return{'Content-Type':'application/json','X-Requested-With':'XMLHttpRequest',[CSRF_TOKEN_NAME]:CSRF_HASH};}
+
+// Ambil nilai jam dari dropdown
+function getJam(hId, mId) {
+  const h = document.getElementById(hId)?.value;
+  const m = document.getElementById(mId)?.value;
+  return (h && h !== '') ? (h + ':' + (m||'00') + ':00') : null;
 }
 
-// ── LOAD SISWA KE DROPDOWN ──
+// Load daftar siswa
 async function loadSiswa() {
   try {
-    const res  = await fetch(`${BASE_URL}jadwal/get-siswa`, {
-      headers: { 'X-Requested-With': 'XMLHttpRequest' }
-    });
+    const res  = await fetch(`${BASE_URL}jadwal/get-siswa`,{headers:{'X-Requested-With':'XMLHttpRequest'}});
     const json = await res.json();
-    const opts = (json.data || []).map(s =>
-      `<option value="${s.id}">${esc(s.nama)} — ${esc(s.kelas)}</option>`
-    ).join('');
+    const opts = (json.data||[]).map(s=>`<option value="${s.id}">${esc(s.nama)} — ${esc(s.kelas)}</option>`).join('');
     const base = '<option value="">-- Pilih Siswa --</option>';
-    document.getElementById('f_siswa_id').innerHTML = base + opts;
-    document.getElementById('e_siswa_id').innerHTML = base + opts;
-  } catch(e) {
-    console.error('Gagal load siswa:', e);
-  }
+    document.getElementById('f_siswa_id').innerHTML = base+opts;
+    document.getElementById('e_siswa_id').innerHTML = base+opts;
+  } catch(e){console.error(e);}
 }
 
-// ── LOAD DATA JADWAL ──
+// Load data jadwal
 async function loadData() {
-  const search = document.getElementById('searchInput').value;
-  const status = document.getElementById('filterStatus').value;
-  const sort   = document.getElementById('filterSort').value;
-
-  const params = new URLSearchParams({ search, status, sort });
-  const res  = await fetch(`${BASE_URL}jadwal/get-data?${params}`, {
-    headers: { 'X-Requested-With': 'XMLHttpRequest' }
+  const p = new URLSearchParams({
+    search: document.getElementById('searchInput').value,
+    status: document.getElementById('filterStatus').value,
+    sort  : document.getElementById('filterSort').value,
   });
+  const res  = await fetch(`${BASE_URL}jadwal/get-data?${p}`,{headers:{'X-Requested-With':'XMLHttpRequest'}});
   const json = await res.json();
-  allData = json.data || [];
+  allData = json.data||[];
   renderTable();
 }
 
-// ── RENDER TABLE ──
 function renderTable() {
-  const total = allData.length;
-  const pages = Math.ceil(total / perPage) || 1;
-  if (currentPage > pages) currentPage = pages;
-  const slice = allData.slice((currentPage - 1) * perPage, currentPage * perPage);
-
-  document.getElementById('tabCount').textContent = total;
-  document.getElementById('paginationInfo').textContent = `Menampilkan ${slice.length} dari ${total} data`;
-
-  const tbody = document.getElementById('tableBody');
-  if (!slice.length) {
-    tbody.innerHTML = `<tr><td colspan="8"><div class="empty-state"><i class="fa fa-calendar-xmark"></i><p>Belum ada jadwal konseling</p></div></td></tr>`;
+  const total=allData.length, pages=Math.ceil(total/perPage)||1;
+  if(currentPage>pages) currentPage=pages;
+  const slice=allData.slice((currentPage-1)*perPage,currentPage*perPage);
+  document.getElementById('tabCount').textContent=total;
+  document.getElementById('paginationInfo').textContent=`Menampilkan ${slice.length} dari ${total} data`;
+  const tbody=document.getElementById('tableBody');
+  if(!slice.length){
+    tbody.innerHTML=`<tr><td colspan="8"><div class="empty-state"><i class="fa fa-calendar-xmark"></i><p>Belum ada jadwal konseling</p></div></td></tr>`;
   } else {
-    tbody.innerHTML = slice.map((j, i) => {
-      const num = (currentPage - 1) * perPage + i + 1;
-      const sc  = (j.status || 'menunggu').toLowerCase();
-      const statusLabel = sc.charAt(0).toUpperCase() + sc.slice(1);
+    tbody.innerHTML=slice.map((j,i)=>{
+      const num=(currentPage-1)*perPage+i+1, sc=(j.status||'menunggu').toLowerCase(), lbl=sc.charAt(0).toUpperCase()+sc.slice(1);
       return `<tr>
         <td style="color:var(--gray-400);font-weight:500">${num}</td>
-        <td><div class="td-student">
-          <div class="td-avatar" style="background:${getColor(j.nama)}">${getInitials(j.nama)}</div>
-          <div>
-            <div class="td-name">${esc(j.nama)}</div>
-            <div class="td-sub">${esc(j.nisn || '')}</div>
-          </div>
-        </div></td>
-        <td style="color:var(--gray-600)">${esc(j.kelas || '—')}</td>
+        <td><div class="td-student"><div class="td-avatar" style="background:${getColor(j.nama)}">${getInitials(j.nama)}</div>
+          <div><div class="td-name">${esc(j.nama)}</div><div class="td-sub">${esc(j.nisn||'')}</div></div></div></td>
+        <td style="color:var(--gray-600)">${esc(j.kelas||'—')}</td>
         <td style="color:var(--gray-600)">${fmtTgl(j.tanggal)}</td>
-        <td style="color:var(--gray-600)">${esc(j.jam_mulai || '—')}</td>
+        <td style="color:var(--gray-600)">${esc(j.jam_mulai||'—')}</td>
         <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--gray-600)" title="${esc(j.keperluan)}">${esc(j.keperluan)}</td>
-        <td><span class="badge ${sc}">${statusLabel}</span></td>
+        <td><span class="badge ${sc}">${lbl}</span></td>
         <td><div class="action-btns">
-          <button class="btn-icon view" title="Detail" onclick="openDetail(${j.id})"><i class="fa fa-eye"></i></button>
-          <button class="btn-icon edit" title="Edit" onclick="openEdit(${j.id})"><i class="fa fa-pen"></i></button>
-          <button class="btn-icon del" title="Hapus" onclick="openHapus(${j.id}, '${esc(j.nama)}')"><i class="fa fa-trash"></i></button>
-        </div></td>
-      </tr>`;
+          <button class="btn-icon view" onclick="openDetail(${j.id})"><i class="fa fa-eye"></i></button>
+          <button class="btn-icon edit" onclick="openEdit(${j.id})"><i class="fa fa-pen"></i></button>
+          <button class="btn-icon del"  onclick="openHapus(${j.id},'${esc(j.nama)}')"><i class="fa fa-trash"></i></button>
+        </div></td></tr>`;
     }).join('');
   }
-
-  // Pagination
-  const pb = document.getElementById('paginationBtns');
-  let btns = `<button class="pg-btn" onclick="goPage(${currentPage-1})" ${currentPage===1?'disabled':''}>«</button>`;
-  for (let p = 1; p <= pages; p++) {
-    btns += `<button class="pg-btn ${p===currentPage?'active':''}" onclick="goPage(${p})">${p}</button>`;
-  }
-  btns += `<button class="pg-btn" onclick="goPage(${currentPage+1})" ${currentPage===pages?'disabled':''}>»</button>`;
-  pb.innerHTML = btns;
+  const pb=document.getElementById('paginationBtns');
+  let b=`<button class="pg-btn" onclick="goPage(${currentPage-1})" ${currentPage===1?'disabled':''}>«</button>`;
+  for(let p=1;p<=pages;p++) b+=`<button class="pg-btn ${p===currentPage?'active':''}" onclick="goPage(${p})">${p}</button>`;
+  b+=`<button class="pg-btn" onclick="goPage(${currentPage+1})" ${currentPage===pages?'disabled':''}>»</button>`;
+  pb.innerHTML=b;
 }
 
-function goPage(p) {
-  const pages = Math.ceil(allData.length / perPage) || 1;
-  if (p < 1 || p > pages) return;
-  currentPage = p;
-  renderTable();
-}
-function filterTable() { currentPage = 1; loadData(); }
+function goPage(p){const pg=Math.ceil(allData.length/perPage)||1;if(p<1||p>pg)return;currentPage=p;renderTable();}
+function filterTable(){currentPage=1;loadData();}
 
 // ── TAMBAH ──
-function openTambah() {
-  document.getElementById('f_siswa_id').value  = '';
-  document.getElementById('f_tanggal').value   = new Date().toISOString().split('T')[0];
-  document.getElementById('f_jam_mulai').value = '08:00';
-  document.getElementById('f_jam_selesai').value = '';
-  document.getElementById('f_keperluan').value = '';
-  document.getElementById('f_catatan').value   = '';
-  document.getElementById('f_status').value    = 'menunggu';
+function openTambah(){
+  document.getElementById('f_siswa_id').value='';
+  document.getElementById('f_tanggal').value=new Date().toISOString().split('T')[0];
+  document.getElementById('f_jam_mulai_h').value='08';
+  document.getElementById('f_jam_mulai_m').value='00';
+  document.getElementById('f_jam_selesai_h').value='';
+  document.getElementById('f_jam_selesai_m').value='00';
+  document.getElementById('f_keperluan').value='';
+  document.getElementById('f_catatan').value='';
+  document.getElementById('f_status').value='menunggu';
   openModal('modalTambah');
 }
 
-async function simpanJadwal() {
-  const payload = {
-    siswa_id    : document.getElementById('f_siswa_id').value,
-    tanggal     : document.getElementById('f_tanggal').value,
-    jam_mulai   : document.getElementById('f_jam_mulai').value,
-    jam_selesai : document.getElementById('f_jam_selesai').value,
-    keperluan   : document.getElementById('f_keperluan').value.trim(),
-    catatan     : document.getElementById('f_catatan').value.trim(),
-    status      : document.getElementById('f_status').value,
-  };
-
-  if (!payload.siswa_id || !payload.tanggal || !payload.jam_mulai || !payload.keperluan) {
-    showFlash('Harap lengkapi semua field yang wajib diisi!', 'error'); return;
-  }
-
-  const res  = await fetch(`${BASE_URL}jadwal/simpan`, {
-    method: 'POST', headers: csrfHeaders(), body: JSON.stringify(payload)
-  });
-  const json = await res.json();
-
-  if (json.status === 'ok') {
-    closeModal('modalTambah');
-    showToast('Jadwal konseling berhasil ditambahkan!', 'success');
-    loadData();
-  } else {
-    showFlash(json.message || 'Gagal menyimpan data.', 'error');
-  }
+async function simpanJadwal(){
+  try {
+    const payload={
+      siswa_id   : document.getElementById('f_siswa_id').value,
+      tanggal    : document.getElementById('f_tanggal').value,
+      jam_mulai  : getJam('f_jam_mulai_h','f_jam_mulai_m'),
+      jam_selesai: getJam('f_jam_selesai_h','f_jam_selesai_m'),
+      keperluan  : document.getElementById('f_keperluan').value.trim(),
+      catatan    : document.getElementById('f_catatan').value.trim(),
+      status     : document.getElementById('f_status').value,
+    };
+    if(!payload.siswa_id||!payload.tanggal||!payload.jam_mulai||!payload.keperluan){
+      showFlash('Harap lengkapi semua field yang wajib diisi!','error'); return;
+    }
+    const res=await fetch(`${BASE_URL}jadwal/simpan`,{method:'POST',headers:csrfHeaders(),body:JSON.stringify(payload)});
+    const json=await res.json();
+    if(json.status==='ok'){closeModal('modalTambah');showToast('Jadwal berhasil ditambahkan!','success');loadData();}
+    else showFlash(json.message||'Gagal menyimpan.','error');
+  } catch(err){showFlash('Error: '+err.message,'error');console.error(err);}
 }
 
 // ── EDIT ──
-function openEdit(id) {
-  const j = allData.find(x => x.id == id);
-  if (!j) return;
-  document.getElementById('e_id').value          = j.id;
-  document.getElementById('e_siswa_id').value    = j.siswa_id;
-  document.getElementById('e_tanggal').value     = j.tanggal;
-  document.getElementById('e_jam_mulai').value   = j.jam_mulai;
-  document.getElementById('e_jam_selesai').value = j.jam_selesai || '';
-  document.getElementById('e_keperluan').value   = j.keperluan;
-  document.getElementById('e_catatan').value     = j.catatan || '';
-  document.getElementById('e_status').value      = j.status;
+function openEdit(id){
+  const j=allData.find(x=>x.id==id); if(!j) return;
+  const mn=['00','05','10','15','20','25','30','35','40','45','50','55'];
+  const [mh,mm]=(j.jam_mulai||'08:00').split(':');
+  const [sh,sm]=(j.jam_selesai||'').split(':');
+  document.getElementById('e_id').value=j.id;
+  document.getElementById('e_siswa_id').value=j.siswa_id;
+  document.getElementById('e_tanggal').value=j.tanggal;
+  document.getElementById('e_jam_mulai_h').value=mh||'08';
+  document.getElementById('e_jam_mulai_m').value=mn.includes(mm)?mm:'00';
+  document.getElementById('e_jam_selesai_h').value=sh||'';
+  document.getElementById('e_jam_selesai_m').value=mn.includes(sm)?sm:'00';
+  document.getElementById('e_keperluan').value=j.keperluan;
+  document.getElementById('e_catatan').value=j.catatan||'';
+  document.getElementById('e_status').value=j.status;
   openModal('modalEdit');
 }
 
-async function updateJadwal() {
-  const id = document.getElementById('e_id').value;
-  const payload = {
-    siswa_id    : document.getElementById('e_siswa_id').value,
-    tanggal     : document.getElementById('e_tanggal').value,
-    jam_mulai   : document.getElementById('e_jam_mulai').value,
-    jam_selesai : document.getElementById('e_jam_selesai').value,
-    keperluan   : document.getElementById('e_keperluan').value.trim(),
-    catatan     : document.getElementById('e_catatan').value.trim(),
-    status      : document.getElementById('e_status').value,
-  };
-
-  if (!payload.siswa_id || !payload.tanggal || !payload.jam_mulai || !payload.keperluan) {
-    showFlash('Harap lengkapi semua field yang wajib diisi!', 'error'); return;
-  }
-
-  const res  = await fetch(`${BASE_URL}jadwal/update/${id}`, {
-    method: 'POST', headers: csrfHeaders(), body: JSON.stringify(payload)
-  });
-  const json = await res.json();
-
-  if (json.status === 'ok') {
-    closeModal('modalEdit');
-    showToast('Jadwal berhasil diperbarui!', 'success');
-    loadData();
-  } else {
-    showFlash(json.message || 'Gagal memperbarui data.', 'error');
-  }
+async function updateJadwal(){
+  try {
+    const id=document.getElementById('e_id').value;
+    const payload={
+      siswa_id   : document.getElementById('e_siswa_id').value,
+      tanggal    : document.getElementById('e_tanggal').value,
+      jam_mulai  : getJam('e_jam_mulai_h','e_jam_mulai_m'),
+      jam_selesai: getJam('e_jam_selesai_h','e_jam_selesai_m'),
+      keperluan  : document.getElementById('e_keperluan').value.trim(),
+      catatan    : document.getElementById('e_catatan').value.trim(),
+      status     : document.getElementById('e_status').value,
+    };
+    if(!payload.siswa_id||!payload.tanggal||!payload.jam_mulai||!payload.keperluan){
+      showFlash('Harap lengkapi semua field yang wajib diisi!','error'); return;
+    }
+    const res=await fetch(`${BASE_URL}jadwal/update/${id}`,{method:'POST',headers:csrfHeaders(),body:JSON.stringify(payload)});
+    const json=await res.json();
+    if(json.status==='ok'){closeModal('modalEdit');showToast('Jadwal berhasil diperbarui!','success');loadData();}
+    else showFlash(json.message||'Gagal memperbarui.','error');
+  } catch(err){showFlash('Error: '+err.message,'error');console.error(err);}
 }
 
 // ── HAPUS ──
-function openHapus(id, nama) {
-  hapusId = id;
-  document.getElementById('hapusNama').textContent = nama;
-  openModal('modalHapus');
-}
-
-async function hapusJadwal() {
-  if (!hapusId) return;
-  const res  = await fetch(`${BASE_URL}jadwal/hapus/${hapusId}`, {
-    method: 'POST',
-    headers: { 'X-Requested-With': 'XMLHttpRequest', [CSRF_TOKEN_NAME]: CSRF_HASH }
-  });
-  const json = await res.json();
-  if (json.status === 'ok') {
-    closeModal('modalHapus');
-    showToast('Jadwal berhasil dihapus!', 'info');
-    loadData();
-  } else {
-    showFlash(json.message || 'Gagal menghapus data.', 'error');
-  }
-  hapusId = null;
+function openHapus(id,nama){hapusId=id;document.getElementById('hapusNama').textContent=nama;openModal('modalHapus');}
+async function hapusJadwal(){
+  if(!hapusId) return;
+  const res=await fetch(`${BASE_URL}jadwal/hapus/${hapusId}`,{method:'POST',headers:{'X-Requested-With':'XMLHttpRequest',[CSRF_TOKEN_NAME]:CSRF_HASH}});
+  const json=await res.json();
+  if(json.status==='ok'){closeModal('modalHapus');showToast('Jadwal berhasil dihapus!','info');loadData();}
+  else showFlash(json.message||'Gagal menghapus.','error');
+  hapusId=null;
 }
 
 // ── DETAIL ──
-async function openDetail(id) {
-  const res  = await fetch(`${BASE_URL}jadwal/detail/${id}`, {
-    headers: { 'X-Requested-With': 'XMLHttpRequest' }
-  });
-  const json = await res.json();
-  if (json.status !== 'ok') return;
-
-  const j = json.data;
-  const sc = (j.status || 'menunggu').toLowerCase();
-  const statusLabel = sc.charAt(0).toUpperCase() + sc.slice(1);
-
-  document.getElementById('detailAvatar').textContent       = getInitials(j.nama);
-  document.getElementById('detailAvatar').style.background  = getColor(j.nama);
-  document.getElementById('detailNama').textContent         = j.nama || '—';
-  document.getElementById('detailMeta').textContent         = fmtTgl(j.tanggal) + ' • ' + (j.jam_mulai || '—');
-  document.getElementById('dTanggal').textContent           = fmtTgl(j.tanggal);
-  document.getElementById('dJamMulai').textContent          = (j.jam_mulai || '—');
-  document.getElementById('dJamSelesai').textContent        = (j.jam_selesai || '—');
-  document.getElementById('dKelas').textContent             = j.kelas || '—';
-  document.getElementById('dStatus').innerHTML              = `<span class="badge ${sc}">${statusLabel}</span>`;
-  document.getElementById('dKontak').textContent            = j.no_hp_ortu || '—';
-  document.getElementById('dKeperluan').textContent         = j.keperluan || '—';
-  document.getElementById('dCatatan').textContent           = j.catatan || '(tidak ada catatan)';
-  document.getElementById('detailEditBtn').onclick = () => { closeModal('modalDetail'); openEdit(id); };
+async function openDetail(id){
+  const res=await fetch(`${BASE_URL}jadwal/detail/${id}`,{headers:{'X-Requested-With':'XMLHttpRequest'}});
+  const json=await res.json();
+  if(json.status!=='ok') return;
+  const j=json.data, sc=(j.status||'menunggu').toLowerCase(), lbl=sc.charAt(0).toUpperCase()+sc.slice(1);
+  document.getElementById('detailAvatar').textContent=getInitials(j.nama);
+  document.getElementById('detailAvatar').style.background=getColor(j.nama);
+  document.getElementById('detailNama').textContent=j.nama||'—';
+  document.getElementById('detailMeta').textContent=fmtTgl(j.tanggal)+' • '+(j.jam_mulai||'—');
+  document.getElementById('dTanggal').textContent=fmtTgl(j.tanggal);
+  document.getElementById('dJamMulai').textContent=j.jam_mulai||'—';
+  document.getElementById('dJamSelesai').textContent=j.jam_selesai||'—';
+  document.getElementById('dKelas').textContent=j.kelas||'—';
+  document.getElementById('dStatus').innerHTML=`<span class="badge ${sc}">${lbl}</span>`;
+  document.getElementById('dKontak').textContent=j.no_hp_ortu||'—';
+  document.getElementById('dKeperluan').textContent=j.keperluan||'—';
+  document.getElementById('dCatatan').textContent=j.catatan||'(tidak ada catatan)';
+  document.getElementById('detailEditBtn').onclick=()=>{closeModal('modalDetail');openEdit(id);};
   openModal('modalDetail');
 }
 
 // ── TOAST & FLASH ──
-function showToast(msg, type = 'success') {
-  const icons = { success:'fa-circle-check', error:'fa-circle-exclamation', info:'fa-circle-info' };
-  const el = document.createElement('div');
-  el.className = `toast ${type}`;
-  el.innerHTML = `<i class="fa ${icons[type]}"></i> ${msg}`;
+function showToast(msg,type='success'){
+  const icons={success:'fa-circle-check',error:'fa-circle-exclamation',info:'fa-circle-info'};
+  const el=document.createElement('div');el.className=`toast ${type}`;
+  el.innerHTML=`<i class="fa ${icons[type]}"></i> ${msg}`;
   document.getElementById('toastContainer').appendChild(el);
-  setTimeout(() => el.style.opacity = '0', 3000);
-  setTimeout(() => el.remove(), 3400);
+  setTimeout(()=>el.style.opacity='0',3000);setTimeout(()=>el.remove(),3400);
 }
-function showFlash(msg, type = 'success') {
-  const icons = { success:'fa-circle-check', error:'fa-circle-exclamation', info:'fa-circle-info' };
-  const zone = document.getElementById('flashZone');
-  zone.innerHTML = `<div class="flash-alert ${type}"><i class="fa ${icons[type]}"></i> ${msg}</div>`;
-  setTimeout(() => zone.innerHTML = '', 4000);
-}
-
-// ── MODAL HELPERS ──
-function openModal(id)  { document.getElementById(id).classList.add('show') }
-function closeModal(id) { document.getElementById(id).classList.remove('show') }
-document.querySelectorAll('.modal-overlay').forEach(m => {
-  m.addEventListener('click', e => { if (e.target === m) m.classList.remove('show') });
-});
-
-// ── SIDEBAR & FULLSCREEN ──
-function toggleSidebar() {
-  document.getElementById('sidebar').classList.toggle('open');
-  document.getElementById('overlay').classList.toggle('show');
-}
-function closeSidebar() {
-  document.getElementById('sidebar').classList.remove('open');
-  document.getElementById('overlay').classList.remove('show');
-}
-function toggleFS() {
-  if (!document.fullscreenElement) {
-    document.documentElement.requestFullscreen();
-    document.getElementById('fsIcon').className = 'fa fa-compress';
-  } else {
-    document.exitFullscreen();
-    document.getElementById('fsIcon').className = 'fa fa-expand';
-  }
+function showFlash(msg,type='success'){
+  const icons={success:'fa-circle-check',error:'fa-circle-exclamation',info:'fa-circle-info'};
+  const z=document.getElementById('flashZone');
+  z.innerHTML=`<div class="flash-alert ${type}"><i class="fa ${icons[type]}"></i> ${msg}</div>`;
+  setTimeout(()=>z.innerHTML='',4000);
 }
 
-// ── CLOCK ──
-function updateClock() {
-  const d = new Date();
-  const days   = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
-  const months = ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Ags','Sep','Okt','Nov','Des'];
-  document.getElementById('dateLive').textContent =
-    days[d.getDay()] + ', ' + d.getDate() + ' ' + months[d.getMonth()] + ' ' + d.getFullYear();
-  document.getElementById('timeLive').textContent =
-    String(d.getHours()).padStart(2,'0') + ':' +
-    String(d.getMinutes()).padStart(2,'0') + ':' +
-    String(d.getSeconds()).padStart(2,'0') + ' WIB';
-}
-setInterval(updateClock, 1000);
-updateClock();
+function openModal(id){document.getElementById(id).classList.add('show');}
+function closeModal(id){document.getElementById(id).classList.remove('show');}
+document.querySelectorAll('.modal-overlay').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('show');}));
 
-// ── INIT ──
+function toggleSidebar(){document.getElementById('sidebar').classList.toggle('open');document.getElementById('overlay').classList.toggle('show');}
+function closeSidebar(){document.getElementById('sidebar').classList.remove('open');document.getElementById('overlay').classList.remove('show');}
+function toggleFS(){if(!document.fullscreenElement){document.documentElement.requestFullscreen();document.getElementById('fsIcon').className='fa fa-compress';}else{document.exitFullscreen();document.getElementById('fsIcon').className='fa fa-expand';}}
+
+function updateClock(){
+  const d=new Date(),dy=['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'],mn=['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Ags','Sep','Okt','Nov','Des'];
+  document.getElementById('dateLive').textContent=dy[d.getDay()]+', '+d.getDate()+' '+mn[d.getMonth()]+' '+d.getFullYear();
+  document.getElementById('timeLive').textContent=String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')+':'+String(d.getSeconds()).padStart(2,'0')+' WIB';
+}
+setInterval(updateClock,1000);updateClock();
+
 loadSiswa();
 loadData();
 </script>

@@ -262,19 +262,7 @@ if (!function_exists('format_kelas')) {
     }
 }
 
-// ── Data dummy siswa ──
-$listSiswa = [
-    ['id'=>1, 'nisn'=>'0041230001','nama'=>'Aldi Firmansyah',   'kelas'=>'XI A'],
-    ['id'=>2, 'nisn'=>'0041230002','nama'=>'Putri Ayu Lestari', 'kelas'=>'X C'],
-    ['id'=>3, 'nisn'=>'0041230003','nama'=>'Rafi Hidayat',      'kelas'=>'XII B'],
-    ['id'=>4, 'nisn'=>'0041230004','nama'=>'Sinta Wulandari',   'kelas'=>'X A'],
-    ['id'=>5, 'nisn'=>'0041230005','nama'=>'Bima Saputra',      'kelas'=>'XI D'],
-    ['id'=>6, 'nisn'=>'0041230006','nama'=>'Nadia Pratiwi',     'kelas'=>'XII E'],
-    ['id'=>7, 'nisn'=>'0041230007','nama'=>'Dandi Firmawan',    'kelas'=>'XI C'],
-    ['id'=>8, 'nisn'=>'0041230008','nama'=>'Mega Rahayu',       'kelas'=>'X B'],
-    ['id'=>9, 'nisn'=>'0041230009','nama'=>'Kevin Prasetyo',    'kelas'=>'XII A'],
-    ['id'=>10,'nisn'=>'0041230010','nama'=>'Ayu Cahyani',       'kelas'=>'XI F'],
-];
+
 
 $jenisPelanggaran = [
     'Ringan' => [
@@ -974,6 +962,7 @@ $siswaJs = array_map(fn($s) => [
 const BASE_URL   = '<?= base_url() ?>';
 // ── Data siswa dari PHP untuk searchable dropdown ──
 const SISWA_DATA = <?= json_encode($siswaJs) ?>;
+console.log('SISWA_DATA:', SISWA_DATA);
 const AVATAR_COLORS = ['#1a56db','#ef4444','#f59e0b','#10b981','#8b5cf6','#ec4899','#06b6d4','#f97316'];
 
 // ══ HELPER ══
@@ -1163,7 +1152,7 @@ function openEdit(id,nama,kelas,jenis,kat,poin,tgl,status,notif,lokasi,deskripsi
     } else {
         // Fallback: isi manual jika siswa tidak ada di list (data lama)
         clearSiswa('edit');
-        document.getElementById('edit_siswa_id').value      = siswaId || id;
+        document.getElementById('edit_siswa_id').value = siswaId || '';
         document.getElementById('edit_siswa_display').value = nama+' — '+kelas;
         document.getElementById('edit_siswa_display').classList.add('has-value');
         document.getElementById('edit_siswa_clear').classList.add('show');
