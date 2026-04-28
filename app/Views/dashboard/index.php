@@ -232,24 +232,22 @@
         </button>
     </div>
     <div class="notif-popup-list" id="notifList">
-        <?php
-        $notifs = [
-            ['color'=>'#ef4444','title'=>'Aldi Firmansyah (XI RPL 2) — Perkelahian',        'time'=>'5 menit lalu'],
-            ['color'=>'#f59e0b','title'=>'Putri Ayu (X TKJ 1) — Membolos 3x berturut',      'time'=>'22 menit lalu'],
-            ['color'=>'#ef4444','title'=>'Rafi Hidayat (XII MM) — Membawa rokok',            'time'=>'1 jam lalu'],
-            ['color'=>'#1a56db','title'=>'Sinta Wulandari (X AKL) — Terlambat',             'time'=>'2 jam lalu'],
-            ['color'=>'#f59e0b','title'=>'Bima Saputra (XI TSM 3) — Seragam tidak lengkap', 'time'=>'3 jam lalu'],
-            ['color'=>'#1a56db','title'=>'Nadia Pratiwi (XII AP 1) — Tidak hadir',          'time'=>'5 jam lalu'],
-        ];
-        foreach ($notifs as $i => $n): ?>
-        <div class="notif-popup-item" id="notifItem<?= $i ?>" onclick="tandaiSatuNotif(<?= $i ?>)">
-            <div class="notif-popup-dot" style="background:<?= $n['color'] ?>;margin-top:6px"></div>
-            <div class="notif-popup-text">
-                <div class="title"><?= esc($n['title']) ?></div>
-                <div class="time"><i class="fa fa-clock"></i> <?= esc($n['time']) ?></div>
-            </div>
-        </div>
-        <?php endforeach; ?>
+        <?php foreach ($pelanggaran_terbaru as $i => $n):
+    $color = match($n['kategori']) {
+        'berat'  => '#ef4444',
+        'sedang' => '#f59e0b',
+        default  => '#1a56db'
+    };
+    $waktu = \CodeIgniter\I18n\Time::parse($n['created_at'])->humanize();
+?>
+<div class="notif-popup-item" id="notifItem<?= $i ?>" onclick="tandaiSatuNotif(<?= $i ?>)">
+    <div class="notif-popup-dot" style="background:<?= $color ?>;margin-top:6px"></div>
+    <div class="notif-popup-text">
+        <div class="title"><?= esc($n['nama']) ?> (<?= esc($n['kelas']) ?>) — <?= esc($n['jenis_pelanggaran']) ?></div>
+        <div class="time"><i class="fa fa-clock"></i> <?= $waktu ?></div>
+    </div>
+</div>
+<?php endforeach; ?>
     </div>
     <div class="notif-popup-footer" onclick="lihatSemuaNotif()">
         Lihat semua notifikasi →
@@ -520,28 +518,30 @@
                     </a>
                 </div>
                 <div class="news-list">
-                    <?php
-                    $news = [
-                        ['color'=>'#ef4444','cat'=>'Berat',  'catClr'=>'#fee2e2;color:#dc2626','title'=>'Aldi Firmansyah terlibat perkelahian di kantin',   'kelas'=>'XI RPL 2','time'=>'08:35'],
-                        ['color'=>'#f59e0b','cat'=>'Sedang', 'catClr'=>'#fef3c7;color:#b45309','title'=>'Putri Ayu membolos 3 hari berturut-turut',         'kelas'=>'X TKJ 1', 'time'=>'09:10'],
-                        ['color'=>'#ef4444','cat'=>'Berat',  'catClr'=>'#fee2e2;color:#dc2626','title'=>'Rafi Hidayat kedapatan membawa rokok',             'kelas'=>'XII MM',  'time'=>'09:55'],
-                        ['color'=>'#1a56db','cat'=>'Ringan', 'catClr'=>'#dbeafe;color:#1d4ed8','title'=>'Sinta Wulandari terlambat masuk kelas',            'kelas'=>'X AKL',   'time'=>'10:20'],
-                        ['color'=>'#f59e0b','cat'=>'Sedang', 'catClr'=>'#fef3c7;color:#b45309','title'=>'Bima Saputra seragam tidak lengkap (3x)',          'kelas'=>'XI TSM 3','time'=>'11:00'],
-                        ['color'=>'#1a56db','cat'=>'Ringan', 'catClr'=>'#dbeafe;color:#1d4ed8','title'=>'Nadia Pratiwi tidak hadir tanpa keterangan',       'kelas'=>'XII AP 1','time'=>'11:30'],
-                    ];
-                    foreach ($news as $n): ?>
-                    <a class="news-item" href="<?= base_url('pelanggaran?tab=semua') ?>">
-                        <div class="news-badge" style="background:<?= $n['color'] ?>"></div>
-                        <div class="news-content">
-                            <div class="news-title"><?= esc($n['title']) ?></div>
-                            <div class="news-meta">
-                                <span><i class="fa fa-user-graduate"></i> <?= esc($n['kelas']) ?></span>
-                                <span><i class="fa fa-clock"></i> <?= esc($n['time']) ?></span>
-                                <span class="news-tag" style="background:<?= $n['catClr'] ?>"><?= esc($n['cat']) ?></span>
-                            </div>
+                    <?php foreach ($pelanggaran_terbaru as $n):
+                    $color = match($n['kategori']) {
+                        'berat'  => '#ef4444',
+                        'sedang' => '#f59e0b',
+                        default  => '#1a56db'
+                    };
+                    $catClr = match($n['kategori']) {
+                        'berat'  => '#fee2e2;color:#dc2626',
+                        'sedang' => '#fef3c7;color:#b45309',
+                        default  => '#dbeafe;color:#1d4ed8'
+                    };
+                ?>
+                <a class="news-item" href="<?= base_url('pelanggaran?tab=semua') ?>">
+                    <div class="news-badge" style="background:<?= $color ?>"></div>
+                    <div class="news-content">
+                        <div class="news-title"><?= esc($n['nama']) ?> — <?= esc($n['jenis_pelanggaran']) ?></div>
+                        <div class="news-meta">
+                            <span><i class="fa fa-user-graduate"></i> <?= esc($n['kelas']) ?></span>
+                            <span><i class="fa fa-clock"></i> <?= date('H:i', strtotime($n['created_at'])) ?></span>
+                            <span class="news-tag" style="background:<?= $catClr ?>"><?= ucfirst($n['kategori']) ?></span>
                         </div>
-                    </a>
-                    <?php endforeach; ?>
+                    </div>
+                </a>
+                <?php endforeach; ?>
                 </div>
             </div>
         </div>

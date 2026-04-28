@@ -62,6 +62,7 @@ class TindakLanjut extends BaseController
 
       $this->tindakLanjutModel->insert([
         'siswa_id'        => (int) $this->request->getPost('siswa_id'),
+        'pelanggaran_id'  => $pelanggaranId,
         'konselor_id'     => null,
         'masalah'         => $this->request->getPost('masalah'),
         'tindak_lanjut'   => $this->request->getPost('tindak_lanjut'),

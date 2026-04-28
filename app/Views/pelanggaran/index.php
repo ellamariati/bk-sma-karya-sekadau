@@ -752,7 +752,13 @@ $siswaJs = array_map(fn($s) => [
     <div class="page-content">
 
         <?php if (session()->getFlashdata('success')): ?>
-        <div class="flash-alert success"><i class="fa fa-circle-check"></i> <?= session()->getFlashdata('success') ?></div>
+        <div class="flash-alert success">
+            <i class="fa fa-circle-check"></i> 
+            <?= session()->getFlashdata('success') ?>
+            <button onclick="this.parentElement.remove()" style="margin-left:auto;background:none;border:none;cursor:pointer;color:#065f46;font-size:16px;">
+                <i class="fa fa-times"></i>
+            </button>
+        </div>
         <?php endif; ?>
         <?php if (session()->getFlashdata('error')): ?>
         <div class="flash-alert error"><i class="fa fa-circle-exclamation"></i> <?= session()->getFlashdata('error') ?></div>

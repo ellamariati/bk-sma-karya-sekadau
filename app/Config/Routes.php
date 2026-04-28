@@ -77,6 +77,13 @@ $routes->get('laporan/export-csv-bimbingan',   'Laporan::exportCsvBimbingan');
 $routes->get('laporan/export-csv-pelanggaran', 'Laporan::exportCsvPelanggaran');
 $routes->get('laporan/export-csv-rekap',       'Laporan::exportCsvRekap');
 
+// Data Guru BK
+$routes->get( 'guru-bk',                'GuruBK::index');
+$routes->post('guru-bk/simpan',         'GuruBK::simpan');
+$routes->get( 'guru-bk/detail/(:num)',  'GuruBK::detail/$1');  // JSON AJAX
+$routes->post('guru-bk/update/(:num)',  'GuruBK::update/$1');
+$routes->get( 'guru-bk/hapus/(:num)',   'GuruBK::hapus/$1');
+
 // Auth
 $routes->get( 'login',  'Auth::index');
 $routes->post('login',  'Auth::proses');

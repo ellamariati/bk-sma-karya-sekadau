@@ -236,7 +236,21 @@ $siswaJs = array_map(fn($s) => [
                 <div class="form-row">
                     <div class="form-group">
                         <label class="form-label">Jam Kunjungan</label>
-                        <input type="time" name="jam" class="form-input" value="<?= old('jam', date('H:i')) ?>">
+                        <input type="hidden" name="jam" id="tambah_jam_val" value="<?= old('jam', date('H:i')) ?>">
+                        <div style="display:flex;gap:8px;align-items:center">
+                            <select class="form-select" id="tambah_jam_h" onchange="updateJam('tambah')" style="flex:1">
+                                <?php for($h=0;$h<24;$h++): $hh=str_pad($h,2,'0',STR_PAD_LEFT); $sel=date('H')==$hh?'selected':''; ?>
+                                <option value="<?= $hh ?>" <?= $sel ?>><?= $hh ?></option>
+                                <?php endfor; ?>
+                            </select>
+                            <span style="font-weight:700;color:var(--gray-600)">:</span>
+                            <select class="form-select" id="tambah_jam_m" onchange="updateJam('tambah')" style="flex:1">
+                                <?php for($m=0;$m<60;$m+=5): $mm=str_pad($m,2,'0',STR_PAD_LEFT); $sel=date('i')<=$mm&&date('i')>$m-5?'selected':''; ?>
+                                <option value="<?= $mm ?>" <?= $sel ?>><?= $mm ?></option>
+                                <?php endfor; ?>
+                            </select>
+                            <span style="font-size:12px;color:var(--gray-400);white-space:nowrap">WIB</span>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label class="form-label">Jenis Kunjungan <span style="color:var(--danger)">*</span></label>
@@ -361,7 +375,21 @@ $siswaJs = array_map(fn($s) => [
                 <div class="form-row">
                     <div class="form-group">
                         <label class="form-label">Jam Kunjungan</label>
-                        <input type="time" name="jam" id="e_jam" class="form-input">
+                        <input type="hidden" name="jam" id="edit_jam_val">
+                        <div style="display:flex;gap:8px;align-items:center">
+                            <select class="form-select" id="edit_jam_h" onchange="updateJam('edit')" style="flex:1">
+                                <?php for($h=0;$h<24;$h++): $hh=str_pad($h,2,'0',STR_PAD_LEFT); ?>
+                                <option value="<?= $hh ?>"><?= $hh ?></option>
+                                <?php endfor; ?>
+                            </select>
+                            <span style="font-weight:700;color:var(--gray-600)">:</span>
+                            <select class="form-select" id="edit_jam_m" onchange="updateJam('edit')" style="flex:1">
+                                <?php for($m=0;$m<60;$m+=5): $mm=str_pad($m,2,'0',STR_PAD_LEFT); ?>
+                                <option value="<?= $mm ?>"><?= $mm ?></option>
+                                <?php endfor; ?>
+                            </select>
+                            <span style="font-size:12px;color:var(--gray-400);white-space:nowrap">WIB</span>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label class="form-label">Jenis Kunjungan</label>
@@ -634,6 +662,12 @@ $siswaJs = array_map(fn($s) => [
 </div>
 
 <script>
+// ══ JAM PICKER ══
+function updateJam(prefix) {
+    const h = document.getElementById(prefix+'_jam_h').value;
+    const m = document.getElementById(prefix+'_jam_m').value;
+    document.getElementById(prefix+'_jam_val').value = h + ':' + m;
+}
 const BASE_URL = '<?= base_url() ?>';
 const SISWA_DATA = <?= json_encode($siswaJs) ?>;
 const AVATAR_COLORS = ['#1a56db','#ef4444','#f59e0b','#10b981','#8b5cf6','#ec4899','#06b6d4','#f97316'];
@@ -781,7 +815,7 @@ function openEdit(id){
         if(siswa) selectSiswa('edit',siswa.id,siswa.nama,siswa.kelas,siswa.nisn||'');
         else clearSiswa('edit');
         document.getElementById('e_tanggal').value=d.tanggal;
-        document.getElementById('e_jam').value=d.jam||'';
+        setEditJam(d.jam || '07:00');
         document.getElementById('e_jenis_kunjungan').value=d.jenis_kunjungan;
         document.getElementById('e_keperluan').value=d.keperluan||'';
         document.getElementById('e_hasil').value=d.hasil_kunjungan||'';

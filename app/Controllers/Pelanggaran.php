@@ -110,7 +110,7 @@ public function index()
 
         $this->pelanggaranModel->insert([
             'siswa_id'          => $this->request->getPost('siswa_id'),
-            'konselor_id'       => $this->request->getPost('konselor_id'),
+            'konselor_id'       => $this->request->getPost('konselor_id') ?: null,
             'jenis_pelanggaran' => $this->request->getPost('jenis_pelanggaran'),
             'kategori'          => $this->request->getPost('kategori'),
             'deskripsi'         => $this->request->getPost('deskripsi'),
@@ -122,7 +122,7 @@ public function index()
         ]);
 
         return redirect()->to(base_url('pelanggaran?tab=semua'))
-            ->with('success', '✅ Data pelanggaran berhasil ditambahkan.');
+            ->with('success', 'Data pelanggaran berhasil ditambahkan.');
     }
 
     // ══════════════════════════════════════════

@@ -20,6 +20,14 @@ class Dashboard extends BaseController
     {
         $db = \Config\Database::connect();
 
+        $data['pelanggaran_terbaru'] = $db->table('pelanggaran p')
+            ->select('p.id, p.jenis_pelanggaran, p.kategori, p.poin, p.created_at, s.nama, s.kelas')
+            ->join('siswa s', 's.id = p.siswa_id', 'left')
+            ->orderBy('p.created_at', 'DESC')
+            ->limit(6)
+            ->get()
+            ->getResultArray();
+
         // ── Stat Cards ──
         $data['stats'] = [
             'total'    => $this->pelanggaranModel->countAll(),
