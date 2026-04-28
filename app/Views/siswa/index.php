@@ -411,64 +411,78 @@
             <div class="brand-sub">Bimbingan &amp; Konseling</div>
         </div>
     </div>
+    <!-- ── MENU UTAMA ── -->
     <div class="sidebar-section">
         <div class="sidebar-section-label">Menu Utama</div>
-        <a class="nav-item <?= (uri_string()==''||uri_string()=='dashboard')?'active':'' ?>" href="<?= base_url('/') ?>">
+        <!-- IKON DASHBOARD: fa-gauge-high (konsisten) -->
+        <a class="nav-item <?= (uri_string()==''||uri_string()=='dashboard')?'active':'' ?>"
+           href="<?= base_url('/') ?>">
             <i class="fa fa-gauge-high"></i> Dashboard
         </a>
-        <a class="nav-item <?= str_starts_with(uri_string(),'pelanggaran')?'active':'' ?>" href="<?= base_url('pelanggaran') ?>">
+        <!-- IKON DATA PELANGGARAN: fa-triangle-exclamation (konsisten) -->
+        <a class="nav-item <?= str_starts_with(uri_string(),'pelanggaran')?'active':'' ?>"
+           href="<?= base_url('pelanggaran') ?>">
             <i class="fa fa-triangle-exclamation"></i> Data Pelanggaran
             <span class="nav-badge"><?= $stats['baru'] ?? 0 ?></span>
         </a>
-        <a class="nav-item <?= str_starts_with(uri_string(),'siswa')?'active':'' ?>" href="<?= base_url('siswa') ?>">
+        <a class="nav-item <?= str_starts_with(uri_string(),'siswa')?'active':'' ?>"
+           href="<?= base_url('siswa') ?>">
             <i class="fa fa-users"></i> Data Siswa
         </a>
-        <a class="nav-item <?= str_starts_with(uri_string(),'tindak-lanjut')?'active':'' ?>" href="<?= base_url('tindak-lanjut') ?>">
+        <a class="nav-item <?= str_starts_with(uri_string(),'tindak-lanjut')?'active':'' ?>"
+           href="<?= base_url('tindak-lanjut') ?>">
             <i class="fa fa-list-check"></i> Tindak Lanjut
         </a>
-        <a class="nav-item <?= str_starts_with(uri_string(),'buku-kunjungan')?'active':'' ?>" href="<?= base_url('buku-kunjungan') ?>">
+        <a class="nav-item <?= str_starts_with(uri_string(),'buku-kunjungan')?'active':'' ?>"
+           href="<?= base_url('buku-kunjungan') ?>">
             <i class="fa fa-book-open"></i> Buku Kunjungan
         </a>
     </div>
+
+    <!-- ── KONSELING ── -->
     <div class="sidebar-section">
         <div class="sidebar-section-label">Konseling</div>
-        <a class="nav-item <?= str_starts_with(uri_string(),'jadwal')?'active':'' ?>" href="<?= base_url('jadwal') ?>">
-            <i class="fa fa-calendar-check"></i> Jadwal Konseling <span class="nav-badge warn">3</span>
+        <a class="nav-item <?= str_starts_with(uri_string(),'jadwal')?'active':'' ?>"
+           href="<?= base_url('jadwal') ?>">
+            <i class="fa fa-calendar-check"></i> Jadwal Konseling
+            <span class="nav-badge warn">3</span>
         </a>
-        <a class="nav-item <?= str_starts_with(uri_string(),'sesi-bimbingan')?'active':'' ?>" href="<?= base_url('sesi-bimbingan') ?>">
+        <a class="nav-item <?= str_starts_with(uri_string(),'sesi-bimbingan')?'active':'' ?>"
+           href="<?= base_url('sesi-bimbingan') ?>">
             <i class="fa fa-comments"></i> Sesi Bimbingan
         </a>
     </div>
+
+    <!-- ── PENGELOLAAN ── -->
     <div class="sidebar-section">
         <div class="sidebar-section-label">Pengelolaan</div>
-        <a class="nav-item <?= str_starts_with(uri_string(),'laporan')?'active':'' ?>" href="<?= base_url('laporan') ?>">
+        <a class="nav-item <?= str_starts_with(uri_string(),'laporan')?'active':'' ?>"
+           href="<?= base_url('laporan') ?>">
             <i class="fa fa-file-lines"></i> Laporan &amp; Rekap
         </a>
-        <a class="nav-item <?= str_starts_with(uri_string(),'kategori-pelanggaran')?'active':'' ?>" href="<?= base_url('kategori-pelanggaran') ?>">
-            <i class="fa fa-scale-balanced"></i> Kategori Pelanggaran
-        </a>
-        <a class="nav-item <?= str_starts_with(uri_string(),'surat-dokumen')?'active':'' ?>" href="<?= base_url('surat-dokumen') ?>">
-            <i class="fa fa-file-signature"></i> Surat &amp; Dokumen
-        </a>
-        <a class="nav-item <?= str_starts_with(uri_string(),'notifikasi')?'active':'' ?>" href="<?= base_url('notifikasi') ?>">
-            <i class="fa fa-bell"></i> Notifikasi <span class="nav-badge"><?= $stats['baru'] ?? 0 ?></span>
-        </a>
     </div>
+
+    <!-- ── SISTEM ── -->
     <div class="sidebar-section">
         <div class="sidebar-section-label">Sistem</div>
-        <a class="nav-item <?= str_starts_with(uri_string(),'guru-bk')?'active':'' ?>" href="<?= base_url('guru-bk') ?>">
+        <a class="nav-item <?= str_starts_with(uri_string(),'guru-bk')?'active':'' ?>"
+           href="<?= base_url('guru-bk') ?>">
             <i class="fa fa-chalkboard-user"></i> Data Guru BK
         </a>
-        <a class="nav-item <?= str_starts_with(uri_string(),'manajemen-user')?'active':'' ?>" href="<?= base_url('manajemen-user') ?>">
+        <a class="nav-item <?= str_starts_with(uri_string(),'manajemen-user')?'active':'' ?>"
+           href="<?= base_url('manajemen-user') ?>">
             <i class="fa fa-users-gear"></i> Manajemen User
         </a>
-        <a class="nav-item <?= str_starts_with(uri_string(),'pengaturan')?'active':'' ?>" href="<?= base_url('pengaturan') ?>">
+        <a class="nav-item <?= str_starts_with(uri_string(),'pengaturan')?'active':'' ?>"
+           href="<?= base_url('pengaturan') ?>">
             <i class="fa fa-gear"></i> Pengaturan
         </a>
-        <a class="nav-item <?= str_starts_with(uri_string(),'bantuan')?'active':'' ?>" href="<?= base_url('bantuan') ?>">
+        <a class="nav-item <?= str_starts_with(uri_string(),'bantuan')?'active':'' ?>"
+           href="<?= base_url('bantuan') ?>">
             <i class="fa fa-circle-question"></i> Bantuan
         </a>
     </div>
+    <!-- ── USER FOOTER ── -->
     <div class="sidebar-footer">
         <div class="user-card">
             <div class="user-avatar">BK</div>

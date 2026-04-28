@@ -318,19 +318,6 @@
            href="<?= base_url('laporan') ?>">
             <i class="fa fa-file-lines"></i> Laporan &amp; Rekap
         </a>
-        <a class="nav-item <?= str_starts_with(uri_string(),'kategori-pelanggaran')?'active':'' ?>"
-           href="<?= base_url('kategori-pelanggaran') ?>">
-            <i class="fa fa-scale-balanced"></i> Kategori Pelanggaran
-        </a>
-        <a class="nav-item <?= str_starts_with(uri_string(),'surat-dokumen')?'active':'' ?>"
-           href="<?= base_url('surat-dokumen') ?>">
-            <i class="fa fa-file-signature"></i> Surat &amp; Dokumen
-        </a>
-        <a class="nav-item <?= str_starts_with(uri_string(),'notifikasi')?'active':'' ?>"
-           href="<?= base_url('notifikasi') ?>">
-            <i class="fa fa-bell"></i> Notifikasi
-            <span class="nav-badge"><?= $stats['baru'] ?? 0 ?></span>
-        </a>
     </div>
 
     <!-- ── SISTEM ── -->
